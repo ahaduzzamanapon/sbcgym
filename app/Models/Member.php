@@ -26,6 +26,8 @@ class Member extends Model
         'id',
         'member_unique_id',
         'mem_name',
+        'last_name',
+        'nid',
         'mem_father',
         'mem_mother',
         'mem_gender',

@@ -7,8 +7,16 @@
     <td>{{ $member->member_unique_id }}</td>
 </tr>
 <tr>
-    <th scope="row">{!! Form::label('mem_name', 'Member Name:') !!}</th>
+    <th scope="row">{!! Form::label('mem_name', 'First Name:') !!}</th>
     <td>{{ $member->mem_name }}</td>
+</tr>
+<tr>
+    <th scope="row">{!! Form::label('mem_name', 'Last Name:') !!}</th>
+    <td>{{ $member->last_name }}</td>
+</tr>
+<tr>
+    <th scope="row">{!! Form::label('nid', 'NID/BCF/Passport:') !!}</th>
+    <td>{{ $member->nid }}</td>
 </tr>
 <tr>
     <th scope="row">{!! Form::label('mem_father', 'Member Father:') !!}</th>

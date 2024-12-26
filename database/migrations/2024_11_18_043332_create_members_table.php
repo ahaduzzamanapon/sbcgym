@@ -17,6 +17,8 @@ class CreateMembersTable extends Migration
             $table->increments('id');
             $table->string('member_unique_id');
             $table->string('mem_name');
+            $table->string('last_name')->nullable();
+            $table->string('nid')->nullable();
             $table->string('mem_father')->nullable();
             $table->string('mem_mother')->nullable();
             $table->string('mem_gender')->nullable();

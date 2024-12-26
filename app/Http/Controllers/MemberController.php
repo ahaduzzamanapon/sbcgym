@@ -319,6 +319,9 @@ class MemberController extends AppBaseController
 
         $input = $request->all();
 
+
+        
+
         if (empty($member)) {
             Flash::error('Member not found');
 
