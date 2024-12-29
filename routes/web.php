@@ -19,6 +19,7 @@ use App\Http\Controllers\PurchasePackageController;
 use App\Http\Controllers\DailyWorkoutsController;
 use App\Http\Controllers\AccountReport;
 use App\Http\Controllers\MealPlanController;
+use App\Http\Controllers\PackageController;
 
 
 include 'web_builder.php';
@@ -152,6 +153,11 @@ Route::group(['middleware' => 'auth'], function () {
         //PurchasePackageController
         Route::get('purchase_packages/{purchasePackage}/invoice', [PurchasePackageController::class, 'invoice'])->name('purchasePackages.invoice');
         Route::get('purchase_packages/{purchasePackage}/renew', [PurchasePackageController::class, 'renew'])->name('purchasePackages.renew');
+
+
+        // package report routes
+        Route::get('package_report', [PackageController::class, 'packages_report'])->name('packages.packages_report');
+        Route::get('report/purchase_report_view', [PackageController::class, 'purchase_report_view'])->name('report.purchase_report_view');
 
 
         Route::get('members_admission_form', [MemberController::class, 'admission_form'])->name('members.admission_form');

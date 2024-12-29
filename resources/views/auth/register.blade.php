@@ -19,14 +19,14 @@
     <!--end of page level css-->
 </head>
 <style>
-    #sign-up .card-align {
-        position: absolute;
-        top: 57%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        box-shadow: 0 0 35px 0 rgba(154, 161, 171, 0.15);
-        margin: auto;
-    }
+   #sign-up .card-align {
+	position: absolute;
+	top: 46%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	box-shadow: 0 0 35px 0 rgba(154, 161, 171, 0.15);
+	margin: auto;
+}
 
     body {
         background: url("{{Storage::url('login_background.png')}}") no-repeat center center fixed;
@@ -38,7 +38,7 @@
 </style>
 
 <body id="sign-up" class="login_backimg">
-    <div class="container mt-3rem">
+    <div class="container">
         <div class="card ">
             <div class="row ">
                 <div class="col-lg-8 col-12 card-align bg-white">
@@ -85,7 +85,7 @@
                                                 </div> --}}
                                                 <div class="col-lg-6 col-12">
                                                     <div class="form-group">
-                                                        <label for="name">{{ __('Name') }}</label>
+                                                        <label for="name">{{ __('First Name') }}</label>
                                                         <input type="text"
                                                             class="form-control  form-control-lg  @error('name') is-invalid @enderror"
                                                             id="name" name="name" placeholder="Name"
@@ -97,6 +97,21 @@
                                                             </span>
                                                         @enderror
 
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-12">
+                                                    <div class="form-group">
+                                                        <label for="last_name">Last Name</label>
+                                                        <input type="text"
+                                                            class="form-control  form-control-lg @error('father_name') is-invalid @enderror"
+                                                            id="last_name" name="last_name"
+                                                            placeholder="Last name" value="{{ old('last_name') }}"
+                                                             />
+                                                        @error('father_name')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-12">
@@ -117,37 +132,9 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+                                                
+                                                
                                                 <div class="col-lg-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="father_name"> {{ __('Father Name') }}</label>
-                                                        <input type="text"
-                                                            class="form-control  form-control-lg @error('father_name') is-invalid @enderror"
-                                                            id="father_name" name="father_name"
-                                                            placeholder="father name" value="{{ old('father_name') }}"
-                                                             />
-                                                        @error('father_name')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="mother_name"> {{ __('Mother Name') }}</label>
-                                                        <input type="text"
-                                                            class="form-control  form-control-lg @error('mother_name') is-invalid @enderror"
-                                                            id="mother_name" name="mother_name"
-                                                            placeholder="mother name" value="{{ old('mother_name') }}"
-                                                             />
-                                                        @error('mother_name')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="gender">{{ __('Gender') }}</label>
                                                         <div class="d-flex gap-3">

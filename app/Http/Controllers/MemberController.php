@@ -437,6 +437,8 @@ class MemberController extends AppBaseController
         $data = [
             'member_unique_id' => $request->member_no,
             'mem_name' => $request->name,
+            'last_name' => $request->last_name,
+            'nid' => $request->nid,
             'mem_father' => $request->father_name,
             'mem_mother' => $request->mother_name,
             'mem_gender' => $request->gender,

@@ -100,10 +100,10 @@
                             <label>{{ $key + 1  }}. {{ $question->questions }}</label> <br>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="question_{{ $question->id }}" value="yes,{{ $question->id }}"> হ্যাঁ
+                                    <input class="form-check-input question"  type="radio" name="question_{{ $question->id }}" value="yes,{{ $question->id }}"> হ্যাঁ
                                 </label> <br>
                                 <label class="form-check-label ms-3">
-                                    <input class="form-check-input" type="radio" name="question_{{ $question->id }}" value="no,{{ $question->id }}"> না
+                                    <input class="form-check-input question" type="radio" name="question_{{ $question->id }}" value="no,{{ $question->id }}"> না
                                 </label> <br>
                             </div>
                         </div>
@@ -132,6 +132,14 @@
         <div class="col-md-3 form-group">
             <label for="name">নাম:</label> <br>
             <input  class="form-control" type="text" id="name" name="name" value="{{ $members->mem_name }}" required>
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="name">পদবী :</label> <br>
+            <input  class="form-control" type="text" id="last_name" name="last_name" value="{{ $members->last_name }}" required>
+        </div>
+        <div class="col-md-3 form-group">
+            <label for="name">NID/BCF/Passport:</label> <br>
+            <input  class="form-control" type="text" id="nid" name="nid" value="{{ $members->nid }}" required>
         </div>
         <div class="col-md-3 form-group">
             <label for="father_name">পিতার নাম:</label> <br>
@@ -304,6 +312,28 @@
           alert('You must accept the terms and conditions to proceed.');
           return;
         }
+      }
+
+      if (step === 2) {
+        console.log('Checking if all questions are answered...');
+        
+
+        const questions = document.querySelectorAll('.question');
+        let allQuestionsAnswered = true;
+
+        questions.forEach(question => {
+          questionName = question.name;
+          const questionValue = document.querySelector(`input[name="${questionName}"]:checked`);
+          if (!questionValue) {
+            allQuestionsAnswered = false;
+          }
+        });
+
+        if (!allQuestionsAnswered) {
+          alert('Please answer all questions to proceed.');
+          return;
+        }
+        
       }
 
       currentStep = step;

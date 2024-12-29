@@ -37,24 +37,37 @@
 </li>
 @endif
 
-@if (if_can('manage_package'))
-    <li class="{!! Request::is('packages*') ? 'active' : '' !!}">
-        <a href="{{ route('packages.index') }}">
-            <span class="mm-text ">Packages</span>
-            <span class="menu-icon"><i class="im im-icon-Structure"></i></span>
-        </a>
-    </li>
-@endif
 
-@if (if_can('purchase_packages'))
-    <li class="{!! Request::is('purchasePackages*') ? 'active' : '' !!}">
-        <a href="{{ route('purchasePackages.index') }}">
-            <span class="mm-text ">Purchase Packages</span>
-            <span class="menu-icon"><i class="align-self-center fa-1x fas fa-money-check-alt"></i></span>
-        </a>
-    </li>
-@endif
-
+<li {!! (Request::is('members*') || Request::is('healthmetrics*') || Request::is('diet_charts*') || Request::is('meal_plans*') ? 'class="menu-dropdown mm-active active"': "class='menu-dropdown'" ) !!}>
+    <a href="#">
+        <span class="mm-text ">Packages</span>
+        <span class="menu-icon "><i class="align-self-center fa-1x fas fa-diagnoses"></i></span>
+        <span class="im im-icon-Arrow-Right imicon"></span>
+    </a>
+    <ul class="sub-menu list-unstyled">
+        @if (if_can('manage_package'))
+            <li class="{!! Request::is('packages*') ? 'active' : '' !!}">
+                <a href="{{ route('packages.index') }}">
+                    <span class="mm-text ">Packages List</span>
+                </a>
+            </li>
+        @endif
+        @if (if_can('purchase_packages'))
+            <li class="{!! Request::is('purchasePackages*') ? 'active' : '' !!}">
+                <a href="{{ route('purchasePackages.index') }}">
+                    <span class="mm-text ">Purchase Packages</span>
+                </a>
+            </li>
+        @endif
+        @if (if_can('manage_package'))
+            <li class="{!! Request::is('packages.packages_report') ? 'active' : '' !!}">
+                <a href="{{ route('packages.packages_report') }}">
+                    <span class="mm-text ">Packages Report</span>
+                </a>
+            </li>
+        @endif
+    </ul>
+</li>
 
 
 @if(if_can('store_management'))

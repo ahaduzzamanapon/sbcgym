@@ -57,8 +57,6 @@ class RegisterController extends Controller
                 'name' => ['required', 'string', 'max:255'],
                 'email' => 'required|email|email:dns|unique:users',
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
-                'father_name' => ['required', 'string', 'max:255'],
-                'mother_name' => ['required', 'string', 'max:255'],
                 'gender' => ['required', 'string', 'max:255'],
             ]
         );
@@ -78,8 +76,6 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => 'required|email|unique:users,email', // Make sure column name is correct
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'father_name' => ['required', 'string', 'max:255'],
-            'mother_name' => ['required', 'string', 'max:255'],
             'gender' => ['required', 'string', 'max:255'],
         ]);
 
@@ -93,8 +89,7 @@ class RegisterController extends Controller
         Member::create(
             [
                 'mem_name' => $data['name'],
-                'mem_father' => $data['father_name'],
-                'mem_mother' => $data['mother_name'],
+                'last_name' => $data['last_name'],
                 'mem_gender' => $data['gender'],
                 'mem_address' => '',
                 'member_unique_id' => 'MEM' . time(),
@@ -107,7 +102,7 @@ class RegisterController extends Controller
 
         return User::create(
             [
-                'name' => $data['name'],
+                'name' => $data['name'].' '.$data['last_name'],
                 'email' => $data['email'],
                 'member_id' => Member::where('mem_email', $data['email'])->first()->id,
                 'password' => Hash::make($data['password']),

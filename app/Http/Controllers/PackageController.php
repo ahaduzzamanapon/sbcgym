@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreatePackageRequest;
 use App\Http\Requests\UpdatePackageRequest;
 use App\Models\Package;
+use App\Models\Member;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -190,5 +191,21 @@ class PackageController extends AppBaseController
                 'data' => null,
             ]);
         }
+    }
+
+     // report
+    public function packages_report()
+    {
+        return view('packages.report.index');
+    }
+    public function purchase_report_view(Request $request){
+        $data = $request->all();
+        $from_date = $data['from_date'];
+        $to_date = $data['to_date'];
+        $member_id = explode(',', $data['member_id']);
+        $type = $data['type'];
+        $member_details = Member::whereIn('id', $member_id)->get();
+        return view('packages.report.purchase_report_view', compact('from_date', 'to_date', 'member_id', 'type','member_details'));
+
     }
 }

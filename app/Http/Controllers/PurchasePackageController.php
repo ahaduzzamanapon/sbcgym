@@ -223,4 +223,6 @@ class PurchasePackageController extends AppBaseController
         Flash::success('Purchase Package Renewed successfully.');
         return redirect(route('purchasePackages.index'));
     }
+
+   
 }
