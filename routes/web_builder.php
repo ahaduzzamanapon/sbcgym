@@ -62,3 +62,7 @@ Route::resource('multiBranches', 'MultiBranchController');
 Route::resource('workoutCategories', 'WorkoutCategoryController');
 
 Route::resource('dailyWorkouts', 'DailyWorkoutsController');
+
+Route::resource('lockers', 'LockerController');
+
+Route::resource('lockerAssignments', 'LockerAssignmentController');

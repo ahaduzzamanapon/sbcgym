@@ -69,6 +69,28 @@
     </ul>
 </li>
 
+@if (if_can('site_settings'))
+<li {!! (Request::is('lockers*') || Request::is('lockerAssignments*') ? 'class="menu-dropdown mm-active active"': "class='menu-dropdown'" ) !!}>
+    <a href="#">
+        <span class="mm-text ">Lockers</span>
+        <span class="menu-icon "><i class="align-self-center fa-1x fas fa-diagnoses"></i></span>
+        <span class="im im-icon-Arrow-Right imicon"></span>
+    </a>
+    <ul class="sub-menu list-unstyled">
+        <li class="{!! (Request::is('lockers*') ? 'active' : '' ) !!}">
+            <a href="{{ route('lockers.index') }}">
+                <span class="mm-text ">Lockers</span>
+            </a>
+        </li>
+        <li class="{!! (Request::is('lockerAssignments*') ? 'active' : '' ) !!}">
+            <a href="{{ route('lockerAssignments.index') }}">
+                <span class="mm-text ">Locker Assignments</span>
+            </a>
+        </li>
+    </ul>
+</li>
+@endif
+
 
 @if(if_can('store_management'))
 <li {!! (Request::is('products*') || Request::is('requisitions*') || Request::is('sales*') ? 'class="menu-dropdown mm-active active"': "class='menu-dropdown'" ) !!}>
@@ -250,22 +272,6 @@
 
 
 
-{{-- <li class="{!! (Request::is('permissions*') ? 'active' : '' ) !!}">
-    <a href="{{ route('permissions.index') }}">
-        <span class="mm-text ">Permissions</span>
-        <span class="menu-icon"><i class="im im-icon-Structure"></i></span>
-    </a>
-</li> --}}
-
-{{-- <li class="{!! (Request::is('groupPermitions*') ? 'active' : '' ) !!}">
-    <a href="{{ route('groupPermitions.index') }}">
-        <span class="mm-text ">Group Permitions</span>
-        <span class="menu-icon"><i class="im im-icon-Structure"></i></span>
-    </a>
-</li> --}}
-
-
-
 @if(if_can('own_diet_charts'))
 <li class="{!! (Request::is('diet_charts*') ? 'active' : '' ) !!}">
     <a href="{{ route('diet_charts.index') }}">
@@ -340,7 +346,7 @@
         <span class="menu-icon "><i class="align-self-center fa-1x fas fa-diagnoses"></i></span>
         <span class="im im-icon-Arrow-Right imicon"></span>
     </a>
-    <ul class="sub-menu list-unstyled">    
+    <ul class="sub-menu list-unstyled">
         @if (if_can('site_settings'))
         <li class="{!! (Request::is('workoutCategories*') ? 'active' : '' ) !!}">
             <a href="{{ route('workoutCategories.index') }}">
@@ -356,4 +362,6 @@
         </li>
     </ul>
 </li>
+
+
 

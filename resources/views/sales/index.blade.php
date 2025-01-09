@@ -12,8 +12,7 @@ Sales @parent
     <div class="separator-breadcrumb border-top"></div>
 </section>
 
-php artisan make:model Locker -m
-php artisan make:model LockerAssignment -m
+
 
 
 <div class="content">
