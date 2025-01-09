@@ -16,7 +16,7 @@ $packages = DB::table('packages')->where('pack_status',1)->get();
 <div class="row">
     <div class="form-group col-md-4">
         {!! Form::label('tax', 'Vat Percentage:',['class'=>'control-label']) !!}
-        {!! Form::number('tax', null, ['class' => 'form-control', 'required']) !!}
+        {!! Form::number('tax', null, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group col-md-4">
         {!! Form::label('coupons_id', 'Coupon Code:', ['class' => 'control-label']) !!}
@@ -47,6 +47,35 @@ $packages = DB::table('packages')->where('pack_status',1)->get();
     <div class="form-group col-md-4">
         {!! Form::label('expired_date', 'Expired Date:',['class'=>'control-label']) !!}
         {!! Form::date('expired_date', null, ['class' => 'form-control','readonly','required'=>'required']) !!}
+    </div>
+</div>
+<div class="row">
+    <h1>Payment Details</h1>
+    <div class="row">
+        <div class="form-group col-md-4">
+            {!! Form::label('payment_mode', 'Payment Mode:',['class'=>'control-label']) !!}
+            {!! Form::select('payment_mode', ['' => 'Select Payment Mode','Cash' => 'Cash','Bank' => 'Bank','Bkash' => 'Bkash','Nagad' => 'Nagad','Card' => 'Card'], null, ['class' => 'form-control', 'required']) !!}
+        </div>
+        <div class="form-group col-md-4">
+            {!! Form::label('payment_date', 'Payment Date:',['class'=>'control-label']) !!}
+            {!! Form::date('payment_date', null, ['class' => 'form-control', 'required']) !!}
+        </div>
+        <div class="form-group col-md-4">
+            {!! Form::label('payment_amount', 'Payment Amount:',['class'=>'control-label']) !!}
+            {!! Form::number('payment_amount', null, ['class' => 'form-control', 'required','readonly'],) !!}
+        </div>
+        <div class="form-group col-md-4">
+            {!! Form::label('payment_note', 'Payment Note:',['class'=>'control-label']) !!}
+            {!! Form::text('payment_note', null, ['class' => 'form-control', 'required', 'placeholder' => 'Transaction ID']) !!}
+        </div>
+        <div class="form-group col-md-4">
+            {!! Form::label('payment_doc', 'Payment Document:',['class'=>'control-label']) !!}
+            {!! Form::file('payment_doc', ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group col-md-4 {{ if_can('show_all_data') ? '' : 'd-none' }}">
+            {!! Form::label('payment_status', 'Payment Status:',['class'=>'control-label']) !!}
+            {!! Form::select('payment_status', ['1' => 'Pending','2' => 'Approved'], null, ['class' => 'form-control']) !!}
+        </div>
     </div>
 </div>
 <div class="form-group col-sm-12">
@@ -81,7 +110,7 @@ $packages = DB::table('packages')->where('pack_status',1)->get();
                     calculate()
                 }
             });
-            
+
         })
     })
 </script>
@@ -116,16 +145,19 @@ $packages = DB::table('packages')->where('pack_status',1)->get();
                     calculate()
                 }
             });
-            
+
         })
       })
 </script>
 <script>
     function calculate() {
         console.log('calculate');
-        
+
         var amount = document.getElementById('amount').value;
         var coupon_amount = document.getElementById('coupon_amount').value;
+        if (coupon_amount == '') {
+            coupon_amount = 0;
+        }
         var tax = document.getElementById('tax').value;
         if (tax == '') {
             tax = 0;
@@ -148,7 +180,11 @@ $packages = DB::table('packages')->where('pack_status',1)->get();
         if (pay_amount>0 && due_amount==0) {
             document.getElementById('status').value = 3;
         }
-        
+
+        $('#payment_amount').val(pay_amount);
+
+
+
     }
 </script>
 <script>

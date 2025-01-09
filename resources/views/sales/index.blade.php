@@ -12,6 +12,10 @@ Sales @parent
     <div class="separator-breadcrumb border-top"></div>
 </section>
 
+php artisan make:model Locker -m
+php artisan make:model LockerAssignment -m
+
+
 <div class="content">
     <div class="clearfix"></div>
     @include('flash::message')
@@ -51,7 +55,7 @@ Sales @parent
                             <a href="{{ route('sales.edit', $sale->id) }}" class="btn btn-primary">Edit</a>
                             <a target="_blank" href="{{ route('sales.invoice', $sale->id) }}" class="btn btn-success">Invoice</a>
                         </td>
-                        
+
                     </tr>
                     @endforeach
                 </tbody>

@@ -38,7 +38,7 @@
 @endif
 
 
-<li {!! (Request::is('members*') || Request::is('healthmetrics*') || Request::is('diet_charts*') || Request::is('meal_plans*') ? 'class="menu-dropdown mm-active active"': "class='menu-dropdown'" ) !!}>
+<li {!! (Request::is('packages*') || Request::is('purchasePackages*')  ? 'class="menu-dropdown mm-active active"': "class='menu-dropdown'" ) !!}>
     <a href="#">
         <span class="mm-text ">Packages</span>
         <span class="menu-icon "><i class="align-self-center fa-1x fas fa-diagnoses"></i></span>

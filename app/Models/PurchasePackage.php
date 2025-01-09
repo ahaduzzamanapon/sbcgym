@@ -21,7 +21,7 @@ class PurchasePackage extends Model
 {
 
     public $table = 'purchasepackages';
-    
+
 
 
 
@@ -37,6 +37,12 @@ class PurchasePackage extends Model
         'due_amount',
         'status',
         'expired_date',
+        'payment_mode',
+        'payment_date',
+        'payment_amount',
+        'payment_note',
+        'payment_doc',
+        'payment_status',
     ];
 
     /**
@@ -71,5 +77,5 @@ class PurchasePackage extends Model
         'pay_amount' => 'required',
     ];
 
-    
+
 }

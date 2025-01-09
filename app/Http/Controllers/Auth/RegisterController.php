@@ -99,7 +99,6 @@ class RegisterController extends Controller
                 'mem_img_url' => '',
             ]
         );
-
         return User::create(
             [
                 'name' => $data['name'].' '.$data['last_name'],

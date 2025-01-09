@@ -31,6 +31,7 @@
                 <th>Pay Amount</th>
                 <th>Due Amount</th>
                 <th>Status</th>
+                <th>Payment Status</th>
                 <th>Created At</th>
                 <th>Action</th>
             </tr>
@@ -49,7 +50,7 @@
                         </div>
                         @endif
                     </td>
-                   
+
                     <td>{{ $purchasePackage->gross_amount }}</td>
                     <td>{{ $purchasePackage->pay_amount }}</td>
                     <td>{{ $purchasePackage->due_amount }}</td>
@@ -60,6 +61,13 @@
                             <span class="badge badge-danger">Due</span>
                         @elseif($purchasePackage->status == 3)
                             <span class="badge badge-success">Fully Paid</span>
+                        @endif
+                    </td>
+                    <td>
+                        @if ($purchasePackage->payment_status == 1)
+                            <span class="badge badge-danger">Pending</span>
+                        @elseif($purchasePackage->payment_status == 2)
+                            <span class="badge badge-success">Approved</span>
                         @endif
                     </td>
                     <td>{{ date('Y-m-d', strtotime($purchasePackage->created_at)) }}</td>
@@ -138,7 +146,7 @@
                 $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
                     var date = Date.parse(data[11]);
                     console.log(date);
-                    
+
 
                     if (
                         (isNaN(minDateFilter) && isNaN(maxDateFilter)) ||

@@ -68,6 +68,26 @@ class PurchasePackageController extends AppBaseController
     public function store(CreatePurchasePackageRequest $request)
     {
         $input = $request->all();
+
+        if($input['tax']==''){
+            $input['tax']=0;
+        }
+
+        if ($request->hasFile('payment_doc')) {
+            $path = storage_path('app/public/images/payment_doc');
+            if (!File::exists($path)) {
+                File::makeDirectory($path, 0775, true, true);
+            }
+            $file = $request->file('payment_doc');
+            $input['payment_doc'] = $file->store('images/payment_doc', 'public');
+        }else{
+            unset($input['payment_doc']);
+        }
+
+
+
+
+
         $purchasePackage = PurchasePackage::create($input);
         $purchasePackages_data = PurchasePackage::select('purchasepackages.*', 'packages.pack_name as pack_name','packages.pack_duration', 'members.mem_name as member_name', 'members.member_unique_id as member_unique_id')
             ->join('packages', 'packages.id', '=', 'purchasepackages.package_id')
@@ -224,5 +244,5 @@ class PurchasePackageController extends AppBaseController
         return redirect(route('purchasePackages.index'));
     }
 
-   
+
 }

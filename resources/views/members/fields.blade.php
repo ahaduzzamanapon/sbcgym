@@ -16,7 +16,7 @@
         <!-- Member Name2 -->
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('mem_name', 'Member Name:', ['class' => 'control-label']) !!}
+                {!! Form::label('mem_name', 'First Name:', ['class' => 'control-label']) !!}
                 {!! Form::text('mem_name', null, ['class' => 'form-control','required', 'placeholder' => 'Enter Member Name']) !!}
                 @error('mem_name')
                     <span class="text-danger">{{ $message }}</span>
