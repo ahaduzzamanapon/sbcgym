@@ -66,3 +66,5 @@ Route::resource('dailyWorkouts', 'DailyWorkoutsController');
 Route::resource('lockers', 'LockerController');
 
 Route::resource('lockerAssignments', 'LockerAssignmentController');
+
+Route::resource('paymentMethods', 'PaymentMethodController');

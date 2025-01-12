@@ -14,6 +14,7 @@ use App\Models\MultiBranch;
 use App\Models\Healthmetrics;
 use App\Models\PurchasePackage;
 
+use App\Models\PaymentMethod;
 
 use App\Models\User;
 use App\Models\Income;
@@ -98,7 +99,7 @@ class MemberController extends AppBaseController
             $package_switch=false;
         }
         unset($input['package_switch']);
-        
+
 
         // package_id
         // amount
@@ -320,7 +321,7 @@ class MemberController extends AppBaseController
         $input = $request->all();
 
 
-        
+
 
         if (empty($member)) {
             Flash::error('Member not found');
@@ -369,8 +370,8 @@ class MemberController extends AppBaseController
             'resting_heart_rate'=> isset($request->pulse_rate) ? $request->pulse_rate :0,
         ];
         Healthmetrics::where('member_id', $id)->update($data_helth);
-        
-       
+
+
         Flash::success('Member updated successfully.');
         return redirect(route('members.index'));
     }
@@ -388,7 +389,7 @@ class MemberController extends AppBaseController
     {
         /** @var Member $member */
         $member = Member::find($id);
-        
+
 
         if (empty($member)) {
             Flash::error('Member not found');
@@ -412,7 +413,7 @@ class MemberController extends AppBaseController
         return view('members.upload_excel_page');
     }
     public function admission_form(){
-        
+
         $members = Member::find(Auth::user()->member_id);
        // dd($members);
         if(empty($members)){
@@ -527,5 +528,12 @@ class MemberController extends AppBaseController
         $branches = MultiBranch::pluck('branch_name'); // Adjust table/model if necessary
         return response()->json($branches);
     }
-    
+    public function get_payment_method_by_member(\Illuminate\Http\Request  $request)
+    {
+        $member_id = $request->input('member_id');
+        $member = Member::find($member_id);
+        $payment_methods = PaymentMethod::where('branch_id', $member->branch_id)->get();
+        return response()->json($payment_methods);
+    }
+
 }

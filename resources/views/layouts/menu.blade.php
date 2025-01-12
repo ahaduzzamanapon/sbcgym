@@ -363,5 +363,12 @@
     </ul>
 </li>
 
-
+@if (if_can('site_settings'))
+<li class="{!! (Request::is('paymentMethods*') ? 'active' : '' ) !!}">
+    <a href="{{ route('paymentMethods.index') }}">
+        <span class="mm-text ">Payment Methods</span>
+        <span class="menu-icon"><i class="im im-icon-Structure"></i></span>
+    </a>
+</li>
+@endif
 

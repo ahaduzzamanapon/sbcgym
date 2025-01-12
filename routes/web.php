@@ -142,7 +142,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('attendance/process_attendence', [AttendenceController::class, 'process_attendence'])->name('attendences.process_attendence');
         Route::get('attendance/get_member', [AttendenceController::class, 'get_member'])->name('attendences.get_member');
         Route::post('attendance/get_daily_attendence', [AttendenceController::class, 'get_daily_attendence'])->name('attendences.get_daily_attendence');
-        
+
 
         //sales_product
 
@@ -180,6 +180,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         //member
         Route::get('get-branches', [MemberController::class, 'getBranches']);
+        Route::post('get_payment_method_by_member', [MemberController::class, 'get_payment_method_by_member'])->name('get_payment_method_by_member');
 
 });
 

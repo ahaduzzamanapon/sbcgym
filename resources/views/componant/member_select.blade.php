@@ -49,7 +49,7 @@
 
 <div class="form-group col-md-4" style="display: @if(if_can('show_all_data')) block @else none @endif;">
     {!! Form::label('member_id', 'Member Name:',['class'=>'control-label']) !!}
-    {!! Form::select('member_id', $members, null, ['class' => 'form-control','required'=>'required']) !!}
+    {!! Form::select('member_id', $members, null, ['class' => 'form-control','required'=>'required','onchange'=>'get_payment_method_by_member(this.value)']) !!}
 </div>
 
 
