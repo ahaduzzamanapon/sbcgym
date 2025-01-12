@@ -17,7 +17,6 @@
                 <th>Id</th>
         <th>Questions</th>
         <th>Created At</th>
-        <th>Updated At</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -27,7 +26,6 @@
                 <td>{{ $admissionQuestions->id }}</td>
             <td>{{ $admissionQuestions->questions }}</td>
             <td>{{ $admissionQuestions->created_at }}</td>
-            <td>{{ $admissionQuestions->updated_at }}</td>
                 <td>
                     {!! Form::open(['route' => ['admissionQuestions.destroy', $admissionQuestions->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
@@ -48,7 +46,7 @@
 
 <!-- Datatables -->
 <script src="{{ asset('vendors/datatables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('vendors/datatables/js/dataTables.bootstrap4.min.js') }}"></script>   
+<script src="{{ asset('vendors/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
 <script>
     $(document).ready(function() {
         let table = $('.table').DataTable({

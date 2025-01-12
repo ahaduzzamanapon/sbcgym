@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    
+
     <table class="table" id="permissions-table">
         <thead>
             <tr>
@@ -7,7 +7,6 @@
         <th>Name</th>
         <th>Key</th>
         <th>Created At</th>
-        <th>Updated At</th>
                 <th colspan="3">Action</th>
             </tr>
         </thead>
@@ -18,7 +17,6 @@
             <td>{{ $permission->name }}</td>
             <td>{{ $permission->key }}</td>
             <td>{{ $permission->created_at }}</td>
-            <td>{{ $permission->updated_at }}</td>
                 <td>
                     {!! Form::open(['route' => ['permissions.destroy', $permission->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

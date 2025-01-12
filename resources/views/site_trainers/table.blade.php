@@ -11,7 +11,6 @@
         <th>Twitter</th>
         <th>Linkedin</th>
         <th>Created At</th>
-        <th>Updated At</th>
                 <th colspan="3">Action</th>
             </tr>
         </thead>
@@ -27,7 +26,6 @@
             <td>{{ $siteTrainer->twitter }}</td>
             <td>{{ $siteTrainer->linkedin }}</td>
             <td>{{ $siteTrainer->created_at }}</td>
-            <td>{{ $siteTrainer->updated_at }}</td>
                 <td>
                     {!! Form::open(['route' => ['siteTrainers.destroy', $siteTrainer->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

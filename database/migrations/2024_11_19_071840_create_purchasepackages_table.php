@@ -31,6 +31,7 @@ class CreatePurchasepackagesTable extends Migration
             $table->integer('payment_amount')->nullable();
             $table->text('payment_note')->nullable();
             $table->text('payment_doc')->nullable();
+            $table->text('payment_number')->nullable();
             $table->integer('payment_status')->comment('1 for pending, 2 for approved')->nullable();
             $table->timestamps();
         });

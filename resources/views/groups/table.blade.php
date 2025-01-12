@@ -6,7 +6,6 @@
         <th>Name</th>
         <th>Key</th>
         <th>Created At</th>
-        <th>Updated At</th>
                 <th colspan="3">Action</th>
             </tr>
         </thead>
@@ -17,7 +16,6 @@
             <td>{{ $group->name }}</td>
             <td>{{ $group->key }}</td>
             <td>{{ $group->created_at }}</td>
-            <td>{{ $group->updated_at }}</td>
                 <td>
                     {!! Form::open(['route' => ['groups.destroy', $group->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

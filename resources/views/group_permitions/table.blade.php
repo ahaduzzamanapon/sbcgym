@@ -6,7 +6,6 @@
         <th>Group Id</th>
         <th>Permission Id</th>
         <th>Created At</th>
-        <th>Updated At</th>
                 <th colspan="3">Action</th>
             </tr>
         </thead>
@@ -17,7 +16,6 @@
             <td>{{ $groupPermition->group_id }}</td>
             <td>{{ $groupPermition->permission_id }}</td>
             <td>{{ $groupPermition->created_at }}</td>
-            <td>{{ $groupPermition->updated_at }}</td>
                 <td>
                     {!! Form::open(['route' => ['groupPermitions.destroy', $groupPermition->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

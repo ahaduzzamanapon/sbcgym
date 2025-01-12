@@ -7,7 +7,6 @@
         <th>Location</th>
         <th>Status</th>
         <th>Created At</th>
-        <th>Updated At</th>
                 <th colspan="3">Action</th>
             </tr>
         </thead>
@@ -19,7 +18,6 @@
             <td>{{ $locker->location }}</td>
             <td>{{ $locker->status }}</td>
             <td>{{ $locker->created_at }}</td>
-            <td>{{ $locker->updated_at }}</td>
                 <td>
                     {!! Form::open(['route' => ['lockers.destroy', $locker->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

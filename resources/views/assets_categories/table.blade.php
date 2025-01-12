@@ -18,7 +18,6 @@
         <th>Category Name</th>
         <th>Description</th>
         <th>Created At</th>
-        <th>Updated At</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -29,7 +28,6 @@
             <td>{{ $assetsCategory->category_name }}</td>
             <td>{{ $assetsCategory->description }}</td>
             <td>{{ $assetsCategory->created_at }}</td>
-            <td>{{ $assetsCategory->updated_at }}</td>
                 <td>
                     {!! Form::open(['route' => ['assetsCategories.destroy', $assetsCategory->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
@@ -50,7 +48,7 @@
 
 <!-- Datatables -->
 <script src="{{ asset('vendors/datatables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('vendors/datatables/js/dataTables.bootstrap4.min.js') }}"></script>   
+<script src="{{ asset('vendors/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
 <script>
     $(document).ready(function() {
         let table = $('.table').DataTable({

@@ -22,7 +22,6 @@
                 <th>Status</th>
                 <th>Note</th>
                 <th>Created At</th>
-                <th>Updated At</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -43,7 +42,6 @@
             </td>
             <td>{{ $schedulebooking->note }}</td>
             <td>{{ $schedulebooking->created_at }}</td>
-            <td>{{ $schedulebooking->updated_at }}</td>
                 <td>
                     {!! Form::open(['route' => ['schedulebookings.destroy', $schedulebooking->schedulebooking_id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

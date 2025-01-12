@@ -43,6 +43,7 @@ class PurchasePackage extends Model
         'payment_note',
         'payment_doc',
         'payment_status',
+        'payment_number',
     ];
 
     /**

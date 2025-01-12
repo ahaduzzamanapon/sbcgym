@@ -72,6 +72,10 @@ $packages = DB::table('packages')->where('pack_status',1)->get();
             {!! Form::label('payment_doc', 'Payment Document:',['class'=>'control-label']) !!}
             {!! Form::file('payment_doc', ['class' => 'form-control']) !!}
         </div>
+        <div class="form-group col-md-4">
+            {!! Form::label('payment_number', 'Payment Number:',['class'=>'control-label']) !!}
+            {!! Form::text('payment_number',null, ['class' => 'form-control']) !!}
+        </div>
         <div class="form-group col-md-4 {{ if_can('show_all_data') ? '' : 'd-none' }}">
             {!! Form::label('payment_status', 'Payment Status:',['class'=>'control-label']) !!}
             {!! Form::select('payment_status', ['1' => 'Pending','2' => 'Approved'], null, ['class' => 'form-control']) !!}
