@@ -29,14 +29,16 @@
             <td>{{ $notice->description }}</td>
             <td>{{ $notice->created_at }}</td>
                 <td>
-                    {!! Form::open(['route' => ['notices.destroy', $notice->id], 'method' => 'delete']) !!}
-                    <div class='btn-group'>
-                        <a href="{{ route('notices.show', [$notice->id]) }}" class='btn btn-outline-primary btn-xs'><i class="im im-icon-Eye" data-placement="top" title="View"></i></a>
-                        <a href="{{ route('notices.edit', [$notice->id]) }}" class='btn btn-outline-primary btn-xs'><i
-                                class="im im-icon-Pen"  data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
-                        {!! Form::button('<i class="im im-icon-Remove" data-toggle="tooltip" data-placement="top" title="Delete"></i>', ['type' => 'submit', 'class' => 'btn btn-outline-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
-                    </div>
-                    {!! Form::close() !!}
+                    <a href="{{ route('notices.show', [$notice->id]) }}" class='btn btn-outline-primary btn-xs'><i class="im im-icon-Eye" data-placement="top" title="View"></i></a>
+                    @if(if_can('show_all_data'))
+                        {!! Form::open(['route' => ['notices.destroy', $notice->id], 'method' => 'delete']) !!}
+                        <div class='btn-group'>
+                            <a href="{{ route('notices.edit', [$notice->id]) }}" class='btn btn-outline-primary btn-xs'><i
+                                    class="im im-icon-Pen"  data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+                            {!! Form::button('<i class="im im-icon-Remove" data-toggle="tooltip" data-placement="top" title="Delete"></i>', ['type' => 'submit', 'class' => 'btn btn-outline-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                        </div>
+                        {!! Form::close() !!}
+                    @endif
                 </td>
             </tr>
         @endforeach

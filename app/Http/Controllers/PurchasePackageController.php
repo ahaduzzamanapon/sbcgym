@@ -97,7 +97,7 @@ class PurchasePackageController extends AppBaseController
         $title=$purchasePackages_data->member_name.' Purchased a Package '.$purchasePackages_data->pack_name;"";
         $member_details=Member::where('id',$purchasePackages_data->member_id)->first();
         $branch_details=MultiBranch::where('id',$member_details->branch_id)->first();
-        $branch_name=$branch_details->branch_name;
+        $branch_name = $branch_details ? $branch_details->branch_name : '';
         $description=$member_details->mem_name.' ( '.$member_details->member_unique_id.' ) '.' Purchased a Package '.$purchasePackages_data->pack_name.' in '.$branch_name;
         $income=new Income();
         $income->title=$title;

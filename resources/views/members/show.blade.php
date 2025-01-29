@@ -21,6 +21,11 @@ Members @parent
 
     <div class="clearfix"></div>
     <div class="card">
+        <div class="col-md-3">
+            <a href="{{ route('members.edit', $member->id) }}" class='btn btn-outline-primary btn-xs c'><i class="im im-icon-Pen" data-placement="top" title="View"></i>
+                Edit
+            </a>
+        </div>
         <div class="table-responsive">
         <table class="table table-default">
             @include('members.show_fields')

@@ -231,8 +231,16 @@
     </script>
     <script>
         var payment_json = ''
+        $(document).ready(function() {
+            const memberId = $('#member_id').val();
+            get_payment_method_by_member(memberId);
+        });
+
 
         function get_payment_method_by_member(member_id) {
+            console.log('member_id', member_id);
+            
+            
             payment_json = '';
             $.ajax({
                 url: "{{ route('get_payment_method_by_member') }}",

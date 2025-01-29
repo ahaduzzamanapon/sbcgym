@@ -32,19 +32,21 @@ class AccountReport extends Controller
         }else{
             $title='Income report for '.$from_date;
         }
-        $incomeData = Income::join('multi_branchs', 'incomes.branch_id', '=', 'multi_branchs.id')
-            ->whereDate('incomes.created_at', '>=', $from_date)
-            ->whereDate('incomes.created_at', '<=', $to_date);
-            if ($selectedMemberIds) {
-                $incomeData->whereIn('incomes.member_id', $selectedMembers);
-            }
+        $from_date_formate=date('Y-m-d 00:00:00', strtotime($from_date));
+        $to_date_formate=date('Y-m-d 23:59:59', strtotime($to_date));
 
-        if ($branch_id) {
-            $incomeData->where('multi_branchs.id', $branch_id);
-        }
+        //DB::enableQueryLog();
 
-        $incomeData = $incomeData->get();
-
+        $incomeData = Income::select('incomes.*', 'multi_branchs.branch_name','incomes.created_at as date')
+        ->join('multi_branchs', 'incomes.branch_id', '=', 'multi_branchs.id')
+        ->whereBetween('incomes.created_at', [$from_date_formate, $to_date_formate])
+        ->when(!empty($selectedMemberIds), function ($query) use ($selectedMemberIds) {
+            return $query->whereIn('incomes.member_id', $selectedMemberIds);
+        })
+        ->when(!empty($branch_id), function ($query) use ($branch_id) {
+            return $query->where('incomes.branch_id', $branch_id);
+        })
+        ->get();
 
 
         $data=[

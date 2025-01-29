@@ -13,12 +13,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-        } 
+        }
         @media print {
             .btn{
                 display: none;
             }
-        }   
+        }
     </style>
 </head>
   <body>
@@ -56,7 +56,7 @@
                                     <td>{{ $attendence->branch_name }}</td>
                                     <td>{{ $attendence->amount }}</td>
                                     <td>{{ $attendence->description }}</td>
-                                    <td>{{ $attendence->created_at }}</td>
+                                    <td>{{ $attendence->date }}</td>
                                 </tr>
                                 @php $total+=$attendence->amount; @endphp
                             @endforeach
@@ -77,7 +77,7 @@
             </div>
       </div>
 
-    
+
 
     <script type="text/javascript">
         function print_w() {
