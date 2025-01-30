@@ -52,11 +52,11 @@
     </div>
     <div class="form-group col-md-4">
         {!! Form::label('expired_date', 'Expired Date:', ['class' => 'control-label']) !!}
-        {!! Form::date('expired_date', null, ['class' => 'form-control', 'readonly', 'required' => 'required']) !!}
+        {!! Form::date('expired_date', null, ['class' => 'form-control', 'required' => 'required']) !!}
     </div>
 </div>
 <div class="row">
-  
+
 
     <div class="col-md-12">
         <div class="row" style="display: flex;align-items: center;gap: 22px;">
@@ -239,8 +239,8 @@
 
         function get_payment_method_by_member(member_id) {
             console.log('member_id', member_id);
-            
-            
+
+
             payment_json = '';
             $.ajax({
                 url: "{{ route('get_payment_method_by_member') }}",

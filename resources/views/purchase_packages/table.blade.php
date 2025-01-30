@@ -78,6 +78,7 @@
                                 class='btn btn-outline-primary btn-xs'>
                                 <i class="im im-icon-Eye" data-placement="top" title="View"></i>
                             </a> --}}
+                            @if(if_can('show_all_data'))
                             <a href="{{ route('purchasePackages.edit', [$purchasePackage->id]) }}"
                                 class='btn btn-outline-primary btn-xs'>
                                 <i class="im im-icon-Pen" data-toggle="tooltip" data-placement="top" title="Edit"></i>
@@ -87,6 +88,7 @@
                                 'class' => 'btn btn-outline-danger btn-xs',
                                 'onclick' => "return confirm('Are you sure?')",
                             ]) !!}
+                            @endif
                             <a target="_blank" href="{{ route('purchasePackages.invoice', $purchasePackage->id) }}"
                                 class="btn btn-success">Invoice</a>
                         </div>

@@ -82,12 +82,12 @@
         <div class="brand">
             {{(!empty($SiteSetting))?$SiteSetting->name:'Gym Master'}}
         </div>
-        
+
         <div>RETAIL INVOICE</div>
         <div class="bill-details">
             <div class="flex justify-between">
                 <div>BILL NO: {{ $sale->id }}</div>
-               
+
             </div>
             <div class="flex justify-between">
                 <div>BILL DATE: {{ date('d/M/Y', strtotime($sale->created_at)) }}</div>
@@ -114,21 +114,21 @@
                 <td>{{ number_format($sale->subtotal, 2) }}</td>
             </tr>
 
-            
+
             <tr class="total">
                 <td></td>
                 <td>Coupon</td>
                 <td></td>
                 <td>{{ number_format($sale->coupon_amount)}}</td>
             </tr>
-           
+
             <tr>
                 <td></td>
                 <td>Vat</td>
                 <td>{{ $sale->tax }}%</td>
                 <td>{{ number_format($sale->subtotal * ($sale->tax / 100), 2) }}</td>
             </tr>
-           
+
             <tr class="net-amount">
                 <td></td>
                 <td>Net Amnt</td>
@@ -150,10 +150,9 @@
 
         </table>
         Payment Method: {{ $sale->payment_method }}<br>
-        Transaction ID: 082098082783<br>
-        Username: Pradeep [Biller]<br>
+        Transaction ID:TRS-{{ date('dhis', strtotime($sale->created_at)) }}<br>
         Thank You! Please visit again
         <button onclick="window.print();" class="hidden-print btn btn-primary">Print Invoice</button>
     </div>
-    
+
 

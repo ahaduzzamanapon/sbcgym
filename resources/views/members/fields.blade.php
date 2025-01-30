@@ -111,7 +111,7 @@
             </div>
         </div>
 
-                
+
         @php
         $groups = DB::table('groups')->get();
         $multi_branchs = DB::table('multi_branchs')->get();
@@ -120,8 +120,8 @@
         <div class="col-md-3">
             <div class="form-group">
                 {!! Form::label('group_id', 'Group:',['class'=>'control-label']) !!}
-                {!! Form::select('group_id', $groups->pluck('name', 'id')->prepend('Select Group', ''), null, ['required','class' => 'form-control']) !!}
-                
+                {!! Form::select('group_id', $groups->pluck('name', 'id')->prepend('Select Group', ''), null,  ['required','class' => 'form-control']) !!}
+
             </div>
         </div>
         <!-- branch Field 39 -->
@@ -129,12 +129,12 @@
             <div class="form-group">
                 <label for="branch_id" class="control-label">
                     Branch: <span class="text-danger">*</span>
-                </label>       
+                </label>
                {!! Form::select('branch_id', $multi_branchs->pluck('branch_name', 'id')->prepend('Select Branch', ''), null, ['class' => 'form-control', 'required' => 'required']) !!}
             </div>
         </div>
 
-        
+
         <!-- Admission7 Date -->
         <div class="col-md-3">
             <div class="form-group">
@@ -223,14 +223,14 @@
             </div>
         </div>
 
-        
+
 
 
         {{-- manndatory end --}}
 
     </div>
     <div class="row">
-            
+
 
         <!-- Father Name3 -->
         <div class="col-md-3">
@@ -330,7 +330,7 @@
                     @enderror
                 </div>
             </div>
-    
+
             <!-- Current Diet Routine 21 -->
             <div class="col-md-3">
                 <div class="form-group">
@@ -341,7 +341,7 @@
                     @enderror
                 </div>
             </div>
-    
+
             <!-- Sassoon Exercise Time 22 -->
             <div class="col-md-3">
                 <div class="form-group">
@@ -352,7 +352,7 @@
                     @enderror
                 </div>
             </div>
-    
+
             <!-- Sleep Time 23 -->
             <div class="col-md-3">
                 <div class="form-group">
@@ -363,7 +363,7 @@
                     @enderror
                 </div>
             </div>
-    
+
             <!-- Wake Up Time 24 -->
             <div class="col-md-3">
                 <div class="form-group">
@@ -374,7 +374,7 @@
                     @enderror
                 </div>
             </div>
-    
+
             <!-- Work Time 25 -->
             <div class="col-md-3">
                 <div class="form-group">
@@ -385,7 +385,7 @@
                     @enderror
                 </div>
             </div>
-    
+
             <!-- Exercise History 26 -->
             <div class="col-md-3">
                 <div class="form-group">
@@ -396,7 +396,7 @@
                     @enderror
                 </div>
             </div>
-    
+
             <!-- Medicine History 27 -->
             <div class="col-md-3">
                 <div class="form-group">
@@ -407,7 +407,7 @@
                     @enderror
                 </div>
             </div>
-    
+
             <!-- Injury or Health Issue 28 -->
             <div class="col-md-3">
                 <div class="form-group">
@@ -418,7 +418,7 @@
                     @enderror
                 </div>
             </div>
-    
+
             <!-- Like or Dislike Exercise 29 -->
             <div class="col-md-3">
                 <div class="form-group">
@@ -429,7 +429,7 @@
                     @enderror
                 </div>
             </div>
-    
+
             <!-- Like or Dislike Food 30 -->
             <div class="col-md-3">
                 <div class="form-group">
@@ -440,7 +440,7 @@
                     @enderror
                 </div>
             </div>
-    
+
             <!-- Pull Up Count 31 -->
             <div class="col-md-3">
                 <div class="form-group">
@@ -451,7 +451,7 @@
                     @enderror
                 </div>
             </div>
-    
+
             <!-- Lift Count (Kg) 32 -->
             <div class="col-md-3">
                 <div class="form-group">
@@ -463,7 +463,7 @@
                 </div>
             </div>
         </div>
-    
+
             <!-- Question  33-->
             {{-- <div class="col-md-3">
                 <div class="form-group">
@@ -583,7 +583,7 @@
                     {!! Form::date('expired_date', null, ['class' => 'form-control','readonly']) !!}
                 </div>
             </div>
-    
+
             <!-- Terms and Conditions 34 -->
             <div class="col-md-3">
                 <div class="form-group">
@@ -631,7 +631,7 @@
                     calculate()
                 }
             });
-            
+
         })
     })
 </script>
@@ -666,7 +666,7 @@
                     calculate()
                 }
             });
-            
+
         })
       })
 </script>
@@ -697,7 +697,7 @@
         if (pay_amount>0 && due_amount==0) {
             document.getElementById('status').value = 3;
         }
-        
+
     }
 </script>
 <script>
@@ -746,9 +746,9 @@
             $('#status').removeAttr('required');
             $('#expired_date').removeAttr('required');
         }
-        
+
     }
-    
+
     function calculateBMI() {
         const weight = parseFloat(document.getElementById('weight').value); // Get weight value
         const height_cm = parseFloat(document.getElementById('height').value); // Get height value
@@ -758,7 +758,7 @@
             const bmi = weight / (height * height); // BMI formula
             document.getElementById('bmi').value = bmi.toFixed(2); // Display BMI with 2 decimal places
 
-           
+
         } else {
             document.getElementById('bmi').value = ''; // Clear BMI field if inputs are invalid
         }
