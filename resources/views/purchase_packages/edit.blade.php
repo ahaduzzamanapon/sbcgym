@@ -18,7 +18,7 @@ Purchase Package @parent
            <div class="card-body">
                 {!! Form::model($purchasePackage, ['route' => ['purchasePackages.update', $purchasePackage->id], 'method' => 'patch','class' => 'form-horizontal']) !!}
 
-                    @include('purchase_packages.fields')
+                    @include('purchase_packages.fields_edit')
 
                 {!! Form::close() !!}
            </div>

@@ -27,6 +27,7 @@
                 <th>Member Name</th>
                 <th>Package Name</th>
                 <th>Expired Date</th>
+                <th>Active status</th>
                 <th>Gross Amount</th>
                 <th>Pay Amount</th>
                 <th>Due Amount</th>
@@ -46,10 +47,17 @@
                         @if ($purchasePackage->expired_date < date('Y-m-d'))
                         <div style="display: flex;align-items: center;">
                             <span class="badge badge-danger">Expired</span>
-                            <a href="{{ route('purchasePackages.renew', [$purchasePackage->id]) }}" class="btn btn-primary">Renew</a>
                         </div>
                         @endif
                     </td>
+
+                    <td>
+                        @if ($purchasePackage->active_status != 'Active')
+                            <span class="badge badge-danger">Inactive</span>
+                            <span>Start date : {{ date('Y-m-d', strtotime($purchasePackage->inactive_date)) }}</span>
+                        @else
+                            <span class="badge badge-success">Active</span>
+                        @endif
 
                     <td>{{ $purchasePackage->gross_amount }}</td>
                     <td>{{ $purchasePackage->pay_amount }}</td>
@@ -74,10 +82,7 @@
                     <td>
                         {!! Form::open(['route' => ['purchasePackages.destroy', $purchasePackage->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
-                            {{-- <a href="{{ route('purchasePackages.show', [$purchasePackage->id]) }}"
-                                class='btn btn-outline-primary btn-xs'>
-                                <i class="im im-icon-Eye" data-placement="top" title="View"></i>
-                            </a> --}}
+
                             @if(if_can('show_all_data'))
                             <a href="{{ route('purchasePackages.edit', [$purchasePackage->id]) }}"
                                 class='btn btn-outline-primary btn-xs'>
@@ -88,6 +93,8 @@
                                 'class' => 'btn btn-outline-danger btn-xs',
                                 'onclick' => "return confirm('Are you sure?')",
                             ]) !!}
+                            <a target="_blank" href="{{ route('purchasePackages.make_payment', $purchasePackage->id) }}"
+                                class="btn btn-success" style="white-space: nowrap;">Make Payment</a>
                             @endif
                             <a target="_blank" href="{{ route('purchasePackages.invoice', $purchasePackage->id) }}"
                                 class="btn btn-success">Invoice</a>

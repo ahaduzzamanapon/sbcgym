@@ -19,7 +19,7 @@ class Coupon extends Model
 {
 
     public $table = 'coupons';
-    
+
 
 
 
@@ -27,6 +27,7 @@ class Coupon extends Model
         'title',
         'coupon_code',
         'expire_date',
+        'type',
         'amount',
         'note'
     ];
@@ -57,5 +58,5 @@ class Coupon extends Model
         'amount' => 'required'
     ];
 
-    
+
 }

@@ -152,7 +152,9 @@ Route::group(['middleware' => 'auth'], function () {
 
         //PurchasePackageController
         Route::get('purchase_packages/{purchasePackage}/invoice', [PurchasePackageController::class, 'invoice'])->name('purchasePackages.invoice');
+        Route::get('purchase_packages/{purchasePackage}/make_payment', [PurchasePackageController::class, 'make_payment'])->name('purchasePackages.make_payment');
         Route::get('purchase_packages/{purchasePackage}/renew', [PurchasePackageController::class, 'renew'])->name('purchasePackages.renew');
+        Route::post('purchase_packages/payment_store', [PurchasePackageController::class, 'payment_store'])->name('purchasePackages.payment_store');
 
 
         // package report routes

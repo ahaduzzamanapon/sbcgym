@@ -21,18 +21,15 @@ class CreatePurchasepackagesTable extends Migration
             $table->integer('amount');
             $table->integer('tax');
             $table->integer('coupon_amount')->nullable();
+            $table->integer('admission_fee')->nullable();
             $table->integer('gross_amount');
             $table->integer('pay_amount');
             $table->integer('due_amount');
             $table->integer('status')->comment('1 for pending, 2 for due, 3 for fully payment');
             $table->date('expired_date')->nullable();
-            $table->text('payment_mode')->nullable();
-            $table->date('payment_date')->nullable();
-            $table->integer('payment_amount')->nullable();
-            $table->text('payment_note')->nullable();
-            $table->text('payment_doc')->nullable();
-            $table->text('payment_number')->nullable();
-            $table->integer('payment_status')->comment('1 for pending, 2 for approved')->nullable();
+            $table->date('due_date')->nullable();
+            $table->string('active_status')->default('Active')->nullable();
+            $table->date('inactive_date')->nullable();
             $table->timestamps();
         });
     }

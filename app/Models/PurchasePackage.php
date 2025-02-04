@@ -32,18 +32,15 @@ class PurchasePackage extends Model
         'amount',
         'tax',
         'coupon_amount',
+        'admission_fee',
         'gross_amount',
         'pay_amount',
         'due_amount',
         'status',
         'expired_date',
-        'payment_mode',
-        'payment_date',
-        'payment_amount',
-        'payment_note',
-        'payment_doc',
-        'payment_status',
-        'payment_number',
+        'due_date',
+        'active_status',
+        'inactive_date',
     ];
 
     /**

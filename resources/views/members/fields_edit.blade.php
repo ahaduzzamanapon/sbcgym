@@ -6,7 +6,11 @@
         <div class="col-md-3">
             <div class="form-group">
                 {!! Form::label('member_unique_id', 'Member ID:', ['class' => 'control-label']) !!}
+                @if(if_can('show_all_data'))
                 {!! Form::text('member_unique_id', null, ['class' => 'form-control','required','placeholder' => 'Enter Member ID']) !!}
+                @else
+                {!! Form::text('member_unique_id', null, ['class' => 'form-control','required','readonly','placeholder' => 'Enter Member ID']) !!}
+                @endif
                 @error('member_unique_id')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -37,7 +41,11 @@
         <div class="col-md-3">
             <div class="form-group">
                 {!! Form::label('nid', 'NID/BCF/Passport No. :', ['class' => 'control-label']) !!}
+                @if(if_can('show_all_data'))
                 {!! Form::text('nid', null, ['class' => 'form-control','required', 'placeholder' => 'Enter NID No.']) !!}
+                @else
+                {!! Form::text('nid', null, ['class' => 'form-control','required','readonly', 'placeholder' => 'Enter NID No.']) !!}
+                @endif
                 @error('mem_name')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -48,6 +56,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 {!! Form::label('mem_gender', 'Gender:', ['class' => 'control-label']) !!}
+                @if(if_can('show_all_data'))
                 <div style="display: flex;flex-direction: row;gap: 11px;align-items: center;">
                     <div class="form-check">
                         {!! Form::radio('mem_gender', 'Male', false, ['class' => 'form-check-input', 'id' => 'genderMale']) !!}
@@ -62,6 +71,22 @@
                         {!! Form::label('genderOther', 'Other', ['class' => 'form-check-label']) !!}
                     </div>
                 </div>
+                @else
+                <div style="display: flex;flex-direction: row;gap: 11px;align-items: center; ">
+                    <div class="form-check">
+                        {!! Form::radio('mem_gender', 'Male', false, ['class' => 'form-check-input', 'id' => 'genderMale', 'readonly']) !!}
+                        {!! Form::label('genderMale', 'Male', ['class' => 'form-check-label']) !!}
+                    </div>
+                    <div class="form-check">
+                        {!! Form::radio('mem_gender', 'Female', false, ['class' => 'form-check-input', 'id' => 'genderFemale', 'readonly']) !!}
+                        {!! Form::label('genderFemale', 'Female', ['class' => 'form-check-label']) !!}
+                    </div>
+                    <div class="form-check">
+                        {!! Form::radio('mem_gender', 'Other', false, ['class' => 'form-check-input', 'id' => 'genderOther', 'readonly']) !!}
+                        {!! Form::label('genderOther', 'Other', ['class' => 'form-check-label']) !!}
+                    </div>
+                </div>
+                @endif
                 @error('mem_gender')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror

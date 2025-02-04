@@ -532,7 +532,7 @@
                 transform: translateX(1.5em);
                 }
             </style>
-            <div class="row">
+            {{-- <div class="row">
                 <h5>Packages Active</h5>
                 <label class="switch">
                   <input type="checkbox" id="package_switch" name="package_switch" value="1">
@@ -582,7 +582,7 @@
                     {!! Form::label('expired_date', 'Expired Date:',['class'=>'control-label']) !!}
                     {!! Form::date('expired_date', null, ['class' => 'form-control','readonly']) !!}
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Terms and Conditions 34 -->
             <div class="col-md-3">

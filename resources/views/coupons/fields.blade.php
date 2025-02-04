@@ -47,13 +47,25 @@
 </script>
 @endsection --}}
 
+<div class="form-group">
+    <div class="row">
+        {!! Form::label('type', 'Type:',['class'=>'col-md-3 col-lg-3 col-12 control-label']) !!}
+        <div class="col-md-9 col-lg-9 col-12">
+            {!! Form::select('type', [''=>'Select Type','1'=>'Percent','0'=>'Fixed'], null, ['class' => 'form-control']) !!}
+            <!-- {!! Form::number('amount', null, ['class' => 'form-control']) !!} -->
+        </div>
+    </div>
+</div>
+
+
 
 <!-- Amount Field -->
 <div class="form-group">
     <div class="row">
         {!! Form::label('amount', 'Amount:',['class'=>'col-md-3 col-lg-3 col-12 control-label']) !!}
         <div class="col-md-9 col-lg-9 col-12">
-            {!! Form::number('amount', null, ['class' => 'form-control']) !!}
+            {!! Form::number('amount', null, ['class' => 'form-control','id'=>'amount']) !!}
+            <span style="color:red" id="error_amount"></sapn>
         </div>
     </div>
 </div>
@@ -77,4 +89,32 @@
 </div>
 
 
+<script>
+    $(document).ready(function () {
+        function checkType() {
+            if ($('#type').val() == 1) {
+                $('#percent').show();
+            } else {
+                $('#percent').hide();
+            }
+        }
+        checkType();
+        $('#type').on('change', checkType);
 
+    });
+
+    $('#error_amount').html('');
+    $('#amount').on('input',function(){
+        if($('#type').val() == 1){
+            var val = parseInt($(this).val());
+            if (isNaN(val) || val > 100) {
+                // alert('Percent should be less than 100');
+                $('#error_amount').html('Percent should be less than 100');
+                $(this).val('');
+            }else{
+                $('#error_amount').html('');
+            }
+
+        }
+    });
+</script>

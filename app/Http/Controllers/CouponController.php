@@ -94,6 +94,9 @@ class CouponController extends AppBaseController
             return redirect(route('coupons.index'));
         }
 
+        // dd($coupon);
+
+
         return view('coupons.edit')->with('coupon', $coupon);
     }
 
@@ -160,7 +163,7 @@ class CouponController extends AppBaseController
             return response()->json([
                 'status' => true,
                 'data' => $coupon,
-            ]);    
+            ]);
         }else{
             return response()->json([
                 'status' => false,

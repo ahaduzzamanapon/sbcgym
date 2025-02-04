@@ -25,7 +25,6 @@
         {!! Form::text('coupons_id', null, ['class' => 'form-control', 'id' => 'coupons_id']) !!}
         <span class="text-danger" id="coupons_id_error"></span>
         <span class="text-success" id="coupons_id_success"></span>
-        <input type="hidden" name="coupon_idd" id="coupon_idd">
     </div>
     <div class="form-group col-md-4">
         {!! Form::label('coupon_amount', 'Coupon Amount:', ['class' => 'control-label']) !!}
@@ -48,6 +47,22 @@
         {!! Form::number('due_amount', null, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group col-md-4">
+        {!! Form::label('active_status', 'Active Status:', ['class' => 'control-label']) !!}
+        {!! Form::select('active_status', ['Active' => 'Active', 'Inactive' => 'Inactive'], null, [
+            'class' => 'form-control',
+            'required' => 'required',
+        ]) !!}
+    </div>
+    <div class="form-group col-md-4">
+        {!! Form::label('inactive_date', 'Inactive Date:', ['class' => 'control-label']) !!}
+        {!! Form::date('inactive_date', null, ['class' => 'form-control', 'required' => 'required']) !!}
+    </div>
+
+    <div class="form-group col-md-4">
+        {!! Form::label('due_amount', 'Due Amount:', ['class' => 'control-label']) !!}
+        {!! Form::number('due_amount', null, ['class' => 'form-control']) !!}
+    </div>
+    <div class="form-group col-md-4">
         {!! Form::label('status', 'Status:', ['class' => 'control-label']) !!}
         {!! Form::select('status', ['' => 'Select Status', '1' => 'Pending', '2' => 'Due', '3' => 'Full Paid'], null, [
             'class' => 'form-control',
@@ -64,50 +79,7 @@
         {!! Form::date('due_date', null, ['class' => 'form-control']) !!}
     </div>
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="row" style="display: flex;align-items: center;gap: 22px;">
-            <h1>Payment Details </h1>
-            <span class="text-danger">Please payment on <strong id="payment_number_marchent"></strong> </span>
-        </div>
-    </div>
-    <?php
-    ?>
-    <div class="row">
-        <div class="form-group col-md-4">
-            {!! Form::label('payment_mode', 'Payment Mode:', ['class' => 'control-label']) !!}
-            {!! Form::select('payment_mode', ['' => 'Select Payment Mode'], null, [
-                'class' => 'form-control',
-                'required',
-                'onchange' => 'get_number()',
-            ]) !!}
-        </div>
-        <div class="form-group col-md-4">
-            {!! Form::label('payment_date', 'Payment Date:', ['class' => 'control-label']) !!}
-            {!! Form::date('payment_date', null, ['class' => 'form-control', 'required']) !!}
-        </div>
-        <div class="form-group col-md-4">
-            {!! Form::label('payment_amount', 'Payment Amount:', ['class' => 'control-label']) !!}
-            {!! Form::number('payment_amount', null, ['class' => 'form-control', 'required', 'readonly']) !!}
-        </div>
-        <div class="form-group col-md-4">
-            {!! Form::label('payment_note', 'Payment Note:', ['class' => 'control-label']) !!}
-            {!! Form::text('payment_note', null, ['class' => 'form-control', 'required', 'placeholder' => 'Transaction ID']) !!}
-        </div>
-        <div class="form-group col-md-4">
-            {!! Form::label('payment_doc', 'Payment Document:', ['class' => 'control-label']) !!}
-            {!! Form::file('payment_doc', ['class' => 'form-control']) !!}
-        </div>
-        <div class="form-group col-md-4">
-            {!! Form::label('payment_number', 'Payment Number:', ['class' => 'control-label']) !!}
-            {!! Form::text('payment_number', null, ['class' => 'form-control']) !!}
-        </div>
-        <div class="form-group col-md-4 {{ if_can('show_all_data') ? '' : 'd-none' }}">
-            {!! Form::label('payment_status', 'Payment Status:', ['class' => 'control-label']) !!}
-            {!! Form::select('payment_status', ['1' => 'Pending', '2' => 'Approved'], null, ['class' => 'form-control']) !!}
-        </div>
-    </div>
-</div>
+
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
     <a href="{{ route('purchasePackages.index') }}" class="btn btn-danger">Cancel</a>
@@ -129,23 +101,9 @@
                     dataType: 'json',
                     success: function(response) {
                         if (response.status == true) {
-
-
-
-                            if(response.data['type'] == 0){
-                                $('#coupon_amount').val(response.data['amount']);
-                            }else{
-                                amount=$('#amount').val();
-                                $('#coupon_amount').val((amount*response.data['amount'])/100);
-                            }
-
-                            $('#coupon_idd').val(response.data['id']);
-
-
+                            $('#coupon_amount').val(response.data['amount']);
                             $('#coupons_id_error').text('');
                             $('#coupons_id_success').text('Valid Coupons Code');
-
-
                         } else {
                             $('#coupon_amount').val(0);
                             $('#coupons_id_error').text('Invalid Coupons Code Or Expired');
@@ -200,6 +158,7 @@
             var amount = document.getElementById('amount').value;
             var coupon_amount = document.getElementById('coupon_amount').value;
             var admission_fee = document.getElementById('admission_fee').value;
+
             if (coupon_amount == '') {
                 coupon_amount = 0;
             }

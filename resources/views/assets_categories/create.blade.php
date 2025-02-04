@@ -17,9 +17,7 @@ Assets Categories @parent
         <div class="card">
             <div class="card-body">
                 {!! Form::open(['route' => 'assetsCategories.store','class' => 'form-horizontal']) !!}
-
                     @include('assets_categories.fields')
-
                 {!! Form::close() !!}
             </div>
         </div>

@@ -9,6 +9,8 @@ use App\Models\PurchasePackage;
 use App\Models\Member;
 use App\Models\MultiBranch;
 use App\Models\Income;
+use App\Models\PurchasePayment;
+
 use App\Models\Package;
 use Illuminate\Http\Request;
 use Flash;
@@ -67,7 +69,12 @@ class PurchasePackageController extends AppBaseController
      */
     public function store(CreatePurchasePackageRequest $request)
     {
+
+
+
+
         $input = $request->all();
+
 
         if($input['tax']==''){
             $input['tax']=0;
@@ -81,19 +88,46 @@ class PurchasePackageController extends AppBaseController
             $file = $request->file('payment_doc');
             $input['payment_doc'] = $file->store('images/payment_doc', 'public');
         }else{
-            unset($input['payment_doc']);
+            $input['payment_doc']='';
         }
 
+        $insert_data = array(
+            'member_id' => $input['member_id'],
+            'package_id' => $input['package_id'],
+            'coupons_id' => $input['coupon_idd'],
+            'amount' => $input['amount'],
+            'tax' => $input['tax'],
+            'coupon_amount' => $input['coupon_amount'],
+            'admission_fee' => $input['admission_fee'],
+            'gross_amount' => $input['gross_amount'],
+            'pay_amount' => $input['pay_amount'],
+            'due_amount' => $input['due_amount'],
+            'status' => $input['status'],
+            'expired_date' => $input['expired_date'],
+            'due_date' => $input['due_date'],
+        );
+        $purchasePackage = PurchasePackage::create($insert_data);
 
-
-
-
-        $purchasePackage = PurchasePackage::create($input);
         $purchasePackages_data = PurchasePackage::select('purchasepackages.*', 'packages.pack_name as pack_name','packages.pack_duration', 'members.mem_name as member_name', 'members.member_unique_id as member_unique_id')
             ->join('packages', 'packages.id', '=', 'purchasepackages.package_id')
             ->join('members', 'members.id', '=', 'purchasepackages.member_id')
             ->where('purchasepackages.id',$purchasePackage->id)
             ->first();
+
+
+        $payment_data=array(
+            'purchase_purchase_id'=>$purchasePackage->id,
+            'payment_mode'=>$input['payment_mode'],
+            'payment_date'=>$input['payment_date'],
+            'payment_amount'=>$input['payment_amount'],
+            'payment_note'=>$input['payment_note'],
+            'payment_doc'=>$input['payment_doc'],
+            'payment_number'=>$input['payment_number'],
+            'payment_status'=>$input['payment_status'],
+        );
+
+        PurchasePayment::create($payment_data);
+
         $title=$purchasePackages_data->member_name.' Purchased a Package '.$purchasePackages_data->pack_name;"";
         $member_details=Member::where('id',$purchasePackages_data->member_id)->first();
         $branch_details=MultiBranch::where('id',$member_details->branch_id)->first();
@@ -109,7 +143,6 @@ class PurchasePackageController extends AppBaseController
         Flash::success('Purchase Package saved successfully.');
         return redirect(route('purchasePackages.index'));
     }
-
     /**
      * Display the specified PurchasePackage.
      *
@@ -142,13 +175,10 @@ class PurchasePackageController extends AppBaseController
     {
         /** @var PurchasePackage $purchasePackage */
         $purchasePackage = PurchasePackage::find($id);
-
         if (empty($purchasePackage)) {
             Flash::error('Purchase Package not found');
-
             return redirect(route('purchasePackages.index'));
         }
-
         return view('purchase_packages.edit')->with('purchasePackage', $purchasePackage);
     }
 
@@ -244,5 +274,67 @@ class PurchasePackageController extends AppBaseController
         return redirect(route('purchasePackages.index'));
     }
 
+    public function make_payment($id){
+        $sale = PurchasePackage::select('purchasepackages.*', 'packages.pack_name as pack_name', 'members.mem_name as member_name')
+            ->join('packages', 'packages.id', '=', 'purchasepackages.package_id')
+            ->join('members', 'members.id', '=', 'purchasepackages.member_id')
+            ->where('purchasepackages.id', $id)
+            ->first();
+        $payment_details = PurchasePayment::select('purchase_payments.*', 'paymentmethods.name as payment_method_name', 'paymentmethods.payment_number as payment_method_number')
+            ->join('paymentmethods', 'paymentmethods.id', '=', 'purchase_payments.payment_mode')
+            ->get();
 
+        return view('purchase_packages.make_payment', compact('sale', 'payment_details'));
+    }
+    public function payment_store(Request $request){
+//         dd($request->all());
+//         array:10 [▼ // app\Http\Controllers\PurchasePackageController.php:286
+//   "_token" => "eIOqxZq7pnxok04qqyJrpcJiCwdpo5gecbMSv00g"
+//   "member_id" => "1"
+//   "sale_id" => "6"
+//   "payment_mode" => "3"
+//   "payment_date" => "2025-02-04"
+//   "payment_amount" => "30"
+//   "payment_note" => "test"
+//   "payment_doc" => null
+//   "payment_number" => "54981056489"
+//   "payment_status" => "2"
+// ]
+
+        $input = $request->all();
+        $payment_data=array(
+            'purchase_purchase_id'=>$input['sale_id'],
+            'payment_mode'=>$input['payment_mode'],
+            'payment_date'=>$input['payment_date'],
+            'payment_amount'=>$input['payment_amount'],
+            'payment_note'=>$input['payment_note'],
+            'payment_doc'=>$input['payment_doc'],
+            'payment_number'=>$input['payment_number'],
+            'payment_status'=>$input['payment_status'],
+        );
+
+        PurchasePayment::create($payment_data);
+
+        // status	int			No	None	1 for pending, 2 for due, 3 for fully payment
+        $sale = PurchasePackage::where('id', $input['sale_id'])->first();
+        $sale->due_amount = $sale->due_amount - $input['payment_amount'];
+        $sale->pay_amount = $sale->pay_amount + $input['payment_amount'];
+        $sale->status = $sale->due_amount == 0 ? 3 : 2;
+        $sale->save();
+
+        $member_details=Member::where('id',$sale->member_id)->first();
+        $branch_details=MultiBranch::where('id',$member_details->branch_id)->first();
+        $branch_name = $branch_details ? $branch_details->branch_name : '';
+        $title=$member_details->mem_name.' Paid a Package '.$sale->pack_name."";
+        $description=$member_details->mem_name.' ( '.$member_details->member_unique_id.' ) '.' Paid a Package '.$sale->pack_name.' in '.$branch_name;
+        $income=new Income();
+        $income->title=$title;
+        $income->branch_id=$member_details->branch_id;
+        $income->member_id=$member_details->id;
+        $income->amount=$input['payment_amount'];
+        $income->description=$description;
+        $income->save();
+        Flash::success('Payment saved successfully.');
+        return redirect(route('purchasePackages.index'));
+    }
 }
