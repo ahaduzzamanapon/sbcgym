@@ -11,7 +11,7 @@ use App\Models\Member;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
-use DB; 
+use DB;
 
 
 
@@ -184,7 +184,7 @@ class AttendenceController extends AppBaseController
             'status'=>true,
             'view'=>view('attendences.report.get_daily_attendence_view',compact('attendences','title','targetDate'))->render()
         ];
-        
+
         return response()->json($data, 200);
     }
     public function auto_from_machine(Request $request){
@@ -202,6 +202,38 @@ class AttendenceController extends AppBaseController
         } catch (\Exception $e) {
             return response()->json(['message' => 'Error processing attendance', 'error' => $e->getMessage()], 500);
         }
-        
+
     }
+    public function job_card(Request $request){
+
+        $from_date=$request->input('from_date');
+        $to_date=$request->input('to_date');
+
+
+        $job_card=[];
+        foreach ($request->member_id as $member_id) {
+            $member_data = Member::find($member_id);
+            $attendance_data = Attendence::where('member_id', $member_id)
+                            ->whereBetween('date', [$from_date, $to_date])
+                            ->get();
+            $job_card[]=[
+                'member_data'=>$member_data,
+                'attendences'=>$attendance_data,
+            ];
+        }
+
+        $title='Job Card Report from '.$from_date.' to '.$to_date;
+
+        $data=[
+            'from_date'=>$from_date,
+            'to_date'=>$to_date,
+            'status'=>true,
+
+            'view'=>view('attendences.report.job_card',compact('job_card','from_date','to_date','title'))->render()
+        ];
+        return response()->json($data, 200);
+    }
+
+
+
 }

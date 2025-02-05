@@ -100,10 +100,7 @@ Attendences @parent
                                 </div>
                                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                     <div class="row p-2" style="display: flex;flex-wrap: wrap;gap: 8px;">
-                                        {{-- <a href="#" class="btn btn-primary">Continue Attendance</a>
-                                        <a href="#" class="btn btn-primary">Continue Present</a>
-                                        <a href="#" class="btn btn-primary">Continue Absent</a> --}}
-                                        <h1>Coming Soon</h1>
+                                        <a href="#" onclick="JobCard()" class="btn btn-primary">Job Card</a>
                                     </div>
                                 </div>
 
@@ -249,5 +246,47 @@ Attendences @parent
             newWindow.document.write(response);
         });
     }
+
+    function JobCard() {
+        const fromDateValue = $('#from_date').val();
+        const toDateValue = $('#to_date').val();
+        const memberIds = get_checked_member_id();
+
+        if (memberIds.length === 0) {
+            alert('Please select member');
+            return;
+        }
+
+        if (!fromDateValue) {
+            alert('Please select first date');
+            return;
+        }
+
+        if (!toDateValue) {
+            alert('Please select to date');
+            return;
+        }
+
+        $.ajax({
+            url: "{{ route('attendences.job_card') }}",
+            type: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                from_date: fromDateValue,
+                to_date: toDateValue,
+                member_id: memberIds,
+            },
+            dataType: 'json',
+            }).done(function(response) {
+                const newWindow = window.open();
+                newWindow.document.write(response.view);
+            }).fail(function(response) {
+                $('#loader').html('');
+                const newWindow = window.open();
+                newWindow.document.write(response);
+            })
+    }
+
+
 </script>
 @endsection

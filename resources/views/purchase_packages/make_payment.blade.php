@@ -2,62 +2,62 @@
 
 {{-- Page title --}}
 @section('title')
-Purchase Package @parent
+    Purchase Package @parent
 @stop
 
 @section('content')
-   <section class="content-header">
-    <div aria-label="breadcrumb" class="card-breadcrumb">
-        <h1>Payment details</h1>
-    </div>
-    <div class="separator-breadcrumb border-top"></div>
+    <section class="content-header">
+        <div aria-label="breadcrumb" class="card-breadcrumb">
+            <h1>Payment details</h1>
+        </div>
+        <div class="separator-breadcrumb border-top"></div>
     </section>
     <div class="content">
         @include('adminlte-templates::common.errors')
         <div class="card">
             <div class="card-body">
-<div class="col-md-12">
-   <table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>SL</th>
-            <th>Payment Mode</th>
-            <th>Payment Date</th>
-            <th>Payment Amount</th>
-            <th>Payment Note</th>
-            <th>Payment Number</th>
-            <th>Payment Status</th>
-            <th>Payment Method Name</th>
-            <th>Payment Method Number</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($payment_details as $key => $payment_detail)
-            <tr>
-                <td>{{ $key+1 }}</td>
-                <td>{{ $payment_detail->payment_mode }}</td>
-                <td>{{ $payment_detail->payment_date }}</td>
-                <td>{{ $payment_detail->payment_amount }}</td>
-                <td>{{ $payment_detail->payment_note }}</td>
-                <td>{{ $payment_detail->payment_number }}</td>
-                <td>{{ $payment_detail->payment_status }}</td>
-                <td>{{ $payment_detail->payment_method_name }}</td>
-                <td>{{ $payment_detail->payment_method_number }}</td>
-            </tr>
-        @endforeach
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>SL</th>
+                                <th>Payment Mode</th>
+                                <th>Payment Date</th>
+                                <th>Payment Amount</th>
+                                <th>Payment Note</th>
+                                <th>Payment Number</th>
+                                <th>Payment Status</th>
+                                <th>Payment Method Name</th>
+                                <th>Payment Method Number</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($payment_details as $key => $payment_detail)
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $payment_detail->payment_mode }}</td>
+                                    <td>{{ $payment_detail->payment_date }}</td>
+                                    <td>{{ $payment_detail->payment_amount }}</td>
+                                    <td>{{ $payment_detail->payment_note }}</td>
+                                    <td>{{ $payment_detail->payment_number }}</td>
+                                    <td>{{ $payment_detail->payment_status }}</td>
+                                    <td>{{ $payment_detail->payment_method_name }}</td>
+                                    <td>{{ $payment_detail->payment_method_number }}</td>
+                                </tr>
+                            @endforeach
 
-    </tbody>
-   </table>
-   <div class="row">
-    <div class="col-md-12" style="display: flex;flex-direction: column;gap: 10px;">
-        <span>Total Amount: <strong>{{ $sale->gross_amount }}</strong></span>
-        <span>Pay Amount: <strong>{{ $sale->pay_amount }}</strong></span>
-        <span>Due Amount: <strong>{{ $sale->due_amount }}</strong></span>
-        <input type="hidden" name="due_amount" id="due_amount" value="{{ $sale->due_amount }}">
-    </div>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-12" style="display: flex;flex-direction: column;gap: 10px;">
+                            <span>Total Amount: <strong>{{ $sale->gross_amount }}</strong></span>
+                            <span>Pay Amount: <strong>{{ $sale->pay_amount }}</strong></span>
+                            <span>Due Amount: <strong>{{ $sale->due_amount }}</strong></span>
+                            <input type="hidden" name="due_amount" id="due_amount" value="{{ $sale->due_amount }}">
+                        </div>
 
-   </div>
-</div>
+                    </div>
+                </div>
 
 
 
@@ -72,7 +72,8 @@ Purchase Package @parent
                         <div class="col-md-12">
                             <div class="row" style="display: flex;align-items: center;gap: 22px;">
                                 <h1>Payment Details </h1>
-                                <span class="text-danger">Please payment on <strong id="payment_number_marchent"></strong> </span>
+                                <span class="text-danger">Please payment on <strong id="payment_number_marchent"></strong>
+                                </span>
                             </div>
                         </div>
                         <?php
@@ -124,45 +125,45 @@ Purchase Package @parent
             </div>
         </div>
     </div>
-    @section('footer_scripts')
-        <script>
-            var payment_json = ''
-            $(document).ready(function() {
-                const memberId = $('#member_id').val();
-                get_payment_method_by_member(memberId);
+@section('footer_scripts')
+    <script>
+        var payment_json = ''
+        $(document).ready(function() {
+            const memberId = $('#member_id').val();
+            get_payment_method_by_member(memberId);
+        });
+
+
+        function get_payment_method_by_member(member_id) {
+            console.log('member_id', member_id);
+
+
+            payment_json = '';
+            $.ajax({
+                url: "{{ route('get_payment_method_by_member') }}",
+                type: "POST",
+                data: {
+                    '_token': "{{ csrf_token() }}",
+                    'member_id': member_id
+                },
+                dataType: 'json',
+                success: function(response) {
+                    payment_json = response
+                    $('#payment_mode').empty();
+                    $('#payment_mode').append('<option value="">Select Payment Mode</option>');
+                    $.each(response, function(index, payment_method) {
+                        $('#payment_mode').append('<option value="' + payment_method.id + '">' +
+                            payment_method.name + '</option>');
+                    });
+                }
             });
+        }
 
-
-            function get_payment_method_by_member(member_id) {
-                console.log('member_id', member_id);
-
-
-                payment_json = '';
-                $.ajax({
-                    url: "{{ route('get_payment_method_by_member') }}",
-                    type: "POST",
-                    data: {
-                        '_token': "{{ csrf_token() }}",
-                        'member_id': member_id
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        payment_json = response
-                        $('#payment_mode').empty();
-                        $('#payment_mode').append('<option value="">Select Payment Mode</option>');
-                        $.each(response, function(index, payment_method) {
-                            $('#payment_mode').append('<option value="' + payment_method.id + '">' +
-                                payment_method.name + '</option>');
-                        });
-                    }
-                });
-            }
-
-            function get_number() {
-                var payment_mode = $('#payment_mode').val();
-                var payment_method = payment_json.find(payment_method => payment_method.id == payment_mode);
-                $('#payment_number_marchent').html(payment_method.payment_number + ' (' + payment_method.name + ')');
-            }
-        </script>
-    @endsection
+        function get_number() {
+            var payment_mode = $('#payment_mode').val();
+            var payment_method = payment_json.find(payment_method => payment_method.id == payment_mode);
+            $('#payment_number_marchent').html(payment_method.payment_number + ' (' + payment_method.name + ')');
+        }
+    </script>
+@endsection
 @endsection

@@ -18,7 +18,7 @@ Member @parent
            <div class="card-body">
             @include('flash::message')
 
-                {!! Form::model($member, ['route' => ['members.update', $member->id], 'method' => 'patch','class' => 'form-horizontal']) !!}
+            {!! Form::model($member, ['route' => ['members.update', $member->id], 'method' => 'patch', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
 
                     @include('members.fields_edit')
 
