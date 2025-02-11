@@ -282,6 +282,7 @@ class PurchasePackageController extends AppBaseController
             ->first();
         $payment_details = PurchasePayment::select('purchase_payments.*', 'paymentmethods.name as payment_method_name', 'paymentmethods.payment_number as payment_method_number')
             ->join('paymentmethods', 'paymentmethods.id', '=', 'purchase_payments.payment_mode')
+            ->where('purchase_payments.purchase_purchase_id', $id)
             ->get();
 
         return view('purchase_packages.make_payment', compact('sale', 'payment_details'));
