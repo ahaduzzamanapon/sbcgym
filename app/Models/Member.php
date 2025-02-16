@@ -64,12 +64,12 @@ class Member extends Model
         'push_up_count',
         'pull_up_count',
         'lift_count_kg',
+        'password',
         'question',
         'term_con',
         'created_at',
         'updated_at',
     ];
-
 
     /**
      * The attributes that should be casted to native types.
@@ -77,18 +77,18 @@ class Member extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
-        'member_unique_id' => 'string',
-        'mem_name' => 'string',
-        'mem_father' => 'string',
-        'mem_address' => 'string',
+        'id'                 => 'integer',
+        'member_unique_id'   => 'string',
+        'mem_name'           => 'string',
+        'mem_father'         => 'string',
+        'mem_address'        => 'string',
         'mem_admission_date' => 'date',
-        'mem_cell' => 'string',
-        'mem_email' => 'string',
-        'mem_img_url' => 'string',
-        'group_id' => 'integer',
-        'punch_id' => 'integer',
-        'branch_id' => 'integer',
+        'mem_cell'           => 'string',
+        'mem_email'          => 'string',
+        'mem_img_url'        => 'string',
+        'group_id'           => 'integer',
+        'punch_id'           => 'integer',
+        'branch_id'          => 'integer',
     ];
 
     /**
@@ -97,12 +97,13 @@ class Member extends Model
      * @var array
      */
     public static $rules = [
-        'mem_name' => 'required',
+        'mem_name'           => 'required',
         // 'member_unique_id' => 'unique:members,member_unique_id',
-        'mem_address' => 'required',
+        'mem_address'        => 'required',
         'mem_admission_date' => 'required',
-        'mem_cell' => 'required',
-        'mem_email' => 'required'
+        'mem_cell'           => 'required',
+        'mem_email'          => 'required',
+        'password'           => 'required',
     ];
-    
+
 }

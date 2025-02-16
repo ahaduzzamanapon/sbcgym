@@ -1,70 +1,64 @@
 <?php
 
-Route::resource('members', 'MemberController');
+Route::resource( 'members', 'MemberController' );
 
-Route::resource('packages', 'PackageController');
+Route::resource( 'packages', 'PackageController' );
 
-Route::resource('products', 'ProductController');
+Route::resource( 'products', 'ProductController' );
 
-Route::resource('healthmetrics', 'HealthmetricsController');
+Route::resource( 'healthmetrics', 'HealthmetricsController' );
 
-Route::resource('requisitions', 'RequisitionController');
+Route::resource( 'requisitions', 'RequisitionController' );
 
+Route::resource( 'expenses', 'ExpensesController' );
 
+Route::resource( 'incomes', 'IncomeController' );
 
-Route::resource('expenses', 'ExpensesController');
+Route::resource( 'schedulebookings', 'SchedulebookingController' );
 
-Route::resource('incomes', 'IncomeController');
+Route::resource( 'coupons', 'CouponController' );
 
-Route::resource('schedulebookings', 'SchedulebookingController');
+Route::resource( 'groups', 'GroupController' );
 
-Route::resource('coupons', 'CouponController');
+Route::resource( 'permissions', 'PermissionController' );
 
-Route::resource('groups', 'GroupController');
+Route::resource( 'groupPermitions', 'GroupPermitionController' );
 
-Route::resource('permissions', 'PermissionController');
+Route::resource( 'purchasePackages', 'PurchasePackageController' );
 
-Route::resource('groupPermitions', 'GroupPermitionController');
+Route::resource( 'assetsManagements', 'AssetsManagementController' );
 
-Route::resource('purchasePackages', 'PurchasePackageController');
+Route::resource( 'assetsManagements', 'AssetsManagementController' );
 
-
-Route::resource('assetsManagements', 'AssetsManagementController');
-
-Route::resource('assetsManagements', 'AssetsManagementController');
-
-Route::resource('assetsCategories', 'AssetsCategoryController');
+Route::resource( 'assetsCategories', 'AssetsCategoryController' );
 
 // Route::resource('attendences', 'AttendenceController');
 
-Route::resource('siteSettings', 'SiteSettingController');
+Route::resource( 'siteSettings', 'SiteSettingController' );
 
-Route::resource('siteProfiles', 'SiteProfileController');
+Route::resource( 'siteProfiles', 'SiteProfileController' );
 
-Route::resource('siteFeatures', 'SiteFeatureController');
+Route::resource( 'siteFeatures', 'SiteFeatureController' );
 
-Route::resource('aboutuses', 'AboutUsController');
+Route::resource( 'aboutuses', 'AboutUsController' );
 
-Route::resource('siteTrainers', 'SiteTrainerController');
-Route::resource('contactMassages', 'ContactMassageController');
+Route::resource( 'siteTrainers', 'SiteTrainerController' );
+Route::resource( 'contactMassages', 'ContactMassageController' );
 
+Route::resource( 'notices', 'NoticeController' );
 
+Route::resource( 'termAndConditions', 'TermAndConditionController' );
 
+Route::resource( 'admissionQuestions', 'AdmissionQuestionsController' );
 
-Route::resource('notices', 'NoticeController');
+Route::resource( 'multiBranches', 'MultiBranchController' );
 
-Route::resource('termAndConditions', 'TermAndConditionController');
+Route::resource( 'workoutCategories', 'WorkoutCategoryController' );
 
-Route::resource('admissionQuestions', 'AdmissionQuestionsController');
+Route::resource( 'dailyWorkouts', 'DailyWorkoutsController' );
 
-Route::resource('multiBranches', 'MultiBranchController');
+Route::resource( 'lockers', 'LockerController' );
 
-Route::resource('workoutCategories', 'WorkoutCategoryController');
+Route::resource( 'lockerAssignments', 'LockerAssignmentController' );
 
-Route::resource('dailyWorkouts', 'DailyWorkoutsController');
-
-Route::resource('lockers', 'LockerController');
-
-Route::resource('lockerAssignments', 'LockerAssignmentController');
-
-Route::resource('paymentMethods', 'PaymentMethodController');
+Route::resource( 'paymentMethods', 'PaymentMethodController' );

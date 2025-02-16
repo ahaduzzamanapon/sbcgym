@@ -18,9 +18,6 @@ class Package extends Model
 {
 
     public $table = 'packages';
-    
-
-
 
     public $fillable = [
         'pack_name',
@@ -28,7 +25,7 @@ class Package extends Model
         'pack_image',
         'pack_admission_fee',
         'pack_duration',
-        'pack_status'
+        'pack_status',
     ];
 
     /**
@@ -37,11 +34,11 @@ class Package extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
-        'pack_name' => 'string',
+        'id'                 => 'integer',
+        'pack_name'          => 'string',
         'pack_admission_fee' => 'integer',
-        'pack_duration' => 'string',
-        'pack_status' => 'integer'
+        'pack_duration'      => 'string',
+        'pack_status'        => 'integer',
     ];
 
     /**
@@ -50,10 +47,10 @@ class Package extends Model
      * @var array
      */
     public static $rules = [
-        'pack_name' => 'required',
+        'pack_name'          => 'required',
         'pack_admission_fee' => 'required',
-        'pack_duration' => 'required'
+        'pack_duration'      => 'required',
+        'pack_image'         => 'required',
     ];
 
-    
 }

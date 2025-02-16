@@ -11,7 +11,7 @@
         href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
         rel="stylesheet">
 
-    <title>{{ $SiteProfile->title?? 'home' }}</title>
+    <title>{{ $SiteProfile->title ?? 'home' }}</title>
     <!--
 
 TemplateMo 548 Training Studio
@@ -43,7 +43,8 @@ https://templatemo.com/tm-548-training-studio
         appearance: none;
         margin-bottom: 1px;
     }
-    .contact-form textarea{
+
+    .contact-form textarea {
         color: #7a7a7a;
         font-size: 13px;
         border: 1px solid #ddd;
@@ -59,10 +60,11 @@ https://templatemo.com/tm-548-training-studio
         appearance: none;
         margin-bottom: 1px;
     }
+
     .feature-item {
-    display: flex;
-    margin-bottom: 60px;
-}
+        display: flex;
+        margin-bottom: 60px;
+    }
 </style>
 
 <body>
@@ -106,6 +108,8 @@ https://templatemo.com/tm-548-training-studio
                             <li class="scroll-to-section linkkss"><a href="#top" class="active">Home</a></li>
                             <li class="scroll-to-section linkkss"><a href="#features">About</a></li>
                             <li class="scroll-to-section linkkss"><a href="#packages_section">Packages</a></li>
+                            <li class="scroll-to-section linkkss"><a href="#offers">Offers</a></li>
+                            <li class="scroll-to-section linkkss"><a href="#classes">Classes</a></li>
                             <li class="scroll-to-section linkkss"><a href="#contact-us">Contact</a></li>
                             @if (isset($scrollToBottom))
                                 :
@@ -248,7 +252,8 @@ https://templatemo.com/tm-548-training-studio
                         <ul class="features-items">
                             <li class="feature-item">
                                 <div class="left-icon">
-                                    <img src="{{ asset('storage/' . $feature->image) }}" alt="First One" style="height: 100px;width: 100px;">
+                                    <img src="{{ asset('storage/' . $feature->image) }}" alt="First One"
+                                        style="height: 100px;width: 100px;">
                                 </div>
                                 <div class="right-content">
                                     <h4>{{ $feature->title }}</h4>
@@ -333,7 +338,8 @@ https://templatemo.com/tm-548-training-studio
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
-                    <div class="section-heading" style="margin-top: 9px;margin-bottom: 23px;border-bottom: 2px solid #00bc65;">
+                    <div class="section-heading"
+                        style="margin-top: 9px;margin-bottom: 23px;border-bottom: 2px solid #00bc65;">
                         <h2>Expert <em>Trainers</em></h2>
                     </div>
                 </div>
@@ -351,9 +357,12 @@ https://templatemo.com/tm-548-training-studio
                                 <h4>{{ $trainer->trainer_name }}</h4>
                                 <p>{{ $trainer->description }}</p>
                                 <ul class="social-icons">
-                                    <li><a href="{{ $trainer->facebook_link }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="{{ $trainer->twitter }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="{{ $trainer->linkedin }}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a href="{{ $trainer->facebook_link }}" target="_blank"><i
+                                                class="fa fa-facebook"></i></a></li>
+                                    <li><a href="{{ $trainer->twitter }}" target="_blank"><i
+                                                class="fa fa-twitter"></i></a></li>
+                                    <li><a href="{{ $trainer->linkedin }}" target="_blank"><i
+                                                class="fa fa-linkedin"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -362,18 +371,19 @@ https://templatemo.com/tm-548-training-studio
             </div>
         </div>
     </section>
-    <section class="section mt-5 packages_section" id="trainers" >
+    <section class="section mt-5 packages_section" id="trainers">
         <div class="container" id="packages_section">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
-                    <div class="section-heading" style="margin-top: 9px;margin-bottom: 23px;border-bottom: 2px solid #00bc65;">
-                        <h2>All  <em>Packages</em></h2>
+                    <div class="section-heading"
+                        style="margin-top: 9px;margin-bottom: 23px;border-bottom: 2px solid #00bc65;">
+                        <h2>All <em>Packages</em></h2>
                     </div>
                 </div>
             </div>
             <div class="row">
                 @php
-                $packages=\App\Models\Package::where('pack_status',1)->get();
+                    $packages = \App\Models\Package::where('pack_status', 1)->get();
                 @endphp
                 {{-- @dd($packages) --}}
                 {{-- id" => 1
@@ -385,18 +395,14 @@ https://templatemo.com/tm-548-training-studio
         "created_at" => "2024-11-18 05:41:04"
         "updated_at" => "2024-12-10 06:09:31" --}}
                 @foreach ($packages as $package)
-                    <div class="col-lg-4">
+                    <div class="col-md-6 mb-4">
                         <div class="trainer-item" style="height: fit-content!important;">
                             <div class="image-thumb">
                                 <br>
-                                <img src="{{ asset('storage/packeg.jpg') }}"
-                                    alt="{{ $package->pack_name }}">
+                                <img src="{{ asset('images/pack_image/' . $package->pack_image) }}" alt="{{ $package->pack_name }}" style="width: 100%; height: 500px; object-fit: cover;">
                             </div>
-                            <div class="down-content">
-                                <h4 class="m-0 mt-2">{{ $package->pack_name }}</h4>
-                                <p class="m-0">Duration : {{ $package->pack_duration }}</p>
-                                <p class="m-0">Package Fee :{{ $package->pack_admission_fee }}</p>
-                                <a class="btn" style="background: #00bc65; color: #fff" href="{{route('login')}}">Purchase</a>
+                            <div class="down-content bg-success  mt-3 p-1 rounded-sm">
+                                <h4 class="m-0 my-3 text-center text-white" >{{ $package->pack_name }}</h4>
                             </div>
 
                         </div>
@@ -475,7 +481,8 @@ https://templatemo.com/tm-548-training-studio
                                 <div class="col-md-12 col-sm-12">
                                     <fieldset>
                                         <div class="form-group">
-                                            <input name="phone" type="text" id="phone" placeholder="Phone" required>
+                                            <input name="phone" type="text" id="phone" placeholder="Phone"
+                                                required>
                                             @if ($errors->has('phone'))
                                                 <span class="text-danger"
                                                     style="font-size: 12px;">{{ $errors->first('phone') }}</span>
@@ -497,7 +504,7 @@ https://templatemo.com/tm-548-training-studio
                                 </div>
                                 <div class="col-lg-12">
                                     <fieldset>
-                                        <button   type="submit" id="form-submit" class="main-button">Send
+                                        <button type="submit" id="form-submit" class="main-button">Send
                                             Message</button>
                                     </fieldset>
                                 </div>
@@ -555,8 +562,8 @@ https://templatemo.com/tm-548-training-studio
     <script src="assets/js/custom.js"></script>
 
     <script>
-        $('.linkkss').on('click', function (e) {
-            
+        $('.linkkss').on('click', function(e) {
+
             $('.menu-trigger').addClass('active');
         })
     </script>
