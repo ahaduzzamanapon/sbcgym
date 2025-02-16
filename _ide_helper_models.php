@@ -880,6 +880,17 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Offer
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Offer newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Offer newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Offer query()
+ */
+	class Offer extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * Class Package
  *
  * @package App\Models
@@ -907,6 +918,17 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Package whereUpdatedAt($value)
  */
 	class Package extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Package_class
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Package_class newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Package_class newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Package_class query()
+ */
+	class Package_class extends \Eloquent {}
 }
 
 namespace App\Models{
