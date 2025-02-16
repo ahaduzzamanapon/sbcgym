@@ -10,7 +10,7 @@
                 ->map(function ($member) {
                 return [
                     'id' => $member->id,
-                    'mem_name' => $member->mem_name . '->' . $member->branch_name.'->'. $member->mem_cell,
+                    'mem_name' => $member->member_unique_id . '->' . $member->mem_name . '->' . $member->branch_name.'->'. $member->mem_cell,
                 ];
             })
             ->pluck('mem_name', 'id');
@@ -24,7 +24,7 @@
                 ->map(function ($member) {
                 return [
                     'id' => $member->id,
-                    'mem_name' => $member->mem_name . '->' . $member->branch_name.'->'. $member->mem_cell,
+                    'mem_name' =>  $member->member_unique_id . '->' . $member->mem_name . '->' . $member->branch_name.'->'. $member->mem_cell,
                 ];
             })
             ->pluck('mem_name', 'id');
@@ -40,7 +40,7 @@
             ->map(function ($member) {
             return [
                 'id' => $member->id,
-                'mem_name' => $member->mem_name . '->' . $member->branch_name.'->'. $member->mem_cell,
+                'mem_name' => $member->member_unique_id . '->' . $member->mem_name . '->' . $member->branch_name.'->'. $member->mem_cell,
             ];
         })
         ->pluck('mem_name', 'id');

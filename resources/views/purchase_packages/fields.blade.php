@@ -1,8 +1,10 @@
 @php
     $packages = DB::table('packages')->where('pack_status', 1)->get();
+    // dd($packages);
 @endphp
 <div class="row">
     @include('componant.member_select')
+    {{-- <input type="hidden" id="member_id" name="member_id" value="{{ isset($member_id) ? $member_id : '' }}"> --}}
     <div class="form-group col-md-4">
         {!! Form::label('package_id', 'Package Id:', ['class' => 'control-label']) !!}
         {!! Form::select('package_id', $packages->pluck('pack_name', 'id')->prepend('Select Package', ''), null, [

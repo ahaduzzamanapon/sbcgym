@@ -5,7 +5,7 @@
         <!-- Member ID 1 -->
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('member_unique_id', 'Member ID:', ['class' => 'control-label']) !!}
+                {!! Form::label('member_unique_id', 'Member ID:', ['class' => 'control-label']) !!}<span class="text-danger"> *</span>
                 {!! Form::text('member_unique_id', null, ['class' => 'form-control','required','placeholder' => 'Enter Member ID']) !!}
                 @error('member_unique_id')
                     <span class="text-danger">{{ $message }}</span>
@@ -16,7 +16,7 @@
         <!-- Member Name2 -->
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('mem_name', 'First Name:', ['class' => 'control-label']) !!}
+                {!! Form::label('mem_name', 'First Name:', ['class' => 'control-label']) !!}<span class="text-danger"> *</span>
                 {!! Form::text('mem_name', null, ['class' => 'form-control','required', 'placeholder' => 'Enter Member Name']) !!}
                 @error('mem_name')
                     <span class="text-danger">{{ $message }}</span>
@@ -27,7 +27,7 @@
           <!-- Member Name2 -->
           <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('last_name', 'Last Name:', ['class' => 'control-label']) !!}
+                {!! Form::label('last_name', 'Last Name:', ['class' => 'control-label']) !!}<span class="text-danger"> *</span>
                 {!! Form::text('last_name', null, ['class' => 'form-control','required', 'placeholder' => 'Enter last Name']) !!}
                 @error('mem_name')
                     <span class="text-danger">{{ $message }}</span>
@@ -37,7 +37,7 @@
         <!-- Member Name2 -->
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('nid', 'NID/BCF/Passport No. :', ['class' => 'control-label']) !!}
+                {!! Form::label('nid', 'NID/BCF/Passport No. :', ['class' => 'control-label']) !!}<span class="text-danger"> *</span>
                 {!! Form::text('nid', null, ['class' => 'form-control','required', 'placeholder' => 'Enter NID No.']) !!}
                 @error('mem_name')
                     <span class="text-danger">{{ $message }}</span>
@@ -48,7 +48,7 @@
         <!-- Gender5 -->
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('mem_gender', 'Gender:', ['class' => 'control-label']) !!}
+                {!! Form::label('mem_gender', 'Gender:', ['class' => 'control-label']) !!} <span class="text-danger"> *</span>
                 <div style="display: flex;flex-direction: row;gap: 11px;align-items: center;">
                     <div class="form-check">
                         {!! Form::radio('mem_gender', 'Male', false, ['class' => 'form-check-input', 'id' => 'genderMale']) !!}
@@ -72,7 +72,7 @@
         <!-- Address6 -->
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('mem_address', 'Address:', ['class' => 'control-label']) !!}
+                {!! Form::label('mem_address', 'Address:', ['class' => 'control-label']) !!} <span class="text-danger"> *</span>
                 {!! Form::text('mem_address', null, ['class' => 'form-control','required', 'placeholder' => 'Enter Address']) !!}
                 @error('mem_address')
                     <span class="text-danger">{{ $message }}</span>
@@ -84,8 +84,8 @@
         {{-- Mem Type Field 35 --}}
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('mem_type', 'Member Type:', ['class' => 'control-label']) !!}
-                {!! Form::select('mem_type', ['member' => 'Member', 'staff' => 'Staff'], null, ['class' => 'form-control', 'required' => 'required']) !!}
+                {!! Form::label('mem_type', 'Member Type:', ['class' => 'control-label']) !!}<span class="text-danger"> *</span>
+                {!! Form::select('mem_type', ['member' => 'Member'], null, ['class' => 'form-control', 'required' => 'required']) !!}
                     @error('mem_type')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -119,7 +119,7 @@
         <!-- group Field 38 -->
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('group_id', 'Group:',['class'=>'control-label']) !!}
+                {!! Form::label('group_id', 'Group:',['class'=>'control-label']) !!} <span class="text-danger"> *</span>
                 {!! Form::select('group_id', $groups->pluck('name', 'id')->prepend('Select Group', ''), null,  ['required','class' => 'form-control']) !!}
 
             </div>
@@ -139,14 +139,14 @@
         <div class="col-md-3">
             <div class="form-group">
                 @php $admissionDate= isset($member) ? date('Y-m-d', strtotime($member->mem_admission_date)) : date('Y-m-d'); @endphp
-                {!! Form::label('mem_admission_date', 'Admission Date:', ['class' => 'control-label']) !!}
+                {!! Form::label('mem_admission_date', 'Admission Date:', ['class' => 'control-label']) !!} <span class="text-danger"> *</span>
                 {!! Form::date('mem_admission_date', $admissionDate, ['required','class' => 'form-control']) !!}
                 @error('mem_admission_date')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
         </div>
-        <!-- Admission7 Date -->
+        {{-- <!-- Admission7 Date -->
         <div class="col-md-3">
             <div class="form-group">
                 {!! Form::label('mem_admission_fees', 'Admission Fees:', ['class' => 'control-label']) !!}
@@ -155,12 +155,12 @@
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
-        </div>
+        </div> --}}
 
         <!-- Date of Birth8 -->
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('date_of_birth', 'Date of Birth:', ['class' => 'control-label']) !!}
+                {!! Form::label('date_of_birth', 'Date of Birth:', ['class' => 'control-label']) !!}<span class="text-danger"> *</span>
                 {!! Form::date('date_of_birth', null, ['required','class' => 'form-control']) !!}
                 @error('date_of_birth')
                     <span class="text-danger">{{ $message }}</span>
@@ -171,7 +171,7 @@
         <!-- Cell9 -->
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('mem_cell', 'Cell Number:', ['class' => 'control-label']) !!}
+                {!! Form::label('mem_cell', 'Cell Number:', ['class' => 'control-label']) !!}<span class="text-danger"> *</span>
                 {!! Form::text('mem_cell', null, ['class' => 'form-control','required', 'placeholder' => 'Enter Cell Number']) !!}
                 @error('mem_cell')
                     <span class="text-danger">{{ $message }}</span>
@@ -182,7 +182,7 @@
         <!-- Email10 -->
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('mem_email', 'Email:', ['class' => 'control-label']) !!}
+                {!! Form::label('mem_email', 'Email:', ['class' => 'control-label']) !!}<span class="text-danger"> *</span>
                 {!! Form::email('mem_email', null, ['class' => 'form-control','required', 'placeholder' => 'Enter Email']) !!}
                 @error('mem_email')
                     <span class="text-danger">{{ $message }}</span>
@@ -458,6 +458,17 @@
                     {!! Form::label('lift_count_kg', 'Lift Count (Kg):', ['class' => 'control-label']) !!}
                     {!! Form::text('lift_count_kg', null, ['class' => 'form-control', 'placeholder' => 'Enter Lift Count (Kg)']) !!}
                     @error('lift_count_kg')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+
+            <!--password-->
+            <div class="col-md-3">
+                <div class="form-group">
+                    {!! Form::label('password', 'Password:', ['class' => 'control-label']) !!} <span class="text-danger">*</span>
+                    {!! Form::text('password', null, ['class' => 'form-control', 'required','placeholder' => 'Enter password']) !!}
+                    @error('Password')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
