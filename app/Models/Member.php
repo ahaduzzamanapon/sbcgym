@@ -103,7 +103,6 @@ class Member extends Model
         'mem_admission_date' => 'required',
         'mem_cell'           => 'required',
         'mem_email'          => 'required',
-        'password'           => 'required',
     ];
 
 }

@@ -5,6 +5,10 @@
 Purchase Package @parent
 @stop
 
+@push('backend_css')
+    
+@endpush
+
 @section('content')
     <section class="content-header">
     <div aria-label="breadcrumb" class="card-breadcrumb">
@@ -25,3 +29,17 @@ Purchase Package @parent
         </div>
     </div>
 @endsection
+
+@push('backend_js')
+    
+    <script>
+       
+        $(document).ready(function() {
+            $('#member_id').select2({
+                theme: "classic",
+                allowClear: true,
+                width: '100%'
+            });
+        });
+    </script>
+@endpush

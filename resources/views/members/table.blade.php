@@ -6,5 +6,6 @@
 
 @section('footer_scripts')
     @include('layouts.datatables_js')
+    {{-- @dd($dataTable) --}}
     {!! $dataTable->scripts() !!}
 @endsection
