@@ -76,7 +76,7 @@
     <div class="row">
         {!! Form::label('note', 'Note:',['class'=>'col-md-3 col-lg-3 col-12 control-label']) !!}
         <div class="col-md-9 col-lg-9 col-12">
-            {!! Form::textarea('note', null, ['class' => 'form-control']) !!}
+            {!! Form::textarea('note', null, ['class' => 'form-control', 'required' => 'required']) !!}
         </div>
     </div>
 </div>

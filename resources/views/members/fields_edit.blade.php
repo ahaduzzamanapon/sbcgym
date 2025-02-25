@@ -5,7 +5,7 @@
         <!-- Member ID 1 -->
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('member_unique_id', 'Member ID:', ['class' => 'control-label']) !!}
+                {!! Form::label('member_unique_id', 'Member ID:', ['class' => 'control-label']) !!} <span class="text-danger">*</span>
                 @if(if_can('show_all_data'))
                 {!! Form::text('member_unique_id', null, ['class' => 'form-control','required','placeholder' => 'Enter Member ID']) !!}
                 @else
@@ -20,7 +20,7 @@
         <!-- Member Name2 -->
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('mem_name', 'First Name:', ['class' => 'control-label']) !!}
+                {!! Form::label('mem_name', 'First Name:', ['class' => 'control-label']) !!} <span class="text-danger">*</span>
                 {!! Form::text('mem_name', null, ['class' => 'form-control','required', 'placeholder' => 'Enter Member Name']) !!}
                 @error('mem_name')
                     <span class="text-danger">{{ $message }}</span>
@@ -30,7 +30,7 @@
         <!-- Member Name2 -->
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('last_name', 'Last Name:', ['class' => 'control-label']) !!}
+                {!! Form::label('last_name', 'Last Name:', ['class' => 'control-label']) !!} <span class="text-danger">*</span>
                 {!! Form::text('last_name', null, ['class' => 'form-control','required', 'placeholder' => 'Enter last Name']) !!}
                 @error('mem_name')
                     <span class="text-danger">{{ $message }}</span>
@@ -40,7 +40,7 @@
         <!-- Member Name2 -->
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('nid', 'NID/BCF/Passport No. :', ['class' => 'control-label']) !!}
+                {!! Form::label('nid', 'NID/BCF/Passport No.:', ['class' => 'control-label']) !!} <span class="text-danger">*</span>
                 @if(if_can('show_all_data'))
                 {!! Form::text('nid', null, ['class' => 'form-control','required', 'placeholder' => 'Enter NID No.']) !!}
                 @else
@@ -55,7 +55,7 @@
         <!-- Gender5 -->
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('mem_gender', 'Gender:', ['class' => 'control-label']) !!}
+                {!! Form::label('mem_gender', 'Gender:', ['class' => 'control-label']) !!} <span class="text-danger">*</span>
                 @if(if_can('show_all_data'))
                 <div style="display: flex;flex-direction: row;gap: 11px;align-items: center;">
                     <div class="form-check">
@@ -96,7 +96,7 @@
         <!-- Address6 -->
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('mem_address', 'Address:', ['class' => 'control-label']) !!}
+                {!! Form::label('mem_address', 'Address:', ['class' => 'control-label']) !!} <span class="text-danger">*</span>
                 {!! Form::text('mem_address', null, ['class' => 'form-control','required', 'placeholder' => 'Enter Address']) !!}
                 @error('mem_address')
                     <span class="text-danger">{{ $message }}</span>
@@ -108,7 +108,7 @@
         {{-- Mem Type Field 35 --}}
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('mem_type', 'Member Type:', ['class' => 'control-label']) !!}
+                {!! Form::label('mem_type', 'Member Type:', ['class' => 'control-label']) !!} <span class="text-danger">*</span>
                 {!! Form::select('mem_type', ['member' => 'Member'], null, ['class' => 'form-control', 'required' => 'required']) !!}
                     @error('mem_type')
                         <span class="text-danger">{{ $message }}</span>
@@ -143,7 +143,7 @@
         <!-- group Field 38 -->
         <div class="col-md-3 @if(!@if_can('member_manage')) d-none @endif">
             <div class="form-group ">
-                {!! Form::label('group_id', 'Group:',['class'=>'control-label']) !!}
+                {!! Form::label('group_id', 'Group:',['class'=>'control-label']) !!} <span class="text-danger">*</span>
                 {!! Form::select('group_id', $groups->pluck('name', 'id')->prepend('Select Group', ''), null, ['required','class' => 'form-control']) !!}
 
             </div>
@@ -163,7 +163,7 @@
         <div class="col-md-3 @if(!@if_can('member_manage')) d-none @endif">
             <div class="form-group">
                 @php $admissionDate= isset($member) ? date('Y-m-d', strtotime($member->mem_admission_date)) : date('Y-m-d'); @endphp
-                {!! Form::label('mem_admission_date', 'Admission Date:', ['class' => 'control-label']) !!}
+                {!! Form::label('mem_admission_date', 'Admission Date:', ['class' => 'control-label']) !!} <span class="text-danger">*</span>
                 {!! Form::date('mem_admission_date', $admissionDate, ['required','class' => 'form-control']) !!}
                 @error('mem_admission_date')
                     <span class="text-danger">{{ $message }}</span>
@@ -184,7 +184,7 @@
         <!-- Date of Birth8 -->
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('date_of_birth', 'Date of Birth:', ['class' => 'control-label']) !!}
+                {!! Form::label('date_of_birth', 'Date of Birth:', ['class' => 'control-label']) !!} <span class="text-danger">*</span>
                 {!! Form::date('date_of_birth', null, ['required','class' => 'form-control']) !!}
                 @error('date_of_birth')
                     <span class="text-danger">{{ $message }}</span>
@@ -195,7 +195,7 @@
         <!-- Cell9 -->
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('mem_cell', 'Cell Number:', ['class' => 'control-label']) !!}
+                {!! Form::label('mem_cell', 'Cell Number:', ['class' => 'control-label']) !!} <span class="text-danger">*</span>
                 {!! Form::text('mem_cell', null, ['class' => 'form-control','required', 'placeholder' => 'Enter Cell Number']) !!}
                 @error('mem_cell')
                     <span class="text-danger">{{ $message }}</span>
@@ -206,7 +206,7 @@
         <!-- Email10 -->
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('mem_email', 'Email:', ['class' => 'control-label']) !!}
+                {!! Form::label('mem_email', 'Email:', ['class' => 'control-label']) !!} <span class="text-danger">*</span>
                 {!! Form::email('mem_email', null, ['class' => 'form-control','required', 'placeholder' => 'Enter Email']) !!}
                 @error('mem_email')
                     <span class="text-danger">{{ $message }}</span>
@@ -513,7 +513,7 @@
             <!-- Terms and Conditions 34 -->
             <div class="col-md-3">
                 <div class="form-group">
-                    {!! Form::label('term_con', 'Terms & Conditions:', ['class' => 'control-label']) !!}
+                    {!! Form::label('term_con', 'Terms & Conditions:', ['class' => 'control-label']) !!} <span class="text-danger">*</span>
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" name="term_con" value="yes" id="term_con" required {{ isset($member->term_con) && $member->term_con == 'yes' ? 'checked' : '' }}>
                         <label class="form-check-label" for="term_con">I agree to the terms and conditions</label>

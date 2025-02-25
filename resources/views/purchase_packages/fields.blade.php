@@ -23,6 +23,14 @@
         {!! Form::number('tax', null, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group col-md-4">
+        {!! Form::label('admission_fee', 'Admission Fee:', ['class' => 'control-label']) !!}
+        {!! Form::number('admission_fee', null, ['class' => 'form-control','onkeyup' => 'calculate()']) !!}
+    </div>
+    <div class="form-group col-md-4">
+        {!! Form::label('gross_amount', 'Gross Amount:', ['class' => 'control-label']) !!}
+        {!! Form::number('gross_amount', 0, ['class' => 'form-control']) !!}
+    </div>
+    <div class="form-group col-md-4">
         {!! Form::label('coupons_id', 'Coupon Code:', ['class' => 'control-label']) !!}
         {!! Form::text('coupons_id', null, ['class' => 'form-control', 'id' => 'coupons_id']) !!}
         <span class="text-danger" id="coupons_id_error"></span>
@@ -32,14 +40,6 @@
     <div class="form-group col-md-4">
         {!! Form::label('coupon_amount', 'Coupon Amount:', ['class' => 'control-label']) !!}
         {!! Form::number('coupon_amount', null, ['class' => 'form-control']) !!}
-    </div>
-    <div class="form-group col-md-4">
-        {!! Form::label('admission_fee', 'Admission Fee:', ['class' => 'control-label']) !!}
-        {!! Form::number('admission_fee', null, ['class' => 'form-control','onkeyup' => 'calculate()']) !!}
-    </div>
-    <div class="form-group col-md-4">
-        {!! Form::label('gross_amount', 'Gross Amount:', ['class' => 'control-label']) !!}
-        {!! Form::number('gross_amount', 0, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group col-md-4">
         {!! Form::label('pay_amount', 'Pay Amount:', ['class' => 'control-label']) !!}
@@ -137,7 +137,7 @@
                             if(response.data['type'] == 0){
                                 $('#coupon_amount').val(response.data['amount']);
                             }else{
-                                amount=$('#amount').val();
+                                amount=$('#gross_amount').val();
                                 $('#coupon_amount').val((amount*response.data['amount'])/100);
                             }
 
