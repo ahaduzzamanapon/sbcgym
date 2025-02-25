@@ -4,11 +4,11 @@
 <head>
     <title>
         @php
-            if (!Auth::check()) {
-                // dd("Please login first");
-                // redirect(route('welcome'));
-            }
-            $setting = DB::table('sitesettings')->first();
+        if (!Auth::check()) {
+        // dd("Please login first");
+        // redirect(route('welcome'));
+        }
+        $setting = DB::table('sitesettings')->first();
         @endphp
         @section('title')| {{ !empty($setting) ? $setting->name : 'Gym Master' }} -
         {{ !empty($setting) ? $setting->slogan : 'Gym Master' }} @show
@@ -46,21 +46,21 @@
 
 
     <style>
-        #demo {
-            position: relative;
+    #demo {
+        position: relative;
 
-            overflow: auto;
-        }
+        overflow: auto;
+    }
     </style>
     <style>
-        .dataTables_wrapper {
-            overflow-x: scroll;
-        }
+    .dataTables_wrapper {
+        overflow-x: scroll;
+    }
 
-        .chosen-single {
-            padding: 6px !important;
-            height: fit-content !important;
-        }
+    .chosen-single {
+        padding: 6px !important;
+        height: fit-content !important;
+    }
     </style>
     <!-- end of global css -->
 
@@ -86,70 +86,82 @@
 
 
 
-                @php 
+            @php
 
-                    $today_registered_notification=[];
-                    $payment_pending=[];
-                    $schedule_book=[];
+            $today_registered_notification=[];
+            $payment_pending=[];
+            $schedule_book=[];
 
-                    $today_registered_notification = DB::table('members')
-                                                ->whereDate('created_at', '=', date('Y-m-d'))
-                                                ->get();
+            $today_registered_notification = DB::table('members')
+            ->whereDate('created_at', '=', date('Y-m-d'))
+            ->get();
 
-                    $payment_pending = DB::table('purchase_payments')
-                                        ->join('purchasepackages', 'purchase_payments.purchase_purchase_id', '=', 'purchasepackages.id')
-                                        ->join('members', 'purchasepackages.member_id', '=', 'members.id')
-                                        ->select('purchase_payments.*', 'members.mem_name','members.last_name')
-                                        ->where('purchase_payments.payment_status', 1)
-                                        ->get();
+            $payment_pending = DB::table('purchase_payments')
+            ->join('purchasepackages', 'purchase_payments.purchase_purchase_id', '=', 'purchasepackages.id')
+            ->join('members', 'purchasepackages.member_id', '=', 'members.id')
+            ->select('purchase_payments.*', 'members.mem_name','members.last_name')
+            ->where('purchase_payments.payment_status', 1)
+            ->get();
 
-                    $schedule_book = DB::table('schedulebookings')
-                                ->join('members', 'schedulebookings.member_id', '=', 'members.id')
-                                ->join('assets_managements', 'schedulebookings.asset_id', '=', 'assets_managements.id')
-                                ->select('schedulebookings.*', 'members.mem_name', 'assets_managements.item_name')
-                                ->where('schedulebookings.status', 1)
-                                ->get();
-                @endphp
+            $schedule_book = DB::table('schedulebookings')
+            ->join('members', 'schedulebookings.member_id', '=', 'members.id')
+            ->join('assets_managements', 'schedulebookings.asset_id', '=', 'assets_managements.id')
+            ->select('schedulebookings.*', 'members.mem_name', 'assets_managements.item_name')
+            ->where('schedulebookings.status', 1)
+            ->get();
+            @endphp
             <div class="navbar-right ml-auto">
                 <ul class="navbar-nav nav flex" style="display: flex;flex-direction: row;flex-wrap: nowrap;gap: 10px;">
                     <li class="dropdown notifications-menu nav-item dropdown">
-                        <a href="javascript:void(0)" class="nav-link"
-                        data-toggle="dropdown" id="navbarDropdown"
-                        style="padding: 0 15px;border-radius: 7px;">
-                        <span style="background: red;position: absolute;border-radius: 50px;height: auto;width: fit-content;padding: 0px 6px;font-size: 9px;font-weight: bolder;right: 5px;">{{count($today_registered_notification) + count($payment_pending) + count($schedule_book)}}</span>
+                        <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown" id="navbarDropdown"
+                            style="padding: 0 15px;border-radius: 7px;">
+                            <span
+                                style="background: red;position: absolute;border-radius: 50px;height: auto;width: fit-content;padding: 0px 6px;font-size: 9px;font-weight: bolder;right: 5px;color: white;">{{count($today_registered_notification) + count($payment_pending) + count($schedule_book)}}</span>
                             <i class="im im-icon-Bell fs-16"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-notifications table-striped" aria-labelledby="navbarDropdown">
                             <li class="dropdown-footer" style="padding: 5px;">
-                              <h4 style="white-space: nowrap;font-size: 16px;">Today Registered: {{count($today_registered_notification)}}</h4>
+                                <h4 style="white-space: nowrap;font-size: 16px;">Today Registered:
+                                    {{count($today_registered_notification)}}</h4>
                             </li>
                             @foreach ($today_registered_notification as $notification)
                             <li class="dropdown-footer">
-                                <a class="dropdown-item" href="{{ route('members.details', ['id' => $notification->id]) }}">
-                                    <span style="font-size: 13px;"><i class="im im-icon-Boy fs-16"></i> {{ $notification->mem_name }} {{ $notification->last_name }} - {{ $notification->mem_email }} </span>
+                                <a class="dropdown-item"
+                                    href="{{ route('members.details', ['id' => $notification->id]) }}">
+                                    <span style="font-size: 13px;"><i class="im im-icon-Boy fs-16"></i>
+                                        {{ $notification->mem_name }} {{ $notification->last_name }} -
+                                        {{ $notification->mem_email }} </span>
                                 </a>
                             </li>
-                                @endforeach
+                            @endforeach
                             <li class="dropdown-footer" style="padding: 5px;">
-                              <h4 style="white-space: nowrap;font-size: 16px;">Payment Pending: {{count($payment_pending)}}</h4>
+                                <h4 style="white-space: nowrap;font-size: 16px;">Payment Pending:
+                                    {{count($payment_pending)}}</h4>
                             </li>
                             @foreach ($payment_pending as $notification)
                             <li class="dropdown-footer">
-                                <a class="dropdown-item" href="{{ route('purchasePackages.make_payment', $notification->purchase_purchase_id) }}">
-                                    <span><i class="im im-icon-Dollar fs-16"></i> {{ $notification->mem_name }} {{ $notification->last_name }} - {{ $notification->payment_number }} Payment Amount -{{ $notification->payment_amount }} </span>
+                                <a class="dropdown-item"
+                                    href="{{ route('purchasePackages.make_payment', $notification->purchase_purchase_id) }}">
+                                    <span><i class="im im-icon-Dollar fs-16"></i> {{ $notification->mem_name }}
+                                        {{ $notification->last_name }} - {{ $notification->payment_number }} Payment
+                                        Amount -{{ $notification->payment_amount }} </span>
                                 </a>
                             </li>
-                                @endforeach
+                            @endforeach
                             <li class="dropdown-footer" style="padding: 5px;">
-                              <h4 style="white-space: nowrap;font-size: 16px;">Schedule Booking: {{count($payment_pending)}}</h4>
+                                <h4 style="white-space: nowrap;font-size: 16px;">Schedule Booking:
+                                    {{count($payment_pending)}}</h4>
                             </li>
                             @foreach ($schedule_book as $notification)
                             <li class="dropdown-footer">
-                                <a class="dropdown-item" href="{{ route('schedulebookings.edit', [$notification->id]) }}">
-                                    <span><i class="im im-icon-Calendar-2 fs-16"></i> {{ $notification->mem_name }} - {{ $notification->booking_date }} {{ $notification->booking_time }} For {{ $notification->item_name }} </span>
+                                <a class="dropdown-item"
+                                    href="{{ route('schedulebookings.edit', [$notification->id]) }}">
+                                    <span><i class="im im-icon-Calendar-2 fs-16"></i> {{ $notification->mem_name }} -
+                                        {{ $notification->booking_date }} {{ $notification->booking_time }} For
+                                        {{ $notification->item_name }} </span>
                                 </a>
                             </li>
-                                @endforeach
+                            @endforeach
                         </ul>
                     </li>
                     <li class="dropdown notifications-menu nav-item dropdown">
@@ -162,13 +174,12 @@
 
                             <li class="dropdown-footer">
                                 @if (!empty(Auth::user()) && Auth::user()->member_id != null)
-                                    <a class="dropdown-item"
-                                        href="{{ route('members.details', ['id' => Auth::user()->member_id]) }}">
-                                        Profile
-                                    </a>
+                                <a class="dropdown-item"
+                                    href="{{ route('members.details', ['id' => Auth::user()->member_id]) }}">
+                                    Profile
+                                </a>
                                 @endif
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
@@ -217,21 +228,21 @@
 
 
     @php
-        $member = DB::table('members')->find(Auth::user()->member_id);
-        if ($member && $member->term_con !== 'yes') {
-            echo '<script>
-                Swal.fire({
-                    text: "Please update your profile and accept terms and conditions",
-                    icon: "warning",
-                    showCancelButton: false,
-                    confirmButtonText: "Go to Profile",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "' . route('members.admission_form') . '";
-                    }
-                });
-            </script>';
+    $member = DB::table('members')->find(Auth::user()->member_id);
+    if ($member && $member->term_con !== 'yes') {
+    echo '<script>
+    Swal.fire({
+        text: "Please update your profile and accept terms and conditions",
+        icon: "warning",
+        showCancelButton: false,
+        confirmButtonText: "Go to Profile",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "' . route('members.admission_form') . '";
         }
+    });
+    </script>';
+    }
     @endphp
 
 
@@ -248,7 +259,7 @@
 
 
     <script>
-        document.body.style.zoom = "90%";
+    document.body.style.zoom = "90%";
     </script>
 
     {{-- <script>
@@ -258,36 +269,36 @@
     </script> --}}
 
     <style>
-        .top_solver {
-            top: -161px !important;
-        }
+    .top_solver {
+        top: -161px !important;
+    }
     </style>
 
     <script>
-        $(document).ready(function() {
-            var ww = $(window).width();
-            console.log(ww);
-            $(window).resize(function() {
-                checkWidth();
-            });
+    $(document).ready(function() {
+        var ww = $(window).width();
+        console.log(ww);
+        $(window).resize(function() {
+            checkWidth();
         });
+    });
 
-        function checkWidth() {
-            var ww = $(window).width();
-            console.log(ww);
+    function checkWidth() {
+        var ww = $(window).width();
+        console.log(ww);
 
-            if (ww < 767) {
-                $('.sidebar-res').css('margin-left', '');
-            }
-
-            if (ww < 992) {
-                console.log('rhb');
-                $('.left-aside').addClass('top_solver');
-            } else {
-                $('.left-aside').removeClass('top_solver');
-            }
-
+        if (ww < 767) {
+            $('.sidebar-res').css('margin-left', '');
         }
+
+        if (ww < 992) {
+            console.log('rhb');
+            $('.left-aside').addClass('top_solver');
+        } else {
+            $('.left-aside').removeClass('top_solver');
+        }
+
+    }
     </script>
 
 
