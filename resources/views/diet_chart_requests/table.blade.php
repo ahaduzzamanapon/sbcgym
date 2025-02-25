@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table " id="dietChartRequests-table">
+    <table class="table table-bordered table-hover table-striped" id="dietChartRequests-table">
         <thead>
             <tr>
                 <th>Id</th>
