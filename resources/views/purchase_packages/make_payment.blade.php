@@ -40,7 +40,12 @@
                                     <td>{{ $payment_detail->payment_amount }}</td>
                                     <td>{{ $payment_detail->payment_note }}</td>
                                     <td>{{ $payment_detail->payment_number }}</td>
-                                    <td>{{ $payment_detail->payment_status }}</td>
+                                    <td>{{ $payment_detail->payment_status==1?'Pending':'Approved' }}
+                                        @if ($payment_detail->payment_status==1)
+                                        <a href="{{ route('purchasePackages.payment_approve', $payment_detail->id) }}" class="btn btn-primary">Approve</a>
+                                        @endif
+                                    </td>
+
                                     <td>{{ $payment_detail->payment_method_name }}</td>
                                     <td>{{ $payment_detail->payment_method_number }}</td>
                                 </tr>

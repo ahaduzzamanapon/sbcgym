@@ -8,7 +8,8 @@
     <li {!! Request::is('members*') ||
     Request::is('healthmetrics*') ||
     Request::is('diet_charts*') ||
-    Request::is('meal_plans*')
+    Request::is('meal_plans*') ||
+    Request::is('dietChartRequests*')
         ? 'class="menu-dropdown mm-active active"'
         : "class='menu-dropdown'" !!}>
         <a href="#">
@@ -35,6 +36,11 @@
             <li {!! Request::is('diet_charts*') ? 'class="active"' : '' !!}>
                 <a href="{{ route('diet_charts.index') }}">
                     <span class="mm-text ">Diet Charts</span>
+                </a>
+            </li>
+            <li class="{!! (Request::is('dietChartRequests*') ? 'active' : '' ) !!}">
+                <a href="{{ route('dietChartRequests.index') }}">
+                    <span class="mm-text ">Diet Chart Requests</span>
                 </a>
             </li>
 
@@ -436,3 +442,5 @@
         </a>
     </li>
 @endif
+
+
