@@ -2,39 +2,82 @@
 
 {{-- Page title --}}
 @section('title')
-Members @parent
+    Members @parent
+@stop
+
+@section('header_styles')
+    <style>
+        .progress-circle {
+            position: relative;
+            width: 96px;
+            height: 96px;
+        }
+
+        .progress-circle svg {
+            transform: rotate(-90deg);
+        }
+
+        .progress-circle circle {
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .progress-circle circle.bg {
+            stroke: #e5e7eb;
+        }
+
+        .progress-circle circle.progress {
+            stroke-dasharray: 283;
+            stroke-linecap: round;
+        }
+        .progress-circle .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .progress-circle .progress-text .progress-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .progress-circle .progress-text .progress-unit {
+            font-size: 0.8rem;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
 @stop
 
 @section('content')
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <div aria-label="breadcrumb" class="card-breadcrumb">
-        <h1>Member</h1>
+    <div class="d-flex min-vh-100 justify-content-center align-items-center">
+        @include('members.show_fields')
     </div>
-    <div class="separator-breadcrumb border-top"></div>
-</section>
-
-<div class="content">
-    <div class="clearfix"></div>
-
-    @include('flash::message')
-
-    <div class="clearfix"></div>
-    <div class="card">
-        <div class="col-md-3">
-            <a href="{{ route('members.edit', $member->id) }}" class='btn btn-outline-primary btn-xs c'><i class="im im-icon-Pen" data-placement="top" title="View"></i>
-                Edit
-            </a>
-        </div>
-        <div class="table-responsive">
-        <table class="table table-default">
-            @include('members.show_fields')
-
-            </table>
-        </div>
-    </div>
-    @if(if_can('member_manage'))
-    <a href="{{ route('members.index') }}" class="btn btn-primary">Back</a>
-    @endif
-</div>
 @endsection
+
+@section('footer_scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            $('.progress-circle').each(function() {
+                var progress = $(this).data('progress');
+                var progressCircle = $(this).find('.progress-circle');
+                var progressCircleBg = progressCircle.find('.bg');
+                var progressCircleProgress = progressCircle.find('.progress');
+
+                progressCircleBg.css('stroke-dasharray', progress + ' 283');
+                progressCircleProgress.css('stroke-dashoffset', progress);
+            });
+
+            // Show sweet alert if success message exists
+            @if(session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: '{{ session('success') }}',
+                    timer: 3000,
+                    showConfirmButton: false
+                });
+            @endif
+        });
+    </script>
+@stop
