@@ -56,6 +56,7 @@
         .dataTables_wrapper {
             overflow-x: scroll;
         }
+
         .chosen-single {
             padding: 6px !important;
             height: fit-content !important;
@@ -78,7 +79,8 @@
             <!-- Header Navbar: style can be found in header-->
             <!-- Sidebar toggle button-->
             <!-- Sidebar toggle button-->
-            <h3 style="display: flex;width: -webkit-fill-available;place-content: center;font-size: x-large;width: -moz-available;">
+            <h3
+                style="display: flex;width: -webkit-fill-available;place-content: center;font-size: x-large;width: -moz-available;">
                 {{ !empty($setting) ? $setting->name : 'Gym Master' }} -
                 {{ !empty($setting) ? $setting->slogan : 'Gym Master' }} </h3>
 
@@ -86,7 +88,8 @@
                 <ul class="navbar-nav nav">
                     <li class="dropdown notifications-menu nav-item dropdown">
                         <a href="javascript:void(0)" class="dropdown-toggle nav-link dropdown-toggle"
-                            data-toggle="dropdown" id="navbarDropdown" style="border: 1px solid #a9a9a9;padding: 0 17px;border-radius: 7px;">
+                            data-toggle="dropdown" id="navbarDropdown"
+                            style="border: 1px solid #a9a9a9;padding: 0 17px;border-radius: 7px;">
                             <i class="im im-icon-Boy fs-16"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-notifications table-striped" aria-labelledby="navbarDropdown">
@@ -150,18 +153,18 @@
     @php
         $member = DB::table('members')->find(Auth::user()->member_id);
         if ($member && $member->term_con !== 'yes') {
-            echo "<script>
+            echo '<script>
                 Swal.fire({
-                    text: 'Please update your profile and accept terms and conditions',
-                    icon: 'warning',
+                    text: "Please update your profile and accept terms and conditions",
+                    icon: "warning",
                     showCancelButton: false,
-                    confirmButtonText: 'Go to Profile',
+                    confirmButtonText: "Go to Profile",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = '".route('members.admission_form')."';
+                        window.location.href = "' . route('members.admission_form') . '";
                     }
                 });
-            </script>";
+            </script>';
         }
     @endphp
 
@@ -190,7 +193,7 @@
 
     <style>
         .top_solver {
-            top: -161px!important;
+            top: -161px !important;
         }
     </style>
 
@@ -207,14 +210,14 @@
             var ww = $(window).width();
             console.log(ww);
 
-            if(ww < 767) {
+            if (ww < 767) {
                 $('.sidebar-res').css('margin-left', '');
             }
 
             if (ww < 992) {
                 console.log('rhb');
                 $('.left-aside').addClass('top_solver');
-            }else{
+            } else {
                 $('.left-aside').removeClass('top_solver');
             }
 

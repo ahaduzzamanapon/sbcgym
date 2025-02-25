@@ -34,6 +34,35 @@ include 'demo.php';
 |
  */
 
+ Route::get('/clear-cache', function () {
+    $exitCode = Artisan::call('cache:clear');
+    return '<h1>Cache facade value cleared</h1>';
+});
+
+//Reoptimized class loader:
+Route::get('/optimize', function () {
+    $exitCode = Artisan::call('optimize:clear');
+    return '<h1>Reoptimized class loader</h1>';
+});
+
+//Route cache:
+Route::get('/route-cache', function () {
+    $exitCode = Artisan::call('route:cache');
+    return '<h1>Routes cached</h1>';
+});
+
+//Clear Route cache:
+Route::get('/route-clear', function () {
+    $exitCode = Artisan::call('route:clear');
+    return '<h1>Route cache cleared</h1>';
+});
+
+//Clear View cache:
+Route::get('/view-clear', function () {
+    $exitCode = Artisan::call('view:clear');
+    return '<h1>View cache cleared</h1>';
+});
+
 Auth::routes();
 
 // login2, register2 pages
@@ -122,6 +151,7 @@ Route::group( ['middleware' => 'auth'], function () {
     Route::get( 'attendance/index', [AttendenceController::class, 'index'] )->name( 'attendences.index' );
     Route::get( 'attendance/process_attendence', [AttendenceController::class, 'process_attendence'] )->name( 'attendences.process_attendence' );
     Route::get( 'attendance/get_member', [AttendenceController::class, 'get_member'] )->name( 'attendences.get_member' );
+    Route::get( 'attendance/job_card', [AttendenceController::class, 'job_card'] )->name( 'attendences.job_card' );
     Route::post( 'attendance/get_daily_attendence', [AttendenceController::class, 'get_daily_attendence'] )->name( 'attendences.get_daily_attendence' );
 
     //sales_product

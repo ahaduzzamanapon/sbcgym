@@ -109,7 +109,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 {!! Form::label('mem_type', 'Member Type:', ['class' => 'control-label']) !!}
-                {!! Form::select('mem_type', ['member' => 'Member', 'staff' => 'Staff'], null, ['class' => 'form-control', 'required' => 'required']) !!}
+                {!! Form::select('mem_type', ['member' => 'Member'], null, ['class' => 'form-control', 'required' => 'required']) !!}
                     @error('mem_type')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -170,7 +170,7 @@
                 @enderror
             </div>
         </div>
-        <!-- Admission7 Date -->
+        {{-- <!-- Admission7 Date -->
         <div class="col-md-3 @if(!@if_can('member_manage')) d-none @endif">
             <div class="form-group">
                 {!! Form::label('mem_admission_fees', 'Admission Fees:', ['class' => 'control-label']) !!}
@@ -179,7 +179,7 @@
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
-        </div>
+        </div> --}}
 
         <!-- Date of Birth8 -->
         <div class="col-md-3">
@@ -486,6 +486,18 @@
                     @enderror
                 </div>
             </div>
+
+              <!--password-->
+            <div class="col-md-3">
+                <div class="form-group">
+                    {!! Form::label('password', 'Password:', ['class' => 'control-label']) !!}
+                    {!! Form::text('password', null, ['class' => 'form-control','placeholder' => 'Enter password']) !!}
+                    @error('Password')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+
         </div>
 
             <!-- Question  33-->

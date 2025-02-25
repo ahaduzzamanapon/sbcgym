@@ -27,6 +27,7 @@
                 <th>Member Name</th>
                 <th>Package Name</th>
                 <th>Expired Date</th>
+                <th>Due Date</th>
                 <th>Active status</th>
                 <th>Gross Amount</th>
                 <th>Pay Amount</th>
@@ -51,6 +52,14 @@
                         @endif
                     </td>
 
+                    <td style="white-space: nowrap">
+                        @if($purchasePackage->status == 2)
+                            {{ date('Y-m-d', strtotime($purchasePackage->due_date)) }}
+                        @else
+                        <span class="badge badge-success">Fully Paid</span>
+                        @endif
+                    </td>
+
                     <td>
                         @if ($purchasePackage->active_status != 'Active')
                             <span class="badge badge-danger">Inactive</span>
@@ -58,6 +67,7 @@
                         @else
                             <span class="badge badge-success">Active</span>
                         @endif
+                    </td>
 
                     <td>{{ $purchasePackage->gross_amount }}</td>
                     <td>{{ $purchasePackage->pay_amount }}</td>
@@ -95,6 +105,13 @@
                             ]) !!}
                             <a target="_blank" href="{{ route('purchasePackages.make_payment', $purchasePackage->id) }}"
                                 class="btn btn-success" style="white-space: nowrap;">Make Payment</a>
+                            @endif
+
+                            @if($purchasePackage->status == 2 && !if_can('show_all_data'))
+                                
+                            <a target="_blank" href="{{ route('purchasePackages.make_payment', $purchasePackage->id) }}"
+                                class="btn btn-success" style="white-space: nowrap;">Make Payment</a>
+
                             @endif
                             <a target="_blank" href="{{ route('purchasePackages.invoice', $purchasePackage->id) }}"
                                 class="btn btn-success">Invoice</a>

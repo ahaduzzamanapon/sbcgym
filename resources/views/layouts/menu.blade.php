@@ -4,41 +4,48 @@
     }
 </style>
 
-@if(if_can('member_manage'))
-<li {!! (Request::is('members*') || Request::is('healthmetrics*') || Request::is('diet_charts*') || Request::is('meal_plans*') ? 'class="menu-dropdown mm-active active"': "class='menu-dropdown'" ) !!}>
-    <a href="#">
-        <span class="mm-text ">Member Manage</span>
-        <span class="menu-icon "><i class="align-self-center fa-1x fas fa-diagnoses"></i></span>
-        <span class="im im-icon-Arrow-Right imicon"></span>
-    </a>
-    <ul class="sub-menu list-unstyled">
-        <li {!! (Request::is('members*') ? 'class="active"' : '' ) !!}>
-            <a href="{{ route('members.index') }}">
-                <span class="mm-text">Members List</span>
-            </a>
-        </li>
-        <li {!! (Request::is('healthmetrics*') ? 'class="active"' : '' ) !!}>
-            <a href="{{ route('healthmetrics.index') }}">
-                <span class="mm-text ">Health Metrics</span>
-            </a>
-        </li>
-        <li {!! (Request::is('meal_plans*') ? 'class="active"' : '' ) !!}>
-            <a href="{{ route('meal_plans.index') }}">
-                <span class="mm-text ">Meal Plans</span>
-            </a>
-        </li>
-        <li {!! (Request::is('diet_charts*') ? 'class="active"' : '' ) !!}>
-            <a href="{{ route('diet_charts.index') }}">
-                <span class="mm-text ">Diet Charts</span>
-            </a>
-        </li>
+@if (if_can('member_manage'))
+    <li {!! Request::is('members*') ||
+    Request::is('healthmetrics*') ||
+    Request::is('diet_charts*') ||
+    Request::is('meal_plans*')
+        ? 'class="menu-dropdown mm-active active"'
+        : "class='menu-dropdown'" !!}>
+        <a href="#">
+            <span class="mm-text ">Member Manage</span>
+            <span class="menu-icon "><i class="align-self-center fa-1x fas fa-diagnoses"></i></span>
+            <span class="im im-icon-Arrow-Right imicon"></span>
+        </a>
+        <ul class="sub-menu list-unstyled">
+            <li {!! Request::is('members*') ? 'class="active"' : '' !!}>
+                <a href="{{ route('members.index') }}">
+                    <span class="mm-text">Members List</span>
+                </a>
+            </li>
+            <li {!! Request::is('healthmetrics*') ? 'class="active"' : '' !!}>
+                <a href="{{ route('healthmetrics.index') }}">
+                    <span class="mm-text ">Health Metrics</span>
+                </a>
+            </li>
+            <li {!! Request::is('meal_plans*') ? 'class="active"' : '' !!}>
+                <a href="{{ route('meal_plans.index') }}">
+                    <span class="mm-text ">Meal Plans</span>
+                </a>
+            </li>
+            <li {!! Request::is('diet_charts*') ? 'class="active"' : '' !!}>
+                <a href="{{ route('diet_charts.index') }}">
+                    <span class="mm-text ">Diet Charts</span>
+                </a>
+            </li>
 
-    </ul>
-</li>
+        </ul>
+    </li>
 @endif
 
 
-<li {!! (Request::is('packages*') || Request::is('purchasePackages*')  ? 'class="menu-dropdown mm-active active"': "class='menu-dropdown'" ) !!}>
+<li {!! Request::is('packages*') || Request::is('purchasePackages*')
+    ? 'class="menu-dropdown mm-active active"'
+    : "class='menu-dropdown'" !!}>
     <a href="#">
         <span class="mm-text ">Packages</span>
         <span class="menu-icon "><i class="align-self-center fa-1x fas fa-diagnoses"></i></span>
@@ -70,88 +77,142 @@
 </li>
 
 @if (if_can('site_settings'))
-<li {!! (Request::is('lockers*') || Request::is('lockerAssignments*') ? 'class="menu-dropdown mm-active active"': "class='menu-dropdown'" ) !!}>
-    <a href="#">
-        <span class="mm-text ">Lockers</span>
-        <span class="menu-icon "><i class="align-self-center fa-1x fas fa-diagnoses"></i></span>
-        <span class="im im-icon-Arrow-Right imicon"></span>
-    </a>
-    <ul class="sub-menu list-unstyled">
-        <li class="{!! (Request::is('lockers*') ? 'active' : '' ) !!}">
-            <a href="{{ route('lockers.index') }}">
-                <span class="mm-text ">Lockers</span>
-            </a>
-        </li>
-        <li class="{!! (Request::is('lockerAssignments*') ? 'active' : '' ) !!}">
-            <a href="{{ route('lockerAssignments.index') }}">
-                <span class="mm-text ">Locker Assignments</span>
-            </a>
-        </li>
-    </ul>
-</li>
+    <li {!! Request::is('lockers*') || Request::is('lockerAssignments*')
+        ? 'class="menu-dropdown mm-active active"'
+        : "class='menu-dropdown'" !!}>
+        <a href="#">
+            <span class="mm-text ">Lockers</span>
+            <span class="menu-icon "><i class="align-self-center fa-1x fas fa-diagnoses"></i></span>
+            <span class="im im-icon-Arrow-Right imicon"></span>
+        </a>
+        <ul class="sub-menu list-unstyled">
+            <li class="{!! Request::is('lockers*') ? 'active' : '' !!}">
+                <a href="{{ route('lockers.index') }}">
+                    <span class="mm-text ">Lockers</span>
+                </a>
+            </li>
+            <li class="{!! Request::is('lockerAssignments*') ? 'active' : '' !!}">
+                <a href="{{ route('lockerAssignments.index') }}">
+                    <span class="mm-text ">Locker Assignments</span>
+                </a>
+            </li>
+        </ul>
+    </li>
 @endif
 
 
-@if(if_can('store_management'))
-<li {!! (Request::is('products*') || Request::is('requisitions*') || Request::is('sales*') ? 'class="menu-dropdown mm-active active"': "class='menu-dropdown'" ) !!}>
-    <a href="#">
-        <span class="mm-text ">Store Manage</span>
-        <span class="menu-icon "> <i class="im im-icon-Shop"></i></span>
-        <span class="im im-icon-Arrow-Right imicon"></span>
-    </a>
-    <ul class="sub-menu list-unstyled">
-        @if(if_can('manage_product'))
-        <li {!! (Request::is('products') ? 'class="active"' : '' ) !!}>
-            <a href="{{ route('products.index') }}">
-                <span class="mm-text ">Products</span>
-            </a>
-        </li>
-        @endif
-
-        @if(if_can('requisition_list'))
-        <li {!! (Request::is('requisitions*') ? 'class="active"' : '' ) !!}>
-            <a href="{{ route('requisitions.index') }}">
-                <span class="mm-text ">Requisitions</span>
-            </a>
-        </li>
-        @endif
-
-        @if(if_can('manage_product'))
-        <li {!! (Request::is('sales*') ? 'class="active"' : '' ) !!}>
-            <a href="{{ route('sales.index') }}">
-                <span class="mm-text ">Sales Product</span>
-            </a>
-        </li>
-        @endif
-
-    </ul>
-</li>
+{{-- package offer --}}
+@if (if_can('package-offer'))
+    <li {!! Request::is('offers*') || Request::is('classes*')
+        ? 'class="menu-dropdown mm-active active"'
+        : "class='menu-dropdown'" !!}>
+        <a href="#">
+            <span class="mm-text ">Package Offer</span>
+            <span class="menu-icon "><i class="align-self-center fa-1x fas fa-box-open"></i></span>
+            <span class="im im-icon-Arrow-Right imicon"></span>
+        </a>
+        <ul class="sub-menu list-unstyled">
+            <li class="{!! Request::is('offers*') ? 'active' : '' !!}">
+                <a href="{{ route('offers.index') }}">
+                    <span class="mm-text ">Offers Show</span>
+                </a>
+            </li>
+            <li class="{!! Request::is('offers.create') ? 'active' : '' !!}">
+                <a href="{{ route('offers.create') }}">
+                    <span class="mm-text ">Create Offer</span>
+                </a>
+            </li>
+        </ul>
+    </li>
 @endif
 
-@if(if_can('manage_inventory'))
-<li {!! (Request::is('assetsManagements*') || Request::is('assetsCategories*') ? 'class="menu-dropdown mm-active active"': "class='menu-dropdown'" ) !!}>
-    <a href="#">
-        <span class="mm-text ">Inventory</span>
-        <span class="menu-icon "><i class="align-self-center fa-1x fas fa-dolly-flatbed"></i></span>
-        <span class="im im-icon-Arrow-Right imicon"></span>
-    </a>
-    <ul class="sub-menu list-unstyled">
-        @if(if_can('assetsCategory'))
-            <li {!! (Request::is('assetsCategories*') ? 'class="active"' : '' ) !!}>
-                <a href="{{ route('assetsCategories.index') }}">
-                    <span class="mm-text ">Assets Categories</span>
+{{-- package class --}}
+@if (if_can('package-class'))
+    <li {!! Request::is('packageClasses*') ? 'class="menu-dropdown mm-active active"' : "class='menu-dropdown'" !!}>
+        <a href="#">
+            <span class="mm-text ">Package Classes</span>
+            <span class="menu-icon "><i class="align-self-center fa-1x fas fa-box-open"></i></span>
+            <span class="im im-icon-Arrow-Right imicon"></span>
+        </a>
+        <ul class="sub-menu list-unstyled">
+            <li class="{!! Request::is('packageClasses*') ? 'active' : '' !!}">
+                <a href="{{ route('packageClasses.index') }}">
+                    <span class="mm-text ">Classes Show</span>
                 </a>
             </li>
-        @endif
-        @if(if_can('assets_managements'))
-            <li {!! (Request::is('assetsManagements*') ? 'class="active"' : '' ) !!}>
-                <a href="{{ route('assetsManagements.index') }}">
-                    <span class="mm-text ">Assets Managements</span>
+            <li class="{!! Request::is('packageClasses.create') ? 'active' : '' !!}">
+                <a href="{{ route('packageClasses.create') }}">
+                    <span class="mm-text ">Create Class</span>
                 </a>
             </li>
-        @endif
-    </ul>
-</li>
+        </ul>
+    </li>
+@endif
+
+@if (if_can('store_management'))
+    <li {!! Request::is('products*') || Request::is('requisitions*') || Request::is('sales*')
+        ? 'class="menu-dropdown mm-active active"'
+        : "class='menu-dropdown'" !!}>
+        <a href="#">
+            <span class="mm-text ">Store Manage</span>
+            <span class="menu-icon "> <i class="im im-icon-Shop"></i></span>
+            <span class="im im-icon-Arrow-Right imicon"></span>
+        </a>
+        <ul class="sub-menu list-unstyled">
+            @if (if_can('manage_product'))
+                <li {!! Request::is('products') ? 'class="active"' : '' !!}>
+                    <a href="{{ route('products.index') }}">
+                        <span class="mm-text ">Products</span>
+                    </a>
+                </li>
+            @endif
+
+            @if (if_can('requisition_list'))
+                <li {!! Request::is('requisitions*') ? 'class="active"' : '' !!}>
+                    <a href="{{ route('requisitions.index') }}">
+                        <span class="mm-text ">Requisitions</span>
+                    </a>
+                </li>
+            @endif
+
+            @if (if_can('manage_product'))
+                <li {!! Request::is('sales*') ? 'class="active"' : '' !!}>
+                    <a href="{{ route('sales.index') }}">
+                        <span class="mm-text ">Sales Product</span>
+                    </a>
+                </li>
+            @endif
+
+        </ul>
+    </li>
+@endif
+
+@if (if_can('manage_inventory'))
+    <li {!! Request::is('assetsManagements*') || Request::is('assetsCategories*')
+        ? 'class="menu-dropdown mm-active active"'
+        : "class='menu-dropdown'" !!}>
+        <a href="#">
+            <span class="mm-text ">Inventory</span>
+            <span class="menu-icon "><i class="align-self-center fa-1x fas fa-dolly-flatbed"></i></span>
+            <span class="im im-icon-Arrow-Right imicon"></span>
+        </a>
+        <ul class="sub-menu list-unstyled">
+            @if (if_can('assetsCategory'))
+                <li {!! Request::is('assetsCategories*') ? 'class="active"' : '' !!}>
+                    <a href="{{ route('assetsCategories.index') }}">
+                        <span class="mm-text ">Assets Categories</span>
+                    </a>
+                </li>
+            @endif
+            @if (if_can('assets_managements'))
+                <li {!! Request::is('assetsManagements*') ? 'class="active"' : '' !!}>
+                    <a href="{{ route('assetsManagements.index') }}">
+                        <span class="mm-text ">Assets Managements</span>
+                    </a>
+                </li>
+            @endif
+        </ul>
+    </li>
 @endif
 
 
@@ -192,7 +253,11 @@
 @endif
 
 @if (if_can('frontend'))
-    <li {!! Request::is('siteFeatures*') || Request::is('siteProfiles*') || Request::is('aboutuses*') || Request::is('contactMassages*') || Request::is('siteTrainers*')
+    <li {!! Request::is('siteFeatures*') ||
+    Request::is('siteProfiles*') ||
+    Request::is('aboutuses*') ||
+    Request::is('contactMassages*') ||
+    Request::is('siteTrainers*')
         ? 'class="menu-dropdown mm-active active"'
         : "class='menu-dropdown'" !!}>
         <a href="#">
@@ -260,7 +325,7 @@
     </li>
 @endif
 
-@if(!empty(Auth::user()) &&Auth::user()->member_id != null)
+@if (!empty(Auth::user()) && Auth::user()->member_id != null)
     <li class="">
         <a href="{{ route('members.details', ['id' => Auth::user()->member_id]) }}">
             <span class="mm-text ">Profile</span>
@@ -272,29 +337,28 @@
 
 
 
-@if(if_can('own_diet_charts'))
-<li class="{!! (Request::is('diet_charts*') ? 'active' : '' ) !!}">
-    <a href="{{ route('diet_charts.index') }}">
-        <span class="mm-text ">Diet Charts</span>
-        <span class="menu-icon"><i class="align-self-center fa-1x fas fa-baby"></i></span>
-    </a>
-</li>
+@if (if_can('own_diet_charts'))
+    <li class="{!! Request::is('diet_charts*') ? 'active' : '' !!}">
+        <a href="{{ route('diet_charts.index') }}">
+            <span class="mm-text ">Diet Charts</span>
+            <span class="menu-icon"><i class="align-self-center fa-1x fas fa-baby"></i></span>
+        </a>
+    </li>
 @endif
 
 @if (if_can('attendence'))
-
-<li class="{!! (Request::is('attendance*') ? 'active' : '' ) !!}">
-    <a href="{{ route('attendences.index') }}">
-        <span class="mm-text ">Attendences</span>
-        <span class="menu-icon"><i class="align-self-center fa-1x far fa-calendar-check"></i></span>
-    </a>
-</li>
+    <li class="{!! Request::is('attendance*') ? 'active' : '' !!}">
+        <a href="{{ route('attendences.index') }}">
+            <span class="mm-text ">Attendences</span>
+            <span class="menu-icon"><i class="align-self-center fa-1x far fa-calendar-check"></i></span>
+        </a>
+    </li>
 @endif
 
 
 
 
-<li class="{!! (Request::is('notices*') ? 'active' : '' ) !!}">
+<li class="{!! Request::is('notices*') ? 'active' : '' !!}">
     <a href="{{ route('notices.index') }}">
         <span class="mm-text ">Notices</span>
         <span class="menu-icon"><i class="align-self-center fa-1x fas fa-bullhorn"></i></span>
@@ -303,44 +367,45 @@
 
 
 @if (if_can('site_settings'))
-<li class="{!! (Request::is('termAndConditions*') ? 'active' : '' ) !!}">
-    <a href="{{ route('termAndConditions.index') }}">
-        <span class="mm-text ">Terms And Conditions</span>
-        <span class="menu-icon"><i class="align-self-center fa-1x fas fa-user-shield"></i></span>
-    </a>
-</li>
-
+    <li class="{!! Request::is('termAndConditions*') ? 'active' : '' !!}">
+        <a href="{{ route('termAndConditions.index') }}">
+            <span class="mm-text ">Terms And Conditions</span>
+            <span class="menu-icon"><i class="align-self-center fa-1x fas fa-user-shield"></i></span>
+        </a>
+    </li>
 @endif
 
 @if (if_can('site_settings'))
-<li class="{!! (Request::is('admissionQuestions*') ? 'active' : '' ) !!}">
-    <a href="{{ route('admissionQuestions.index') }}">
-        <span class="mm-text ">Admission Questions</span>
-        <span class="menu-icon"><i class="align-self-center fa-1x fas fa-question"></i></span>
-    </a>
-</li>
+    <li class="{!! Request::is('admissionQuestions*') ? 'active' : '' !!}">
+        <a href="{{ route('admissionQuestions.index') }}">
+            <span class="mm-text ">Admission Questions</span>
+            <span class="menu-icon"><i class="align-self-center fa-1x fas fa-question"></i></span>
+        </a>
+    </li>
 @endif
 
 @if (if_can('site_settings'))
-<li class="{!! (Request::is('siteSettings*') ? 'active' : '' ) !!}">
-    <a href="{{ route('siteSettings.index') }}">
-        <span class="mm-text ">Site Settings</span>
-        <span class="menu-icon"><i class="align-self-center fa-1x fas fa-sliders-h"></i></span>
-    </a>
-</li>
+    <li class="{!! Request::is('siteSettings*') ? 'active' : '' !!}">
+        <a href="{{ route('siteSettings.index') }}">
+            <span class="mm-text ">Site Settings</span>
+            <span class="menu-icon"><i class="align-self-center fa-1x fas fa-sliders-h"></i></span>
+        </a>
+    </li>
 @endif
 @if (if_can('site_settings'))
-<li class="{!! (Request::is('multiBranches*') ? 'active' : '' ) !!}">
-    <a href="{{ route('multiBranches.index') }}">
-        <span class="mm-text ">Multi Branches</span>
-        <span class="menu-icon"><i class="align-self-center fa-1x fas fa-hospital"></i></span>
-    </a>
-</li>
+    <li class="{!! Request::is('multiBranches*') ? 'active' : '' !!}">
+        <a href="{{ route('multiBranches.index') }}">
+            <span class="mm-text ">Multi Branches</span>
+            <span class="menu-icon"><i class="align-self-center fa-1x fas fa-hospital"></i></span>
+        </a>
+    </li>
 @endif
 
 
 
-<li {!! (Request::is('workoutCategories*') || Request::is('dailyWorkouts*') ? 'class="menu-dropdown mm-active active"': "class='menu-dropdown'" ) !!}>
+<li {!! Request::is('workoutCategories*') || Request::is('dailyWorkouts*')
+    ? 'class="menu-dropdown mm-active active"'
+    : "class='menu-dropdown'" !!}>
     <a href="#">
         <span class="mm-text ">Exercise</span>
         <span class="menu-icon "><i class="align-self-center fa-1x fas fa-diagnoses"></i></span>
@@ -348,14 +413,14 @@
     </a>
     <ul class="sub-menu list-unstyled">
         @if (if_can('site_settings'))
-        <li class="{!! (Request::is('workoutCategories*') ? 'active' : '' ) !!}">
-            <a href="{{ route('workoutCategories.index') }}">
-                <span class="mm-text ">Workout Categories</span>
-            </a>
-        </li>
+            <li class="{!! Request::is('workoutCategories*') ? 'active' : '' !!}">
+                <a href="{{ route('workoutCategories.index') }}">
+                    <span class="mm-text ">Workout Categories</span>
+                </a>
+            </li>
         @endif
 
-        <li class="{!! (Request::is('dailyWorkouts*') ? 'active' : '' ) !!}">
+        <li class="{!! Request::is('dailyWorkouts*') ? 'active' : '' !!}">
             <a href="{{ route('dailyWorkouts.index') }}">
                 <span class="mm-text ">Daily Workouts</span>
             </a>
@@ -364,11 +429,10 @@
 </li>
 
 @if (if_can('site_settings'))
-<li class="{!! (Request::is('paymentMethods*') ? 'active' : '' ) !!}">
-    <a href="{{ route('paymentMethods.index') }}">
-        <span class="mm-text ">Payment Methods</span>
-        <span class="menu-icon"><i class="im im-icon-Structure"></i></span>
-    </a>
-</li>
+    <li class="{!! Request::is('paymentMethods*') ? 'active' : '' !!}">
+        <a href="{{ route('paymentMethods.index') }}">
+            <span class="mm-text ">Payment Methods</span>
+            <span class="menu-icon"><i class="im im-icon-Structure"></i></span>
+        </a>
+    </li>
 @endif
-

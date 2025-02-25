@@ -108,8 +108,8 @@ https://templatemo.com/tm-548-training-studio
                             <li class="scroll-to-section linkkss"><a href="#top" class="active">Home</a></li>
                             <li class="scroll-to-section linkkss"><a href="#features">About</a></li>
                             <li class="scroll-to-section linkkss"><a href="#packages_section">Packages</a></li>
-                            <li class="scroll-to-section linkkss"><a href="#offers">Offers</a></li>
-                            <li class="scroll-to-section linkkss"><a href="#classes">Classes</a></li>
+                            <li class="scroll-to-section linkkss"><a href="#offers_section">Offers</a></li>
+                            <li class="scroll-to-section linkkss"><a href="#classes_section">Classes</a></li>
                             <li class="scroll-to-section linkkss"><a href="#contact-us">Contact</a></li>
                             @if (isset($scrollToBottom))
                                 :
@@ -371,6 +371,10 @@ https://templatemo.com/tm-548-training-studio
             </div>
         </div>
     </section>
+    <!-- ***** Testimonials Ends ***** -->
+
+    {{-- start package --}}
+
     <section class="section mt-5 packages_section" id="trainers">
         <div class="container" id="packages_section">
             <div class="row">
@@ -411,7 +415,70 @@ https://templatemo.com/tm-548-training-studio
             </div>
         </div>
     </section>
-    <!-- ***** Testimonials Ends ***** -->
+
+    {{-- end package --}}
+
+    <!-- ***** Offers Start ***** -->
+    <section class="section offers_section" id="trainers">
+        <div class="container" id="offers_section">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="section-heading"
+                        style="margin-top: 9px;margin-bottom: 23px;border-bottom: 2px solid #00bc65;">
+                        <h2>Special <em>Offers</em></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach ($offers as $offer)
+                    <div class="col-md-6 mb-4">
+                        <div class="trainer-item" style="height: fit-content!important;">
+                            <div class="image-thumb">
+                                <br>
+                                <img src="{{ asset('images/offers/' . $offer->image) }}" alt="{{ $offer->title }}" 
+                                    style="width: 100%; height: 500px; object-fit: cover;">
+                            </div>
+                            <div class="down-content bg-success mt-3 p-1 rounded-sm">
+                                <h4 class="m-0 my-3 text-center text-white">{{ $offer->title }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    {{-- end offers --}}
+
+    {{-- start classes --}}
+    <section class="section classes_section" id="trainers">
+        <div class="container" id="classes_section">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="section-heading"
+                        style="margin-top: 9px;margin-bottom: 23px;border-bottom: 2px solid #00bc65;">
+                        <h2>All <em>Classes</em></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach ($classes as $class)
+                    <div class="col-md-6 mb-4">
+                        <div class="trainer-item" style="height: fit-content!important;">
+                            <div class="image-thumb">
+                                <br>
+                                <img src="{{ asset('images/classes/' . $class->image) }}" alt="{{ $class->title }}" style="width: 100%; height: 500px; object-fit: cover;">
+                            </div>
+                            <div class="down-content bg-success mt-3 p-1 rounded-sm">
+                                <h4 class="m-0 my-3 text-center text-white">{{ $class->title }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    {{-- end classes --}}
+
 
     <!-- ***** Contact Us Area Starts ***** -->
     <section class="section" id="contact-us">

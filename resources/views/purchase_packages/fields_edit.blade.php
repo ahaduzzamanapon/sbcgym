@@ -55,7 +55,7 @@
     </div>
     <div class="form-group col-md-4">
         {!! Form::label('inactive_date', 'Inactive Date:', ['class' => 'control-label']) !!}
-        {!! Form::date('inactive_date', null, ['class' => 'form-control', 'required' => 'required']) !!}
+        {!! Form::date('inactive_date', null, ['class' => 'form-control']) !!}
     </div>
 
     <div class="form-group col-md-4">
