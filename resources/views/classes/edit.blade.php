@@ -5,9 +5,9 @@
     Edit Class @parent
 @stop
 
-@push('backend_css')
+@section('header_styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css">
-@endpush
+@endsection
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -70,11 +70,11 @@
     </div>
 @endsection
 
-@push('backend_js')
+@section('footer_scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
     <script>
         $(document).ready(function() {
             $('.dropify').dropify();
         });
     </script>
-@endpush
+@endsection

@@ -13,14 +13,59 @@
         @section('title')| {{ !empty($setting) ? $setting->name : 'Gym Master' }} -
         {{ !empty($setting) ? $setting->slogan : 'Gym Master' }} @show
     </title>
-  
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" />
+    <link rel="stylesheet" href="{{ asset('fonts/iconmind.css') }}">
+
     <!-- global css -->
-    @include('assets.backend.css')
+    <link type="text/css" href="{{ asset('css/app.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('vendors/perfect-scrollbar/css/perfect-scrollbar.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
+    {{-- //<script src="https://cdn.tailwindcss.com"></script> --}}
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js">
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css">
+
+    {{-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+
+
+
+    <style>
+        #demo {
+            position: relative;
+
+            overflow: auto;
+        }
+    </style>
+    <style>
+        .dataTables_wrapper {
+            overflow-x: scroll;
+        }
+
+        .chosen-single {
+            padding: 6px !important;
+            height: fit-content !important;
+        }
+    </style>
     <!-- end of global css -->
 
     <!-- vendors  css -->
     @yield('header_styles')
-    {{-- end of vendors  css --}}
 </head>
 
 <body>
@@ -34,7 +79,8 @@
             <!-- Header Navbar: style can be found in header-->
             <!-- Sidebar toggle button-->
             <!-- Sidebar toggle button-->
-            <h3 style="display: flex;width: -webkit-fill-available;place-content: center;font-size: x-large;width: -moz-available;">
+            <h3
+                style="display: flex;width: -webkit-fill-available;place-content: center;font-size: x-large;width: -moz-available;">
                 {{ !empty($setting) ? $setting->name : 'Gym Master' }} -
                 {{ !empty($setting) ? $setting->slogan : 'Gym Master' }} </h3>
 
@@ -42,7 +88,8 @@
                 <ul class="navbar-nav nav">
                     <li class="dropdown notifications-menu nav-item dropdown">
                         <a href="javascript:void(0)" class="dropdown-toggle nav-link dropdown-toggle"
-                            data-toggle="dropdown" id="navbarDropdown" style="border: 1px solid #a9a9a9;padding: 0 17px;border-radius: 7px;">
+                            data-toggle="dropdown" id="navbarDropdown"
+                            style="border: 1px solid #a9a9a9;padding: 0 17px;border-radius: 7px;">
                             <i class="im im-icon-Boy fs-16"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-notifications table-striped" aria-labelledby="navbarDropdown">
@@ -99,37 +146,83 @@
     <!-- global js -->
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 
-   
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
     @php
         $member = DB::table('members')->find(Auth::user()->member_id);
         if ($member && $member->term_con !== 'yes') {
-            echo "<script>
+            echo '<script>
                 Swal.fire({
-                    text: 'Please update your profile and accept terms and conditions',
-                    icon: 'warning',
+                    text: "Please update your profile and accept terms and conditions",
+                    icon: "warning",
                     showCancelButton: false,
-                    confirmButtonText: 'Go to Profile',
+                    confirmButtonText: "Go to Profile",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = '".route('members.admission_form')."';
+                        window.location.href = "' . route('members.admission_form') . '";
                     }
                 });
-            </script>";
+            </script>';
         }
     @endphp
 
 
-    <!-- global js -->  
-    @include('assets.backend.js')
-    <!-- end of global js -->
 
+    <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
+    <!-- end of page level js -->
     <!-- Start of vendor js -->
     @yield('footer_scripts')
-    <!-- end of vendor js -->
+
+    <script src="{{ asset('vendors/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
 
 
+
+
+    <script>
+        document.body.style.zoom = "90%";
+    </script>
+
+    {{-- <script>
+        $(document).ready(function() {
+            $('input').attr('required', 'required');
+        });
+    </script> --}}
+
+    <style>
+        .top_solver {
+            top: -161px !important;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            var ww = $(window).width();
+            console.log(ww);
+            $(window).resize(function() {
+                checkWidth();
+            });
+        });
+
+        function checkWidth() {
+            var ww = $(window).width();
+            console.log(ww);
+
+            if (ww < 767) {
+                $('.sidebar-res').css('margin-left', '');
+            }
+
+            if (ww < 992) {
+                console.log('rhb');
+                $('.left-aside').addClass('top_solver');
+            } else {
+                $('.left-aside').removeClass('top_solver');
+            }
+
+        }
+    </script>
 
 
 </body>

@@ -5,9 +5,9 @@
     Offers @parent
 @stop
 
-@push('backend_css')
+@section('header_styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
-@endpush
+@endsection
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -83,7 +83,7 @@
     </div>
 @endsection
 
-@push('backend_js')
+@section('footer_scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
     <script>
         @if (session('success'))
@@ -116,4 +116,4 @@
             });
         });
     </script>
-@endpush
+@endsection

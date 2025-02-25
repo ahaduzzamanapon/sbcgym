@@ -303,6 +303,15 @@ class MemberController extends AppBaseController
             unset( $input['mem_img_url'] );
         }
 
+        if ( isset( $input['password'] ) ) {
+            $input['password'] = Hash::make( $input['password'] );
+            $user              = User::where( 'member_id', $id )->first();
+            $user->password    = $input['password'];
+            $user->save();
+        } else {
+            unset( $input['password'] );
+        }
+
         $member->fill( $input );
         $member->save();
 
@@ -390,6 +399,8 @@ class MemberController extends AppBaseController
         //dd($request->all());
         $AdmissionQuestions = AdmissionQuestions::all();
 
+        // dd($request->all());
+
         $question = [];
         foreach ( $AdmissionQuestions as $admissionQuestion ) {
             $d                                 = explode( ',', $request->input( 'question_' . $admissionQuestion->id ) );
@@ -405,6 +416,7 @@ class MemberController extends AppBaseController
             'mem_mother'               => $request->mother_name,
             'mem_gender'               => $request->gender,
             'mem_address'              => $request->current_address,
+            'branch_id'                => $request->branch_id,
             'date_of_birth'            => $request->date_of_birth,
             'mem_cell'                 => $request->mem_cell,
             'mem_email'                => $request->mem_email,

@@ -486,6 +486,18 @@
                     @enderror
                 </div>
             </div>
+
+              <!--password-->
+            <div class="col-md-3">
+                <div class="form-group">
+                    {!! Form::label('password', 'Password:', ['class' => 'control-label']) !!}
+                    {!! Form::text('password', null, ['class' => 'form-control','placeholder' => 'Enter password']) !!}
+                    @error('Password')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+
         </div>
 
             <!-- Question  33-->

@@ -245,6 +245,24 @@
                             name="like_or_dislike_food" value="{{ $members->like_or_dislike_food }}">
                     </div>
 
+                        
+                    @php
+                        $multi_branchs = DB::table('multi_branchs')->get();
+                    @endphp
+
+                    <!-- branch Field 39 -->
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="branch_id" class="control-label">
+                                ব্রাঞ্চ: <span class="text-danger">*</span>
+                            </label>
+                            {!! Form::select('branch_id', $multi_branchs->pluck('branch_name', 'id')->prepend('ব্রাঞ্চ নির্বাচন করুন', ''), null, [
+                                'class' => 'form-control',
+                                'required' => 'required',
+                            ]) !!}
+                        </div>
+                    </div>
+
 
                 </div>
 
