@@ -336,4 +336,11 @@ class PurchasePackageController extends AppBaseController
         Flash::success( 'Payment saved successfully.' );
         return redirect( route( 'purchasePackages.index' ) );
     }
+    public function payment_approve( $id ){
+        $payment = PurchasePayment::where('id', $id)->first();
+        $payment->payment_status = 2;
+        $payment->save();
+        Flash::success( 'Payment Approved successfully.' );
+        return redirect()->back();
+    }
 }

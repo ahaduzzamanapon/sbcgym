@@ -164,6 +164,8 @@ Route::group( ['middleware' => 'auth'], function () {
     Route::get( 'purchase_packages/{purchasePackage}/make_payment', [PurchasePackageController::class, 'make_payment'] )->name( 'purchasePackages.make_payment' );
     Route::get( 'purchase_packages/{purchasePackage}/renew', [PurchasePackageController::class, 'renew'] )->name( 'purchasePackages.renew' );
     Route::post( 'purchase_packages/payment_store', [PurchasePackageController::class, 'payment_store'] )->name( 'purchasePackages.payment_store' );
+    Route::post( 'purchase_packages/payment_store', [PurchasePackageController::class, 'payment_store'] )->name( 'purchasePackages.payment_store' );
+    Route::get( 'purchase_packages/payment_approve/{id}', [PurchasePackageController::class, 'payment_approve'] )->name( 'purchasePackages.payment_approve' );
 
     // package report routes
     Route::get( 'package_report', [PackageController::class, 'packages_report'] )->name( 'packages.packages_report' );
