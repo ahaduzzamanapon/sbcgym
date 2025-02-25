@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateMemberRequest;
 use App\Models\AdmissionQuestions;
 use App\Models\Healthmetrics;
 use App\Models\Income;
+use App\Models\LockerAssignment;
 use App\Models\Member;
 use App\Models\MultiBranch;
 use App\Models\PaymentMethod;
@@ -98,13 +99,16 @@ class MemberController extends AppBaseController
 
         // dd($input);
         if ( $request->hasFile( 'mem_img_url' ) ) {
-            $path = storage_path( 'app/public/images/members' );
+            $path = public_path( 'images/member_img' );
             if ( !File::exists( $path ) ) {
                 File::makeDirectory( $path, 0775, true, true );
             }
-            $file                 = $request->file( 'mem_img_url' );
-            $input['mem_img_url'] = $file->store( 'images/members', 'public' );
+            $file      = $request->file( 'mem_img_url' );
+            $file_name = time() . '.' . $file->getClientOriginalExtension();
+            $file->move( $path, $file_name );
+            $input['mem_img_url'] = $file_name;
         }
+
         $member_unique_id = 'MEM' . time();
         // $input['member_unique_id']=$member_unique_id;
 
@@ -230,9 +234,14 @@ class MemberController extends AppBaseController
 
             return redirect( route( 'members.index' ) );
         }
-        $questions = AdmissionQuestions::all();
+        $questions      = AdmissionQuestions::all();
+        $locker_details = LockerAssignment::where( 'member_id', $member->id )
+            ->join( 'lockers', 'lockers.id', '=', 'lockerassignments.locker_id' )
+            ->first();
 
-        return view( 'members.show' )->with( 'member', $member )->with( 'questions', $questions );
+        return view( 'members.show' )->with( 'member', $member )
+            ->with( 'questions', $questions )
+            ->with( 'locker_details', $locker_details );
     }
     public function details( $id )
     {
@@ -244,9 +253,14 @@ class MemberController extends AppBaseController
 
             return redirect( route( 'members.index' ) );
         }
-        $questions = AdmissionQuestions::all();
+        $questions      = AdmissionQuestions::all();
+        $locker_details = LockerAssignment::where( 'member_id', $member->id )
+            ->join( 'lockers', 'lockers.id', '=', 'lockerassignments.locker_id' )
+            ->first();
 
-        return view( 'members.show' )->with( 'member', $member )->with( 'questions', $questions );
+        return view( 'members.show' )->with( 'member', $member )
+            ->with( 'questions', $questions )
+            ->with( 'locker_details', $locker_details );
     }
 
     /**
@@ -293,12 +307,14 @@ class MemberController extends AppBaseController
             return redirect( route( 'members.index' ) );
         }
         if ( $request->hasFile( 'mem_img_url' ) ) {
-            $path = storage_path( 'app/public/images/members' );
+            $path = public_path( 'images/member_img' );
             if ( !File::exists( $path ) ) {
                 File::makeDirectory( $path, 0775, true, true );
             }
-            $file                 = $request->file( 'mem_img_url' );
-            $input['mem_img_url'] = $file->store( 'images/members', 'public' );
+            $file      = $request->file( 'mem_img_url' );
+            $file_name = time() . '.' . $file->getClientOriginalExtension();
+            $file->move( $path, $file_name );
+            $input['mem_img_url'] = $file_name;
         } else {
             unset( $input['mem_img_url'] );
         }
@@ -366,6 +382,13 @@ class MemberController extends AppBaseController
             return redirect( route( 'members.index' ) );
         }
         $member_email = $member->mem_email;
+
+        if ( $member->mem_img_url ) {
+            $path = public_path( 'images/member_img/' . $member->mem_img_url );
+            if ( File::exists( $path ) ) {
+                File::delete( $path );
+            }
+        }
 
         $member->delete();
 

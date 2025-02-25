@@ -41,6 +41,31 @@
         </div>
     </div>
 
+    <!-- Locker Details Card -->
+    <div class="card mb-5" style="margin-top: 20px;">
+        <div class="card-header text-center">
+            <h5 class="card-title">Locker Details</h5>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                @if(isset($locker_details))
+                    <div class="col-md-6"><strong>• Locker Status:</strong></div>
+                    <div class="col-md-6">{{ $locker_details->status }}</div>
+                    <div class="col-md-6"><strong>• Locker Number:</strong></div>
+                    <div class="col-md-6">{{ $locker_details->locker_number }}</div>
+                    <div class="col-md-6"><strong>• Start Date:</strong></div>
+                    <div class="col-md-6">{{ date('d-m-Y', strtotime($locker_details->start_date)) }}</div>
+                    <div class="col-md-6"><strong>• End Date:</strong></div>
+                    <div class="col-md-6">{{ date('d-m-Y', strtotime($locker_details->end_date)) }}</div>
+                @else
+                    <div class="col-12 text-center text-muted">
+                        No locker details available
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+
     <!-- Health & Fitness Details -->
     <div class="card mb-5" style="margin-top: 20px;">
         <div class="card-header text-center">
