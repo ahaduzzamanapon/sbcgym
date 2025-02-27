@@ -157,6 +157,32 @@
     </li>
 @endif
 
+{{-- package section --}}
+@if (if_can('package-section'))
+    <li {!! Request::is('packageSections*') ? 'class="menu-dropdown mm-active active"' : "class='menu-dropdown'" !!}>
+        <a href="#">
+            <span class="mm-text ">Package Sections</span>
+            <span class="menu-icon "><i class="align-self-center fa-1x fas fa-box-open"></i></span>
+            <span class="im im-icon-Arrow-Right imicon"></span>
+        </a>
+        <ul class="sub-menu list-unstyled">
+            <li class="{!! Request::is('packageSections*') ? 'active' : '' !!}">
+                <a href="{{ route('packageSections.index') }}">
+                    <span class="mm-text ">Package Sections</span>
+                </a>
+            </li>
+            <li class="{!! Request::is('packageSections.create') ? 'active' : '' !!}">
+                <a href="{{ route('packageSections.create') }}">
+                    <span class="mm-text ">Create Section</span>
+                </a>
+            </li>
+
+        </ul>
+    </li>
+@endif
+
+
+
 @if (if_can('store_management'))
     <li {!! Request::is('products*') || Request::is('requisitions*') || Request::is('sales*')
         ? 'class="menu-dropdown mm-active active"'

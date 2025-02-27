@@ -60,6 +60,11 @@
         .col-md-3 {
             margin-bottom: 25px;
         }
+
+        .required:after {
+            content: " *";
+            color: red;
+        }
     </style>
 </head>
 
@@ -71,7 +76,7 @@
         <form id="multiStepForm" action="{{ route('admission.store') }}" method="POST">
             <!-- Step 1: Accept Terms & Conditions -->
             <div class="form-section active">
-                <h3>নিয়মাবলী </h3>
+                <h3>নিয়মাবলী </h3>
                 <div class="mb-4">
                     <div class="row">
                         @foreach ($TermAndCondition as $key => $termAndCondition)
@@ -85,7 +90,7 @@
                 <div class="mb-3">
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="terms" required>
-                        <label class="form-check-label" for="terms">আমি সকল নিয়মাবলী পড়েছি এবং সমর্থন করি.</label>
+                        <label class="form-check-label required" for="terms">আমি সকল নিয়মাবলী পড়েছি এবং সমর্থন করি.</label>
                         <br>
                     </div>
                 </div>
@@ -103,7 +108,7 @@
                         @foreach ($AdmissionQuestions as $key => $question)
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>{{ $key + 1 }}. {{ $question->questions }}</label> <br>
+                                    <label class="required">{{ $key + 1 }}. {{ $question->questions }}</label> <br>
                                     <div class="form-check">
                                         <label class="form-check-label">
                                             <input class="form-check-input question" type="radio"
@@ -140,17 +145,17 @@
                             value="{{ $members->member_unique_id }}" readonly>
                     </div>
                     <div class="col-md-3 form-group">
-                        <label for="name">নাম:</label> <br>
+                        <label for="name" class="required">নাম:</label> <br>
                         <input class="form-control" type="text" id="name" name="name"
                             value="{{ $members->mem_name }}" required>
                     </div>
                     <div class="col-md-3 form-group">
-                        <label for="name">পদবী :</label> <br>
+                        <label for="name" class="required">পদবী :</label> <br>
                         <input class="form-control" type="text" id="last_name" name="last_name"
                             value="{{ $members->last_name }}" required>
                     </div>
                     <div class="col-md-3 form-group">
-                        <label for="name">NID/BCF/Passport:</label> <br>
+                        <label for="name" class="required">NID/BCF/Passport:</label> <br>
                         <input class="form-control" type="text" id="nid" name="nid"
                             value="{{ $members->nid }}" required>
                     </div>
@@ -165,7 +170,7 @@
                             value="{{ $members->mem_mother }}">
                     </div>
                     <div class="col-md-3 form-group">
-                        <label for="gender">পুরুষ/মহিলা:</label> <br>
+                        <label for="gender" class="required">পুরুষ/মহিলা:</label> <br>
                         <select id="gender" name="gender" class="form-control" required>
                             <option value="Male" {{ $members->mem_gender == 'Male' ? 'selected' : '' }}>পুরুষ
                             </option>
@@ -174,7 +179,7 @@
                         </select>
                     </div>
                     <div class="col-md-3 form-group">
-                        <label for="date_of_birth">জন্ম তারিখ:</label> <br>
+                        <label for="date_of_birth" class="required">জন্ম তারিখ:</label> <br>
                         <input class="form-control" type="date" id="date_of_birth" name="date_of_birth"
                             value="{{ $members->date_of_birth }}" required>
                     </div>
@@ -204,7 +209,7 @@
                             value="{{ $members->office_address }}">
                     </div>
                     <div class="col-md-3 form-group">
-                        <label for="email">প্রতি সেসনে কতক্ষণ ব্যায়াম করতে পারেন</label> <br>
+                        <label for="email">প্রতি সেসনে কতক্ষণ ব্যায়াম করতে পারেন</label> <br>
                         <input class="form-control" type="text" id="sassoon_exercise_time"
                             name="sassoon_exercise_time" value="{{ $members->sassoon_exercise_time }}">
                     </div>
@@ -235,7 +240,7 @@
                             name="injury_or_health_issue" value="{{ $members->injury_or_health_issue }}">
                     </div>
                     <div class="col-md-3 form-group">
-                        <label for="like_or_dislike_exercise">কোন ব্যায়াম পছন্দ করেন বা করেন না:</label> <br>
+                        <label for="like_or_dislike_exercise">কোন ব্যায়াম পছন্দ করেন বা করেন না:</label> <br>
                         <input class="form-control" type="text" id="like_or_dislike_exercise"
                             name="like_or_dislike_exercise" value="{{ $members->like_or_dislike_exercise }}">
                     </div>
@@ -253,8 +258,8 @@
                     <!-- branch Field 39 -->
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="branch_id" class="control-label">
-                                ব্রাঞ্চ: <span class="text-danger">*</span>
+                            <label for="branch_id" class="control-label required">
+                                ব্রাঞ্চ:
                             </label>
                             {!! Form::select('branch_id', $multi_branchs->pluck('branch_name', 'id')->prepend('ব্রাঞ্চ নির্বাচন করুন', ''), null, [
                                 'class' => 'form-control',
@@ -350,16 +355,16 @@
                 <h3>Exercise & Diet</h3>
                 <div class="row">
                     <div class="col-md-3 form-group">
-                        <label for="exercise_goal">ব্যায়াম লক্ষ্য:</label> <br>
+                        <label for="exercise_goal">ব্যায়াম লক্ষ্য:</label> <br>
                         <textarea id="exercise_goal" name="exercise_goal">{{ $members->exercise_goal }}</textarea>
                     </div>
                     <div class="col-md-3 form-group">
-                        <label for="current_diet_routine">বর্তমান ডায়েট রুটিন:</label> <br>
+                        <label for="current_diet_routine">বর্তমান ডায়েট রুটিন:</label> <br>
                         <input class="form-control" type="text" id="current_diet_routine"
                             name="current_diet_routine" value="{{ $members->current_diet_routine }}">
                     </div>
                     <div class="col-md-3 form-group">
-                        <label for="exercise_history">ব্যায়ামের ইতিহাস:</label> <br>
+                        <label for="exercise_history">ব্যায়ামের ইতিহাস:</label> <br>
                         <textarea id="exercise_history" name="exercise_history">{{ $members->exercise_history }}</textarea>
                     </div>
                 </div>

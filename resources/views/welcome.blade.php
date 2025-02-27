@@ -373,32 +373,32 @@ https://templatemo.com/tm-548-training-studio
     </section>
     <!-- ***** Testimonials Ends ***** -->
 
-    {{-- start package --}}
-    <section class="section mt-5 packages_section" id="trainers">
-        <div class="container" id="packages_section">
+    {{-- start package section --}}
+    <section class="section mt-5 package_sections" id="trainers">
+        <div class="container" id="package_sections">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="section-heading"
                         style="margin-top: 9px;margin-bottom: 23px;border-bottom: 2px solid #00bc65;">
-                        <h2>All <em>Packages</em></h2>
+                        <h2>Package <em>Sections</em></h2>
                     </div>
                 </div>
             </div>
             <div class="row">
                 @php
-                    $packages = \App\Models\Package::where('pack_status', 1)->get();
+                    $packageSections = \App\Models\PackageSection::where('status', 1)->get();
                 @endphp
-                @foreach ($packages as $package)
+                @foreach ($packageSections as $section)
                     <div class="col-12 mb-4">
                         <div class="trainer-item" style="height: fit-content!important;">
                             <div class="image-thumb">
                                 <br>
-                                <img src="{{ asset('images/pack_image/' . $package->pack_image) }}" alt="{{ $package->pack_name }}" style="width: 100%; object-fit: cover;">
+                                <img src="{{ asset('images/packageSections/' . $section->image) }}" alt="{{ $section->title }}" style="width: 100%; object-fit: cover;">
                             </div>
                             <div class="down-content" style="background: linear-gradient(45deg, #28a745, #20c997); padding: 15px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);margin-top: 10px;">
-                                <div class="package-title">
+                                <div class="section-title">
                                     <h4 class="text-center text-white m-0" style="font-size: 24px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
-                                        {{ $package->pack_name }}
+                                        {{ $section->title }}
                                     </h4>
                                 </div>
                             </div>

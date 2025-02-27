@@ -67,7 +67,8 @@ Route::resource( 'paymentMethods', 'PaymentMethodController' );
 Route::resource( 'offers', 'Backend\OfferController' );
 // for package class
 Route::resource( 'packageClasses', 'Backend\ClassController' );
-
+// for package section
+Route::resource( 'packageSections', 'PackageSectionController' );
 
 
 Route::resource('dietChartRequests', 'DietChartRequestController');

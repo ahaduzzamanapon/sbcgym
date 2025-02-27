@@ -355,6 +355,29 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * Class DietChartRequest
+ *
+ * @package App\Models
+ * @version February 25, 2025, 8:29 am UTC
+ * @property string $member
+ * @property string $note
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|DietChartRequest newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DietChartRequest newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DietChartRequest query()
+ * @method static \Illuminate\Database\Eloquent\Builder|DietChartRequest whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DietChartRequest whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DietChartRequest whereMember($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DietChartRequest whereNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DietChartRequest whereUpdatedAt($value)
+ */
+	class DietChartRequest extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * Class Expenses
  *
  * @package App\Models
@@ -882,9 +905,23 @@ namespace App\Models{
 /**
  * App\Models\Offer
  *
+ * @property int $id
+ * @property string $title
+ * @property string $slug
+ * @property string $image
+ * @property int $status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Offer newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Offer newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Offer query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Offer whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Offer whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Offer whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Offer whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Offer whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Offer whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Offer whereUpdatedAt($value)
  */
 	class Offer extends \Eloquent {}
 }
@@ -922,11 +959,36 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\PackageSection
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|PackageSection newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PackageSection newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PackageSection query()
+ */
+	class PackageSection extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Package_class
  *
+ * @property int $id
+ * @property string $title
+ * @property string $slug
+ * @property string $image
+ * @property int $status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Package_class newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Package_class newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Package_class query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Package_class whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package_class whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package_class whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package_class whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package_class whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package_class whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Package_class whereUpdatedAt($value)
  */
 	class Package_class extends \Eloquent {}
 }
@@ -1225,8 +1287,8 @@ namespace App\Models{
  * @property integer $status
  * @property string $note
  * @property int $id
- * @property string $booking_time
- * @property int $asset_id
+ * @property string|null $booking_time
+ * @property int|null $asset_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Schedulebooking newModelQuery()

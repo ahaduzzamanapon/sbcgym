@@ -85,7 +85,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 {!! Form::label('mem_type', 'Member Type:', ['class' => 'control-label']) !!}<span class="text-danger"> *</span>
-                {!! Form::select('mem_type', ['member' => 'Member'], null, ['class' => 'form-control', 'required' => 'required']) !!}
+                {!! Form::select('mem_type', ['member' => 'Member', 'staff' => 'Staff'], null, ['class' => 'form-control', 'required' => 'required']) !!}
                     @error('mem_type')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror

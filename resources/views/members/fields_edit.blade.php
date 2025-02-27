@@ -105,11 +105,19 @@
         </div>
 
 
+        {{-- user group id --}}
+        @php
+            $user = Auth::user()->group_id;
+        @endphp
         {{-- Mem Type Field 35 --}}
         <div class="col-md-3">
             <div class="form-group">
                 {!! Form::label('mem_type', 'Member Type:', ['class' => 'control-label']) !!} <span class="text-danger">*</span>
+                @if($user == 3)
+                {!! Form::select('mem_type', ['member' => 'Member', 'staff' => 'Staff'], null, ['class' => 'form-control', 'required' => 'required']) !!}
+                @else
                 {!! Form::select('mem_type', ['member' => 'Member'], null, ['class' => 'form-control', 'required' => 'required']) !!}
+                @endif
                     @error('mem_type')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
