@@ -374,7 +374,6 @@ https://templatemo.com/tm-548-training-studio
     <!-- ***** Testimonials Ends ***** -->
 
     {{-- start package --}}
-
     <section class="section mt-5 packages_section" id="trainers">
         <div class="container" id="packages_section">
             <div class="row">
@@ -389,26 +388,20 @@ https://templatemo.com/tm-548-training-studio
                 @php
                     $packages = \App\Models\Package::where('pack_status', 1)->get();
                 @endphp
-                {{-- @dd($packages) --}}
-                {{-- id" => 1
-        "pack_name" => "3 month"
-        "branch_id" => 2
-        "pack_admission_fee" => 600
-        "pack_duration" => "3 month"
-        "pack_status" => 1
-        "created_at" => "2024-11-18 05:41:04"
-        "updated_at" => "2024-12-10 06:09:31" --}}
                 @foreach ($packages as $package)
-                    <div class="col-md-6 mb-4">
+                    <div class="col-12 mb-4">
                         <div class="trainer-item" style="height: fit-content!important;">
                             <div class="image-thumb">
                                 <br>
-                                <img src="{{ asset('images/pack_image/' . $package->pack_image) }}" alt="{{ $package->pack_name }}" style="width: 100%; height: 500px; object-fit: cover;">
+                                <img src="{{ asset('images/pack_image/' . $package->pack_image) }}" alt="{{ $package->pack_name }}" style="width: 100%; object-fit: cover;">
                             </div>
-                            <div class="down-content bg-success  mt-3 p-1 rounded-sm">
-                                <h4 class="m-0 my-3 text-center text-white" >{{ $package->pack_name }}</h4>
+                            <div class="down-content" style="background: linear-gradient(45deg, #28a745, #20c997); padding: 15px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);margin-top: 10px;">
+                                <div class="package-title">
+                                    <h4 class="text-center text-white m-0" style="font-size: 24px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
+                                        {{ $package->pack_name }}
+                                    </h4>
+                                </div>
                             </div>
-
                         </div>
                     </div>
                 @endforeach
@@ -450,7 +443,7 @@ https://templatemo.com/tm-548-training-studio
     {{-- end offers --}}
 
     {{-- start classes --}}
-    <section class="section classes_section" id="trainers">
+    <section class="section mt-5 classes_section" id="trainers">
         <div class="container" id="classes_section">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
@@ -462,14 +455,18 @@ https://templatemo.com/tm-548-training-studio
             </div>
             <div class="row">
                 @foreach ($classes as $class)
-                    <div class="col-md-6 mb-4">
+                    <div class="col-12 mb-4">
                         <div class="trainer-item" style="height: fit-content!important;">
                             <div class="image-thumb">
                                 <br>
-                                <img src="{{ asset('images/classes/' . $class->image) }}" alt="{{ $class->title }}" style="width: 100%; height: 500px; object-fit: cover;">
+                                <img src="{{ asset('images/classes/' . $class->image) }}" alt="{{ $class->title }}" style="width: 100%; object-fit: cover;">
                             </div>
-                            <div class="down-content bg-success mt-3 p-1 rounded-sm">
-                                <h4 class="m-0 my-3 text-center text-white">{{ $class->title }}</h4>
+                            <div class="down-content" style="background: linear-gradient(45deg, #28a745, #20c997); padding: 15px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);margin-top: 10px;">
+                                <div class="package-title">
+                                    <h4 class="text-center text-white m-0" style="font-size: 24px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
+                                        {{ $class->title }}
+                                    </h4>
+                                </div>
                             </div>
                         </div>
                     </div>

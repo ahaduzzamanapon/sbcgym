@@ -324,6 +324,7 @@ class MemberController extends AppBaseController
             $user              = User::where( 'member_id', $id )->first();
             $user->password    = $input['password'];
             $user->save();
+            unset( $input['password'] );
         } else {
             unset( $input['password'] );
         }

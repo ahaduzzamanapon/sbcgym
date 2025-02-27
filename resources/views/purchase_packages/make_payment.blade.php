@@ -55,10 +55,10 @@
                     </table>
                     <div class="row">
                         <div class="col-md-12" style="display: flex;flex-direction: column;gap: 10px;">
-                            <span>Total Amount: <strong>{{ $sale->gross_amount }}</strong></span>
-                            <span>Pay Amount: <strong>{{ $sale->pay_amount }}</strong></span>
-                            <span>Due Amount: <strong>{{ $sale->due_amount }}</strong></span>
-                            <input type="hidden" name="due_amount" id="due_amount" value="{{ $sale->due_amount }}">
+                            <span>Total Amount: <strong>{{ $sale->gross_amount ?? 0 }}</strong></span>
+                            <span>Pay Amount: <strong>{{ $sale->pay_amount ?? 0 }}</strong></span>
+                            <span>Due Amount: <strong>{{ $sale->due_amount ?? 0 }}</strong></span>
+                            <input type="hidden" name="due_amount" id="due_amount" value="{{ $sale->due_amount ?? 0 }}">
                         </div>
 
                     </div>
@@ -70,8 +70,8 @@
 
                 <form action="{{ route('purchasePackages.payment_store') }}" method="post">
                     @csrf
-                    <input type="hidden" name="member_id" id="member_id" value="{{ $sale->member_id }}">
-                    <input type="hidden" name="sale_id" id="sale_id" value="{{ $sale->id }}">
+                    <input type="hidden" name="member_id" id="member_id" value="{{ $sale->member_id ?? 0 }}">
+                    <input type="hidden" name="sale_id" id="sale_id" value="{{ $sale->id ?? 0 }}">
 
                     <div class="row">
                         <div class="col-md-12">
@@ -98,7 +98,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 {!! Form::label('payment_amount', 'Payment Amount:', ['class' => 'control-label']) !!}
-                                {!! Form::number('payment_amount', null, ['class' => 'form-control', 'required', 'max' => $sale->due_amount]) !!}
+                                {!! Form::number('payment_amount', null, ['class' => 'form-control', 'required', 'max' => $sale->due_amount ?? 0]) !!}
                             </div>
                             <div class="form-group col-md-4">
                                 {!! Form::label('payment_note', 'Payment Note:', ['class' => 'control-label']) !!}
