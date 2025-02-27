@@ -112,58 +112,60 @@
             @endphp
             <div class="navbar-right ml-auto">
                 <ul class="navbar-nav nav flex" style="display: flex;flex-direction: row;flex-wrap: nowrap;gap: 10px;">
-                    <li class="dropdown notifications-menu nav-item dropdown">
-                        <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown" id="navbarDropdown"
-                            style="padding: 0 15px;border-radius: 7px;">
-                            <span
-                                style="background: red;position: absolute;border-radius: 50px;height: auto;width: fit-content;padding: 0px 6px;font-size: 9px;font-weight: bolder;right: 5px;color: white;">{{count($today_registered_notification) + count($payment_pending) + count($schedule_book)}}</span>
-                            <i class="im im-icon-Bell fs-16"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-notifications table-striped" aria-labelledby="navbarDropdown">
-                            <li class="dropdown-footer" style="padding: 5px;">
-                                <h4 style="white-space: nowrap;font-size: 16px;">Today Registered:
-                                    {{count($today_registered_notification)}}</h4>
-                            </li>
-                            @foreach ($today_registered_notification as $notification)
-                            <li class="dropdown-footer">
-                                <a class="dropdown-item"
-                                    href="{{ route('members.details', ['id' => $notification->id]) }}">
-                                    <span style="font-size: 13px;"><i class="im im-icon-Boy fs-16"></i>
-                                        {{ $notification->mem_name }} {{ $notification->last_name }} -
-                                        {{ $notification->mem_email }} </span>
-                                </a>
-                            </li>
-                            @endforeach
-                            <li class="dropdown-footer" style="padding: 5px;">
-                                <h4 style="white-space: nowrap;font-size: 16px;">Payment Pending:
-                                    {{count($payment_pending)}}</h4>
-                            </li>
-                            @foreach ($payment_pending as $notification)
-                            <li class="dropdown-footer">
-                                <a class="dropdown-item"
-                                    href="{{ route('purchasePackages.make_payment', $notification->purchase_purchase_id) }}">
-                                    <span><i class="im im-icon-Dollar fs-16"></i> {{ $notification->mem_name }}
-                                        {{ $notification->last_name }} - {{ $notification->payment_number }} Payment
-                                        Amount -{{ $notification->payment_amount }} </span>
-                                </a>
-                            </li>
-                            @endforeach
-                            <li class="dropdown-footer" style="padding: 5px;">
-                                <h4 style="white-space: nowrap;font-size: 16px;">Schedule Booking:
-                                    {{count($payment_pending)}}</h4>
-                            </li>
-                            @foreach ($schedule_book as $notification)
-                            <li class="dropdown-footer">
-                                <a class="dropdown-item"
-                                    href="{{ route('schedulebookings.edit', [$notification->id]) }}">
-                                    <span><i class="im im-icon-Calendar-2 fs-16"></i> {{ $notification->mem_name }} -
-                                        {{ $notification->booking_date }} {{ $notification->booking_time }} For
-                                        {{ $notification->item_name }} </span>
-                                </a>
-                            </li>
-                            @endforeach
-                        </ul>
-                    </li>
+                    @if (if_can('show_all_data'))
+                        <li class="dropdown notifications-menu nav-item dropdown">
+                            <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown" id="navbarDropdown"
+                                style="padding: 0 15px;border-radius: 7px;">
+                                <span
+                                    style="background: red;position: absolute;border-radius: 50px;height: auto;width: fit-content;padding: 0px 6px;font-size: 9px;font-weight: bolder;right: 5px;color: white;">{{count($today_registered_notification) + count($payment_pending) + count($schedule_book)}}</span>
+                                <i class="im im-icon-Bell fs-16"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-notifications table-striped" aria-labelledby="navbarDropdown">
+                                <li class="dropdown-footer" style="padding: 5px;">
+                                    <h4 style="white-space: nowrap;font-size: 16px;">Today Registered:
+                                        {{count($today_registered_notification)}}</h4>
+                                </li>
+                                @foreach ($today_registered_notification as $notification)
+                                <li class="dropdown-footer">
+                                    <a class="dropdown-item"
+                                        href="{{ route('members.details', ['id' => $notification->id]) }}">
+                                        <span style="font-size: 13px;"><i class="im im-icon-Boy fs-16"></i>
+                                            {{ $notification->mem_name }} {{ $notification->last_name }} -
+                                            {{ $notification->mem_email }} </span>
+                                    </a>
+                                </li>
+                                @endforeach
+                                <li class="dropdown-footer" style="padding: 5px;">
+                                    <h4 style="white-space: nowrap;font-size: 16px;">Payment Pending:
+                                        {{count($payment_pending)}}</h4>
+                                </li>
+                                @foreach ($payment_pending as $notification)
+                                <li class="dropdown-footer">
+                                    <a class="dropdown-item"
+                                        href="{{ route('purchasePackages.make_payment', $notification->purchase_purchase_id) }}">
+                                        <span><i class="im im-icon-Dollar fs-16"></i> {{ $notification->mem_name }}
+                                            {{ $notification->last_name }} - {{ $notification->payment_number }} Payment
+                                            Amount -{{ $notification->payment_amount }} </span>
+                                    </a>
+                                </li>
+                                @endforeach
+                                <li class="dropdown-footer" style="padding: 5px;">
+                                    <h4 style="white-space: nowrap;font-size: 16px;">Schedule Booking:
+                                        {{count($payment_pending)}}</h4>
+                                </li>
+                                @foreach ($schedule_book as $notification)
+                                <li class="dropdown-footer">
+                                    <a class="dropdown-item"
+                                        href="{{ route('schedulebookings.edit', [$notification->id]) }}">
+                                        <span><i class="im im-icon-Calendar-2 fs-16"></i> {{ $notification->mem_name }} -
+                                            {{ $notification->booking_date }} {{ $notification->booking_time }} For
+                                            {{ $notification->item_name }} </span>
+                                    </a>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endif
                     <li class="dropdown notifications-menu nav-item dropdown">
                         <a href="javascript:void(0)" class="dropdown-toggle nav-link dropdown-toggle"
                             data-toggle="dropdown" id="navbarDropdown"
