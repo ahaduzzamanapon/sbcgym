@@ -38,15 +38,17 @@
                     <span class="mm-text ">Diet Charts</span>
                 </a>
             </li>
-            <li class="{!! (Request::is('dietChartRequests*') ? 'active' : '' ) !!}">
-                <a href="{{ route('dietChartRequests.index') }}">
-                    <span class="mm-text ">Diet Chart Requests</span>
-                </a>
-            </li>
+            
 
         </ul>
     </li>
 @endif
+<li class="{!! (Request::is('dietChartRequests*') ? 'active' : '' ) !!}">
+    <a href="{{ route('dietChartRequests.index') }}">
+        <span class="mm-text ">Diet Chart Requests</span>
+        <span class="menu-icon"><i class="align-self-center fa-1x fas fa-calendar-alt"></i></span>
+    </a>
+</li>
 
 
 <li {!! Request::is('packages*') || Request::is('purchasePackages*')
