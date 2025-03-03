@@ -17,6 +17,7 @@ class CreateDietChartRequestsTable extends Migration
             $table->increments('id');
             $table->string('member');
             $table->text('note');
+            $table->string('status');
             $table->timestamps();
         });
     }

@@ -34,18 +34,14 @@ class GymDietChartController extends Controller
  
     public function store(Request $request)
     {
-
-        $validated = $request->validate([
-            'member_name' => 'required|string|max:100',
-            'age' => 'required|integer',
-            'gender' => 'required|in:Male,Female,Other',
-        ]);
+        
+        $member_data=DB::table('members')->where('id', $request->member_id)->first();
+        $member_name=$member_data->mem_name;
+       
         // member_id	member_name	age	gender	height	weight	body_fat_percentage	goal	meal_preference	caloric_requirement	protein_grams	carbs_grams	fats_grams	water_intake	special_instructions	created_at	updated_at	
-        $member_data=explode(',', $request->member_name);
-        $member_name=$member_data[0];
-        $member_id=$member_data[1];
+        
         $data_array = array(
-            'member_id' => $member_id,
+            'member_id' => $request->member_id,
             'member_name' => $member_name,
             'age' => $request->age,
             'gender' => $request->gender,
@@ -77,11 +73,11 @@ class GymDietChartController extends Controller
     
     public function update(Request $request, GymDietChart $dietChart)
     {
-        $validated = $request->validate([
-            'member_name' => 'required|string|max:100',
-            'age' => 'required|integer',
-            'gender' => 'required|in:Male,Female,Other',
-        ]);
+        // $validated = $request->validate([
+        //     'member_name' => 'required|string|max:100',
+        //     'age' => 'required|integer',
+        //     'gender' => 'required|in:Male,Female,Other',
+        // ]);
         // member_id	member_name	age	gender	height	weight	body_fat_percentage	goal	meal_preference	caloric_requirement	protein_grams	carbs_grams	fats_grams	water_intake	special_instructions	created_at	updated_at	
         $member_data=explode(',', $request->member_name);
         $member_name=$member_data[0];

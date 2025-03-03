@@ -5,6 +5,8 @@
                 <th>Id</th>
         <th>Member</th>
         <th>Note</th>
+        <th>status</th>
+        
         <th>Created At</th>
         <th>Updated At</th>
                 <th colspan="3">Action</th>
@@ -16,6 +18,7 @@
                 <td>{{ $dietChartRequest->id }}</td>
             <td>{{ $dietChartRequest->member_name }}</td>
             <td>{{ $dietChartRequest->note }}</td>
+            <td>{{ $dietChartRequest->status }}</td>
             <td>{{ $dietChartRequest->created_at }}</td>
             <td>{{ $dietChartRequest->updated_at }}</td>
                 <td>
