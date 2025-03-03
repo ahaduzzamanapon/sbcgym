@@ -362,6 +362,7 @@ namespace App\Models{
  * @property string $member
  * @property string $note
  * @property int $id
+ * @property string|null $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|DietChartRequest newModelQuery()
@@ -371,6 +372,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|DietChartRequest whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DietChartRequest whereMember($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DietChartRequest whereNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DietChartRequest whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DietChartRequest whereUpdatedAt($value)
  */
 	class DietChartRequest extends \Eloquent {}
@@ -708,18 +710,43 @@ namespace App\Models{
  * @property string $end_date
  * @property string $status
  * @property int $id
+ * @property int|null $coupons_id
+ * @property int|null $amount
+ * @property int|null $tax
+ * @property int|null $coupon_amount
+ * @property int|null $admission_fee
+ * @property int|null $gross_amount
+ * @property int|null $pay_amount
+ * @property int|null $due_amount
+ * @property int|null $pay_status 1 for pending, 2 for due, 3 for fully payment
+ * @property string|null $expired_date
+ * @property string|null $due_date
+ * @property string|null $active_status
+ * @property string|null $inactive_date
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment query()
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereActiveStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereAdmissionFee($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereCouponAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereCouponsId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereDueAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereDueDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereEndDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereExpiredDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereGrossAmount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereInactiveDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereLockerId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereMemberId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment wherePayAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment wherePayStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereStartDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereTax($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereUpdatedAt($value)
  */
 	class LockerAssignment extends \Eloquent {}
@@ -961,9 +988,23 @@ namespace App\Models{
 /**
  * App\Models\PackageSection
  *
+ * @property int $id
+ * @property string $title
+ * @property string $slug
+ * @property string $image
+ * @property int $status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|PackageSection newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PackageSection newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PackageSection query()
+ * @method static \Illuminate\Database\Eloquent\Builder|PackageSection whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PackageSection whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PackageSection whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PackageSection whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PackageSection whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PackageSection whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PackageSection whereUpdatedAt($value)
  */
 	class PackageSection extends \Eloquent {}
 }

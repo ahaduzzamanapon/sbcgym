@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\CreateLockerAssignmentRequest;
 use App\Http\Requests\UpdateLockerAssignmentRequest;
-use App\Http\Controllers\AppBaseController;
 use App\Models\LockerAssignment;
-use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Http\Request;
 use Response;
 
 class LockerAssignmentController extends AppBaseController
@@ -19,16 +19,16 @@ class LockerAssignmentController extends AppBaseController
      *
      * @return Response
      */
-    public function index(Request $request)
+    public function index( Request $request )
     {
         /** @var LockerAssignment $lockerAssignments */
-        $lockerAssignments = LockerAssignment::select('lockerassignments.*', 'members.mem_name as member_name', 'lockers.locker_number','lockerassignments.id as assignment_id')
-            ->join('members', 'lockerassignments.member_id', '=', 'members.id')
-            ->join('lockers', 'lockerassignments.locker_id', '=', 'lockers.id')
-            ->paginate(10);
+        $lockerAssignments = LockerAssignment::select( 'lockerassignments.*', 'members.mem_name as member_name', 'lockers.locker_number', 'lockerassignments.id as assignment_id' )
+            ->join( 'members', 'lockerassignments.member_id', '=', 'members.id' )
+            ->join( 'lockers', 'lockerassignments.locker_id', '=', 'lockers.id' )
+            ->paginate( 10 );
 
-        return view('locker_assignments.index')
-            ->with('lockerAssignments', $lockerAssignments);
+        return view( 'locker_assignments.index' )
+            ->with( 'lockerAssignments', $lockerAssignments );
     }
 
     /**
@@ -38,7 +38,7 @@ class LockerAssignmentController extends AppBaseController
      */
     public function create()
     {
-        return view('locker_assignments.create');
+        return view( 'locker_assignments.create' );
     }
 
     /**
@@ -48,16 +48,43 @@ class LockerAssignmentController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateLockerAssignmentRequest $request)
+    public function store( CreateLockerAssignmentRequest $request )
     {
         $input = $request->all();
 
+        // dd( $input );
+
         /** @var LockerAssignment $lockerAssignment */
-        $lockerAssignment = LockerAssignment::create($input);
+        $lockerAssignment = LockerAssignment::create( [
 
-        Flash::success('Locker Assignment saved successfully.');
+            'member_id'      => $input['member_id'],
+            'locker_id'      => $input['locker_id'],
+            'amount'         => $input['amount'],
+            'tax'            => $input['tax'],
+            'admission_fee'  => $input['admission_fee'],
+            'gross_amount'   => $input['gross_amount'],
+            'coupons_id'     => $input['coupons_id'],
+            'coupon_amount'  => $input['coupon_amount'],
+            'pay_amount'     => $input['pay_amount'],
+            'due_amount'     => $input['due_amount'],
+            'pay_status'     => $input['pay_status'],
+            'start_date'     => $input['start_date'],
+            'end_date'       => $input['end_date'],
+            'active_status'  => 'Active',
+            'status'         => $input['locker_status'],
+            'payment_mode'   => $input['payment_mode'],
+            'payment_date'   => $input['payment_date'],
+            'payment_amount' => $input['payment_amount'],
+            'payment_note'   => $input['payment_note'],
+            'payment_doc'    => $input['payment_doc'],
+            'payment_number' => $input['payment_number'],
+            'payment_status' => $input['payment_status'],
 
-        return redirect(route('lockerAssignments.index'));
+        ] );
+
+        Flash::success( 'Locker Assignment saved successfully.' );
+
+        return redirect( route( 'lockerAssignments.index' ) );
     }
 
     /**
@@ -67,22 +94,22 @@ class LockerAssignmentController extends AppBaseController
      *
      * @return Response
      */
-    public function show($id)
+    public function show( $id )
     {
         /** @var LockerAssignment $lockerAssignment */
-        $lockerAssignments = LockerAssignment::select('lockerassignments.*', 'members.mem_name as member_name', 'lockers.locker_number')
-            ->join('members', 'lockerassignments.member_id', '=', 'members.id')
-            ->join('lockers', 'lockerassignments.locker_id', '=', 'lockers.id')
-            ->where('lockerassignments.id', $id)
+        $lockerAssignments = LockerAssignment::select( 'lockerassignments.*', 'members.mem_name as member_name', 'lockers.locker_number' )
+            ->join( 'members', 'lockerassignments.member_id', '=', 'members.id' )
+            ->join( 'lockers', 'lockerassignments.locker_id', '=', 'lockers.id' )
+            ->where( 'lockerassignments.id', $id )
             ->first();
 
-        if (empty($lockerAssignment)) {
-            Flash::error('Locker Assignment not found');
+        if ( empty( $lockerAssignment ) ) {
+            Flash::error( 'Locker Assignment not found' );
 
-            return redirect(route('lockerAssignments.index'));
+            return redirect( route( 'lockerAssignments.index' ) );
         }
 
-        return view('locker_assignments.show')->with('lockerAssignment', $lockerAssignment);
+        return view( 'locker_assignments.show' )->with( 'lockerAssignment', $lockerAssignment );
     }
 
     /**
@@ -92,18 +119,18 @@ class LockerAssignmentController extends AppBaseController
      *
      * @return Response
      */
-    public function edit($id)
+    public function edit( $id )
     {
         /** @var LockerAssignment $lockerAssignment */
-        $lockerAssignment = LockerAssignment::find($id);
+        $lockerAssignment = LockerAssignment::find( $id );
 
-        if (empty($lockerAssignment)) {
-            Flash::error('Locker Assignment not found');
+        if ( empty( $lockerAssignment ) ) {
+            Flash::error( 'Locker Assignment not found' );
 
-            return redirect(route('lockerAssignments.index'));
+            return redirect( route( 'lockerAssignments.index' ) );
         }
 
-        return view('locker_assignments.edit')->with('lockerAssignment', $lockerAssignment);
+        return view( 'locker_assignments.edit' )->with( 'lockerAssignment', $lockerAssignment );
     }
 
     /**
@@ -114,23 +141,23 @@ class LockerAssignmentController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateLockerAssignmentRequest $request)
+    public function update( $id, UpdateLockerAssignmentRequest $request )
     {
         /** @var LockerAssignment $lockerAssignment */
-        $lockerAssignment = LockerAssignment::find($id);
+        $lockerAssignment = LockerAssignment::find( $id );
 
-        if (empty($lockerAssignment)) {
-            Flash::error('Locker Assignment not found');
+        if ( empty( $lockerAssignment ) ) {
+            Flash::error( 'Locker Assignment not found' );
 
-            return redirect(route('lockerAssignments.index'));
+            return redirect( route( 'lockerAssignments.index' ) );
         }
 
-        $lockerAssignment->fill($request->all());
+        $lockerAssignment->fill( $request->all() );
         $lockerAssignment->save();
 
-        Flash::success('Locker Assignment updated successfully.');
+        Flash::success( 'Locker Assignment updated successfully.' );
 
-        return redirect(route('lockerAssignments.index'));
+        return redirect( route( 'lockerAssignments.index' ) );
     }
 
     /**
@@ -142,21 +169,21 @@ class LockerAssignmentController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id)
+    public function destroy( $id )
     {
         /** @var LockerAssignment $lockerAssignment */
-        $lockerAssignment = LockerAssignment::find($id);
+        $lockerAssignment = LockerAssignment::find( $id );
 
-        if (empty($lockerAssignment)) {
-            Flash::error('Locker Assignment not found');
+        if ( empty( $lockerAssignment ) ) {
+            Flash::error( 'Locker Assignment not found' );
 
-            return redirect(route('lockerAssignments.index'));
+            return redirect( route( 'lockerAssignments.index' ) );
         }
 
         $lockerAssignment->delete();
 
-        Flash::success('Locker Assignment deleted successfully.');
+        Flash::success( 'Locker Assignment deleted successfully.' );
 
-        return redirect(route('lockerAssignments.index'));
+        return redirect( route( 'lockerAssignments.index' ) );
     }
 }

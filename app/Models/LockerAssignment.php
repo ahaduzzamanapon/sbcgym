@@ -22,28 +22,21 @@ class LockerAssignment extends Model
     
 
 
-
-    public $fillable = [
-        'locker_id',
-        'member_id',
-        'start_date',
-        'end_date',
-        'status'
-    ];
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
-    protected $casts = [
-        'id' => 'integer',
-        'locker_id' => 'integer',
-        'member_id' => 'integer',
-        'start_date' => 'date',
-        'end_date' => 'date',
-        'status' => 'string'
-    ];
+    // protected $casts = [
+    //     'id' => 'integer',
+    //     'locker_id' => 'integer',
+    //     'member_id' => 'integer',
+    //     'start_date' => 'date',
+    //     'end_date' => 'date',
+    //     'status' => 'string'
+    // ];
 
     /**
      * Validation rules
