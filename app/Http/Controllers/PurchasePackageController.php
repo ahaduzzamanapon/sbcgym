@@ -272,6 +272,7 @@ class PurchasePackageController extends AppBaseController
 
     public function make_payment( $id )
     {
+        
         $sale = PurchasePackage::select( 'purchasepackages.*', 'packages.pack_name as pack_name', 'members.mem_name as member_name' )
             ->join( 'packages', 'packages.id', '=', 'purchasepackages.package_id' )
             ->join( 'members', 'members.id', '=', 'purchasepackages.member_id' )

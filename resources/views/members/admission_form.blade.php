@@ -184,24 +184,24 @@
                             value="{{ $members->date_of_birth }}" required>
                     </div>
                     <div class="col-md-3 form-group">
-                        <label for="current_address">বর্তমান ঠিকানা:</label> <br>
+                        <label for="current_address" class="required">বর্তমান ঠিকানা:</label> <br>
                         <input class="form-control" type="text" id="current_address" name="current_address"
-                            value="{{ $members->mem_address }}">
+                            value="{{ $members->mem_address }}" required>
                     </div>
                     <div class="col-md-3 form-group">
-                        <label for="telephone">টেলিফোন:</label> <br>
+                        <label for="telephone" class="required">টেলিফোন:</label> <br>
                         <input class="form-control" type="text" id="mem_cell" name="mem_cell"
-                            value="{{ $members->mem_cell }}">
+                            value="{{ $members->mem_cell }}" required>
                     </div>
                     <div class="col-md-3 form-group">
-                        <label for="email">ই-মেইল:</label> <br>
+                        <label for="email" class="required">ই-মেইল:</label> <br>
                         <input class="form-control" type="email" id="mem_email" name="mem_email"
-                            value="{{ $members->mem_email }}">
+                            value="{{ $members->mem_email }}" required>
                     </div>
                     <div class="col-md-3 form-group">
-                        <label for="email">পেশা:</label> <br>
+                        <label for="email" class="required">পেশা:</label> <br>
                         <input class="form-control" type="text" id="profession" name="profession"
-                            value="{{ $members->profession }}">
+                            value="{{ $members->profession }}" required>
                     </div>
                     <div class="col-md-3 form-group">
                         <label for="email">অফিস ঠিকানা:</label> <br>

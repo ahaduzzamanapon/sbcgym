@@ -322,8 +322,8 @@
         <!-- Profession17 -->
         <div class="col-md-3">
             <div class="form-group">
-                {!! Form::label('profession', 'Profession:', ['class' => 'control-label']) !!}
-                {!! Form::text('profession', null, ['class' => 'form-control', 'placeholder' => 'Enter Profession']) !!}
+                {!! Form::label('profession', 'Profession:', ['class' => 'control-label']) !!} <span class="text-danger">*</span>
+                {!! Form::text('profession', null, ['class' => 'form-control', 'placeholder' => 'Enter Profession', 'required' => 'required']) !!}
                 @error('profession')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror

@@ -5,6 +5,10 @@
     Purchase Package @parent
 @stop
 
+@php
+    $user_group = Auth::user()->group_id;
+@endphp
+
 @section('content')
     <section class="content-header">
         <div aria-label="breadcrumb" class="card-breadcrumb">
@@ -35,13 +39,13 @@
                             @foreach ($payment_details as $key => $payment_detail)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $payment_detail->payment_mode }}</td>
+                                    <td>{{ $payment_detail->payment_method_name }}</td>
                                     <td>{{ $payment_detail->payment_date }}</td>
                                     <td>{{ $payment_detail->payment_amount }}</td>
                                     <td>{{ $payment_detail->payment_note }}</td>
                                     <td>{{ $payment_detail->payment_number }}</td>
                                     <td>{{ $payment_detail->payment_status==1?'Pending':'Approved' }}
-                                        @if ($payment_detail->payment_status==1)
+                                        @if ($payment_detail->payment_status==1 && $user_group==3)
                                         <a href="{{ route('purchasePackages.payment_approve', $payment_detail->id) }}" class="btn btn-primary">Approve</a>
                                         @endif
                                     </td>

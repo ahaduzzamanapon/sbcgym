@@ -374,8 +374,8 @@ https://templatemo.com/tm-548-training-studio
     <!-- ***** Testimonials Ends ***** -->
 
     {{-- start package section --}}
-    <section class="section mt-5 package_sections" id="trainers">
-        <div class="container" id="package_sections">
+    <section class="section mt-5 packages_section" id="trainers">
+        <div class="container" id="packages_section">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="section-heading"
@@ -393,11 +393,14 @@ https://templatemo.com/tm-548-training-studio
                         <div class="trainer-item" style="height: fit-content!important;">
                             <div class="image-thumb">
                                 <br>
-                                <img src="{{ asset('images/packageSections/' . $section->image) }}" alt="{{ $section->title }}" style="width: 100%; object-fit: cover;">
+                                <img src="{{ asset('images/packageSections/' . $section->image) }}"
+                                    alt="{{ $section->title }}" style="width: 100%; object-fit: cover;">
                             </div>
-                            <div class="down-content" style="background: linear-gradient(45deg, #28a745, #20c997); padding: 15px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);margin-top: 10px;">
+                            <div class="down-content"
+                                style="background: linear-gradient(45deg, #28a745, #20c997); padding: 15px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);margin-top: 10px;">
                                 <div class="section-title">
-                                    <h4 class="text-center text-white m-0" style="font-size: 24px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
+                                    <h4 class="text-center text-white m-0"
+                                        style="font-size: 24px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
                                         {{ $section->title }}
                                     </h4>
                                 </div>
@@ -428,7 +431,7 @@ https://templatemo.com/tm-548-training-studio
                         <div class="trainer-item" style="height: fit-content!important;">
                             <div class="image-thumb">
                                 <br>
-                                <img src="{{ asset('images/offers/' . $offer->image) }}" alt="{{ $offer->title }}" 
+                                <img src="{{ asset('images/offers/' . $offer->image) }}" alt="{{ $offer->title }}"
                                     style="width: 100%; height: 500px; object-fit: cover;">
                             </div>
                             <div class="down-content bg-success mt-3 p-1 rounded-sm">
@@ -459,11 +462,14 @@ https://templatemo.com/tm-548-training-studio
                         <div class="trainer-item" style="height: fit-content!important;">
                             <div class="image-thumb">
                                 <br>
-                                <img src="{{ asset('images/classes/' . $class->image) }}" alt="{{ $class->title }}" style="width: 100%; object-fit: cover;">
+                                <img src="{{ asset('images/classes/' . $class->image) }}" alt="{{ $class->title }}"
+                                    style="width: 100%; object-fit: cover;">
                             </div>
-                            <div class="down-content" style="background: linear-gradient(45deg, #28a745, #20c997); padding: 15px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);margin-top: 10px;">
+                            <div class="down-content"
+                                style="background: linear-gradient(45deg, #28a745, #20c997); padding: 15px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);margin-top: 10px;">
                                 <div class="package-title">
-                                    <h4 class="text-center text-white m-0" style="font-size: 24px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
+                                    <h4 class="text-center text-white m-0"
+                                        style="font-size: 24px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
                                         {{ $class->title }}
                                     </h4>
                                 </div>
@@ -484,8 +490,9 @@ https://templatemo.com/tm-548-training-studio
                 <div class="col-lg-6 col-md-6 col-xs-12">
                     <div id="map" style="padding: 18px;">
                         <iframe
-                            src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                            width="100%" height="600px" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d733.0461119545271!2d90.3624971!3d23.8262253!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c13a6afd6179%3A0x97a141364878001b!2sSBC%20GYM!5e1!3m2!1sen!2sbd!4v1740972229135!5m2!1sen!2sbd"
+                            width="100%" height="600" style="border:0; display: block; margin: 0 auto;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-xs-12">
