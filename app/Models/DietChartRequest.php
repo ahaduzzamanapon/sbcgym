@@ -22,7 +22,8 @@ class DietChartRequest extends Model
 
     public $fillable = [
         'member',
-        'note'
+        'note',
+        'status'
     ];
 
     /**

@@ -16,6 +16,8 @@ Add Diet Chart @parent
 <div class="content">
     <div class="card">
         <div class="card-body">
+            @include('flash::message')
+
             <form action="{{ route('diet_charts.store')}}" method="POST">
                 @csrf
 
