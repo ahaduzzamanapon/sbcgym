@@ -140,7 +140,7 @@
                 <!-- Personal Details -->
                 <div class="row">
                     <div class="col-md-3 form-group">
-                        <label for="member_no">সদস্য নম্বর:</label> <br>
+                        <label for="member_no" class="required">সদস্য নম্বর:</label><br>
                         <input class="form-control" type="text" id="member_no" name="member_no"
                             value="{{ $members->member_unique_id }}" readonly>
                     </div>
