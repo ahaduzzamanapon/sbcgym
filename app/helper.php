@@ -46,5 +46,10 @@ if(!function_exists('getSetting')){
         return Setting::first()->youtube_link ?? '';
     }
 
+    function get_branch_id(){
+        $user = Auth::user()->join('members', 'users.member_id', '=', 'members.id')->select('users.group_id', 'members.branch_id')->first();
+        return $user;
+    }
+
 
 }

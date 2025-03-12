@@ -18,27 +18,38 @@
             <span class="im im-icon-Arrow-Right imicon"></span>
         </a>
         <ul class="sub-menu list-unstyled">
-            <li {!! Request::is('members*') ? 'class="active"' : '' !!}>
-                <a href="{{ route('members.index') }}">
-                    <span class="mm-text">Members List</span>
-                </a>
-            </li>
-            <li {!! Request::is('healthmetrics*') ? 'class="active"' : '' !!}>
-                <a href="{{ route('healthmetrics.index') }}">
-                    <span class="mm-text ">Health Metrics</span>
-                </a>
-            </li>
-            <li {!! Request::is('meal_plans*') ? 'class="active"' : '' !!}>
-                <a href="{{ route('meal_plans.index') }}">
-                    <span class="mm-text ">Meal Plans</span>
-                </a>
-            </li>
-            <li {!! Request::is('diet_charts*') ? 'class="active"' : '' !!}>
-                <a href="{{ route('diet_charts.index') }}">
-                    <span class="mm-text ">Diet Charts</span>
-                </a>
-            </li>
-            
+
+            @if (if_can('member-list'))
+                <li {!! Request::is('members*') ? 'class="active"' : '' !!}>
+                    <a href="{{ route('members.index') }}">
+                        <span class="mm-text">Members List</span>
+                    </a>
+                </li>
+            @endif
+
+            @if (if_can('health-metrics'))
+                <li {!! Request::is('healthmetrics*') ? 'class="active"' : '' !!}>
+                    <a href="{{ route('healthmetrics.index') }}">
+                        <span class="mm-text ">Health Metrics</span>
+                    </a>
+                </li>
+            @endif
+
+            @if (if_can('meal-plans'))
+                <li {!! Request::is('meal_plans*') ? 'class="active"' : '' !!}>
+                    <a href="{{ route('meal_plans.index') }}">
+                        <span class="mm-text ">Meal Plans</span>
+                    </a>
+                </li>
+            @endif
+
+            @if (if_can('diet-chart'))
+                <li {!! Request::is('diet_charts*') ? 'class="active"' : '' !!}>
+                    <a href="{{ route('diet_charts.index') }}">
+                        <span class="mm-text ">Diet Charts</span>
+                    </a>
+                </li>
+            @endif
 
         </ul>
     </li>

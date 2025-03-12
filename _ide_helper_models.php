@@ -721,6 +721,13 @@ namespace App\Models{
  * @property int|null $pay_status 1 for pending, 2 for due, 3 for fully payment
  * @property string|null $expired_date
  * @property string|null $due_date
+ * @property int|null $payment_mode
+ * @property string|null $payment_date
+ * @property int|null $payment_amount
+ * @property string|null $payment_note
+ * @property string|null $payment_doc
+ * @property string|null $payment_number
+ * @property int|null $payment_status
  * @property string|null $active_status
  * @property string|null $inactive_date
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -745,7 +752,15 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereMemberId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment wherePayAmount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment wherePayStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment wherePaymentAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment wherePaymentDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment wherePaymentDoc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment wherePaymentMode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment wherePaymentNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment wherePaymentNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment wherePaymentStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereStartDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereTax($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LockerAssignment whereUpdatedAt($value)
  */

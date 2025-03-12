@@ -34,12 +34,23 @@ class HealthmetricsDataTable extends DataTable
     public function query(Healthmetrics $model): Builder
     {
         // Join the members table to access `mem_name`
-        return $model->newQuery()
+        $query = $model->newQuery()
             ->join('members', 'healthmetricss.member_id', '=', 'members.id') // Join with members table
             ->select(
                 'healthmetricss.*', // Select all healthmetrics columns
                 'members.mem_name' // Select the member's name
             );
+
+        // Check permissions and filter by branch accordingly
+        if (if_can('male-access')) {
+            $query->where('members.branch_id', 1); // Male branch
+        } elseif (if_can('female-access')) {
+            $query->where('members.branch_id', 2); // Female branch
+        } elseif (!if_can('see_all_branch')) {
+            $query->where('members.branch_id', get_branch());
+        }
+
+        return $query;
     }
 
     /**

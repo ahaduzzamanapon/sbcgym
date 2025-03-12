@@ -119,7 +119,7 @@
             @endphp
             <div class="navbar-right ml-auto">
                 <ul class="navbar-nav nav flex" style="display: flex;flex-direction: row;flex-wrap: nowrap;gap: 10px;">
-                    @if (if_can('show_all_data'))
+                    @if (if_can('notification-access'))
                         <li class="dropdown notifications-menu nav-item dropdown">
                             <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown" id="navbarDropdown"
                                 style="padding: 0 15px;border-radius: 7px;">

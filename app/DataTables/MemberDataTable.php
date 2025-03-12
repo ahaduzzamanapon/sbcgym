@@ -38,12 +38,19 @@ class MemberDataTable extends DataTable
             ->leftJoin( 'users', 'members.id', '=', 'users.member_id' )
             ->leftJoin( 'groups', 'users.group_id', '=', 'groups.id' )
             ->leftJoin( 'multi_branchs', 'members.branch_id', '=', 'multi_branchs.id' );
-        if ( !if_can( 'see_all_branch' ) ) {
+
+        // Check permissions and filter by branch accordingly
+        if ( if_can( 'male-access' ) ) {
+            $query->where( 'members.branch_id', 1 ); // Male branch
+        } elseif ( if_can( 'female-access' ) ) {
+            $query->where( 'members.branch_id', 2 ); // Female branch
+        } elseif ( !if_can( 'see_all_branch' ) ) {
             $query->where( 'members.branch_id', get_branch() );
         }
+
         return $query->select( [
             'members.*',
-            'groups.name as group_name',
+            'groups.name as group_name', 
             'multi_branchs.branch_name',
         ] );
     }
