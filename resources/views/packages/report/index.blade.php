@@ -32,7 +32,7 @@ Purchase Report @parent
     <div class="clearfix"></div>
     <div class="card" style="width: 88vw;">
         <section class="card-header">
-            <h5 class="card-title d-inline">Purchase Report</h5>
+            <h5 class="card-title d-inline"></h5>
         </section>
         <div class="card-body">
             <div class="row">

@@ -1,5 +1,11 @@
 @php
-    $packages = DB::table('packages')->where('pack_status', 1)->get();
+    if (if_can('male-access')) {
+        $packages = DB::table('packages')->where('pack_status', 1)->where('branch_id', 1)->get();
+    } elseif (if_can('female-access')) {
+        $packages = DB::table('packages')->where('pack_status', 1)->where('branch_id', 2)->get();
+    } else {
+        $packages = DB::table('packages')->where('pack_status', 1)->get();
+    }
     // dd($packages);
 @endphp
 <div class="row">

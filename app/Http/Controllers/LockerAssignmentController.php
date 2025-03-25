@@ -22,10 +22,20 @@ class LockerAssignmentController extends AppBaseController
     public function index( Request $request )
     {
         /** @var LockerAssignment $lockerAssignments */
-        $lockerAssignments = LockerAssignment::select( 'lockerassignments.*', 'members.mem_name as member_name', 'lockers.locker_number', 'lockerassignments.id as assignment_id' )
+        $query = LockerAssignment::select( 'lockerassignments.*', 'members.mem_name as member_name', 'lockers.locker_number', 'lockerassignments.id as assignment_id' )
             ->join( 'members', 'lockerassignments.member_id', '=', 'members.id' )
-            ->join( 'lockers', 'lockerassignments.locker_id', '=', 'lockers.id' )
-            ->paginate( 10 );
+            ->join( 'lockers', 'lockerassignments.locker_id', '=', 'lockers.id' );
+
+        // Check permissions and filter by branch accordingly
+        if ( if_can( 'male-access' ) ) {
+            $query->where( 'members.branch_id', 1 ); // Male branch
+        } elseif ( if_can( 'female-access' ) ) {
+            $query->where( 'members.branch_id', 2 ); // Female branch 
+        } elseif ( !if_can( 'see_all_branch' ) ) {
+            $query->where( 'members.branch_id', get_branch() );
+        }
+
+        $lockerAssignments = $query->paginate( 10 );
 
         return view( 'locker_assignments.index' )
             ->with( 'lockerAssignments', $lockerAssignments );

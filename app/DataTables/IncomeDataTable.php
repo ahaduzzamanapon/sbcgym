@@ -35,11 +35,24 @@ class IncomeDataTable extends DataTable
      */
     public function query(Income $model)
     {
-        return $model->newQuery()->leftJoin('multi_branchs', 'incomes.branch_id', '=', 'multi_branchs.id')
-        ->select([
-            'incomes.*', // Select all member columns
-            'multi_branchs.branch_name'
-        ]);
+        $query = $model->newQuery()
+            ->leftJoin('multi_branchs', 'incomes.branch_id', '=', 'multi_branchs.id')
+            ->select([
+                'incomes.*', // Select all incomes columns
+                'multi_branchs.branch_name'
+            ]);
+
+        // Check permissions and filter by branch accordingly
+        if (if_can('male-access')) {
+            $query->where('incomes.branch_id', 1); // Male branch
+        } elseif (if_can('female-access')) {
+            $query->where('incomes.branch_id', 2); // Female branch
+        } elseif (!if_can('see_all_branch')) {
+            $query->where('incomes.branch_id', get_branch());
+        }
+
+        return $query;
+
     }
 
     /**

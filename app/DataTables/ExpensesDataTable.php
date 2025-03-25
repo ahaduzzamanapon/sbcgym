@@ -34,11 +34,23 @@ class ExpensesDataTable extends DataTable
      */
     public function query(Expenses $model)
     {
-        return $model->newQuery()->leftJoin('multi_branchs', 'expensess.branch_id', '=', 'multi_branchs.id')
-        ->select([
-            'expensess.*', // Select all member columns
-            'multi_branchs.branch_name'
-        ]);
+        $query = $model->newQuery()
+            ->leftJoin('multi_branchs', 'expensess.branch_id', '=', 'multi_branchs.id')
+            ->select([
+                'expensess.*', // Select all expenses columns
+                'multi_branchs.branch_name'
+            ]);
+
+        // Check permissions and filter by branch accordingly
+        if (if_can('male-access')) {
+            $query->where('expensess.branch_id', 1); // Male branch
+        } elseif (if_can('female-access')) {
+            $query->where('expensess.branch_id', 2); // Female branch
+        } elseif (!if_can('see_all_branch')) {
+            $query->where('expensess.branch_id', get_branch());
+        } 
+
+        return $query;
     }
 
     /**

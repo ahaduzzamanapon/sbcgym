@@ -24,6 +24,15 @@ class PaymentMethodController extends AppBaseController
         /** @var PaymentMethod $paymentMethods */
         $paymentMethods = PaymentMethod::join('multi_branchs', 'paymentmethods.branch_id', '=', 'multi_branchs.id')
             ->select('paymentmethods.*', 'multi_branchs.branch_name as multi_branch_name')
+            ->when(true, function($query) {
+                if (if_can('male-access')) {
+                    $query->where('paymentmethods.branch_id', 1); // Male branch
+                } elseif (if_can('female-access')) {
+                    $query->where('paymentmethods.branch_id', 2); // Female branch
+                } elseif (!if_can('see_all_branch')) {
+                    $query->where('paymentmethods.branch_id', get_branch());
+                }
+            })
             ->paginate(10);
 
         return view('payment_methods.index')

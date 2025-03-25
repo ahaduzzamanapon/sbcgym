@@ -48,15 +48,23 @@
                             @php
 
                                 $i = 1;
-                                $infos = DB::table('daily_work_out_details')
+                                $query = DB::table('daily_work_out_details')
                                     ->join('members', 'members.id', '=', 'daily_work_out_details.member_id')
                                     ->select(
                                         'members.mem_name',
-                                        'daily_work_out_details.*',
-                                        'daily_work_out_details.id as daily_work_out_id',
-                                    )
-                                    ->get()
-                                    ->all();
+                                        'daily_work_out_details.*', 
+                                        'daily_work_out_details.id as daily_work_out_id'
+                                    );
+
+                                if (if_can('male-access')) {
+                                    $query->where('members.branch_id', 1);
+                                } elseif (if_can('female-access')) {
+                                    $query->where('members.branch_id', 2); 
+                                } elseif (!if_can('see_all_branch')) {
+                                    $query->where('members.branch_id', get_branch());
+                                }
+
+                                $infos = $query->get()->all();
                                 if (count($infos) == 0) {
                                     echo "<tr><td colspan='5' class='text-center'><b>No data found</b></td></tr>";
                                 }

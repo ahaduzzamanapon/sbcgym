@@ -19,11 +19,22 @@ class GymDietChartController extends Controller
      */
     public function index()
     {
-        if(if_can('member_manage')):
-            $dietCharts = GymDietChart::paginate(10);
-        else:
-            $dietCharts = GymDietChart::where('member_id', auth()->user()->member_id)->paginate(10);
-        endif;
+        $query = GymDietChart::query()
+            ->join('members', 'gym_diet_charts.member_id', '=', 'members.id');
+
+        if (!if_can('member_manage')) {
+            $query->where('member_id', auth()->user()->member_id);
+        } else {
+            if (if_can('male-access')) {
+                $query->where('members.branch_id', 1); // Male branch
+            } elseif (if_can('female-access')) {
+                $query->where('members.branch_id', 2); // Female branch  
+            } elseif (!if_can('see_all_branch')) {
+                $query->where('members.branch_id', get_branch());
+            }
+        }
+
+        $dietCharts = $query->select('gym_diet_charts.*')->paginate(10);
         return view('diet_charts.index', compact('dietCharts'));
     }
     

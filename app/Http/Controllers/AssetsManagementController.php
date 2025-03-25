@@ -23,14 +23,24 @@ class AssetsManagementController extends AppBaseController
     public function index(Request $request)
     {
         /** @var AssetsManagement $assetsManagements */
-        $assetsManagements = AssetsManagement::join('multi_branchs', 'assets_managements.branch_id', '=', 'multi_branchs.id')
-        ->select('assets_managements.*', 'multi_branchs.branch_name as branch_name')
-        ->get();
+        $query = AssetsManagement::join('multi_branchs', 'assets_managements.branch_id', '=', 'multi_branchs.id')
+            ->select('assets_managements.*', 'multi_branchs.branch_name as branch_name');
+
+        // Check permissions and filter by branch accordingly
+        if (if_can('male-access')) {
+            $query->where('assets_managements.branch_id', 1); // Male branch
+        } elseif (if_can('female-access')) {
+            $query->where('assets_managements.branch_id', 2); // Female branch
+        } elseif (!if_can('see_all_branch')) {
+            $query->where('assets_managements.branch_id', get_branch());
+        }
+
+        $assetsManagements = $query->get();
 
         return view('assets_managements.index')
             ->with('assetsManagements', $assetsManagements);
     }
-
+    
     /**
      * Show the form for creating a new AssetsManagement.
      *

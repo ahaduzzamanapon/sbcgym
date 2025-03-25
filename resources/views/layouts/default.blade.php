@@ -84,16 +84,22 @@
                 {{ !empty($setting) ? $setting->name : 'Gym Master' }} -
                 {{ !empty($setting) ? $setting->slogan : 'Gym Master' }} </h3>
 
-
-
             @php
 
             $today_registered_notification=[];
             $payment_pending=[];
             $schedule_book=[];
-
             $today_registered_notification = DB::table('members')
             ->whereDate('created_at', '=', date('Y-m-d'))
+            ->when(true, function($query) {
+                if (if_can('male-access')) {
+                    $query->where('members.branch_id', 1); // Male branch
+                } elseif (if_can('female-access')) {
+                    $query->where('members.branch_id', 2); // Female branch
+                } elseif (!if_can('see_all_branch')) {
+                    $query->where('members.branch_id', get_branch());
+                }
+            })
             ->get();
 
             $payment_pending = DB::table('purchase_payments')
@@ -101,6 +107,15 @@
             ->join('members', 'purchasepackages.member_id', '=', 'members.id')
             ->select('purchase_payments.*', 'members.mem_name','members.last_name')
             ->where('purchase_payments.payment_status', 1)
+            ->when(true, function($query) {
+                if (if_can('male-access')) {
+                    $query->where('members.branch_id', 1); // Male branch
+                } elseif (if_can('female-access')) {
+                    $query->where('members.branch_id', 2); // Female branch
+                } elseif (!if_can('see_all_branch')) {
+                    $query->where('members.branch_id', get_branch());
+                }
+            })
             ->get();
 
             $schedule_book = DB::table('schedulebookings')
@@ -108,12 +123,30 @@
             ->join('assets_managements', 'schedulebookings.asset_id', '=', 'assets_managements.id')
             ->select('schedulebookings.*', 'members.mem_name', 'assets_managements.item_name')
             ->where('schedulebookings.status', 1)
+            ->when(true, function($query) {
+                if (if_can('male-access')) {
+                    $query->where('members.branch_id', 1); // Male branch
+                } elseif (if_can('female-access')) {
+                    $query->where('members.branch_id', 2); // Female branch
+                } elseif (!if_can('see_all_branch')) {
+                    $query->where('members.branch_id', get_branch());
+                }
+            })
             ->get();
 
             $diet_chart_request = DB::table('diet_chart_requests')
             ->join('members', 'diet_chart_requests.member', '=', 'members.id')
             ->select('diet_chart_requests.*', 'members.mem_name')
             ->where('diet_chart_requests.status', 'pending')
+            ->when(true, function($query) {
+                if (if_can('male-access')) {
+                    $query->where('members.branch_id', 1); // Male branch
+                } elseif (if_can('female-access')) {
+                    $query->where('members.branch_id', 2); // Female branch
+                } elseif (!if_can('see_all_branch')) {
+                    $query->where('members.branch_id', get_branch());
+                }
+            })
             ->get();
             
             @endphp

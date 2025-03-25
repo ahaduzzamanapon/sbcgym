@@ -29,23 +29,26 @@ class PurchasePackageController extends AppBaseController
     public function index( Request $request )
     {
         /** @var PurchasePackage $purchasePackages */
-        if ( if_can( 'show_all_data' ) ) {
-            $purchasePackages = PurchasePackage::select( 'purchasepackages.*', 'packages.pack_name as pack_name', 'members.mem_name as member_name' )
-                ->join( 'packages', 'packages.id', '=', 'purchasepackages.package_id' )
-                ->join( 'members', 'members.id', '=', 'purchasepackages.member_id' )
-                ->orderBy( 'purchasepackages.id', 'desc' )
-                ->get();
+        $query = PurchasePackage::select('purchasepackages.*', 'packages.pack_name as pack_name', 'members.mem_name as member_name')
+            ->join('packages', 'packages.id', '=', 'purchasepackages.package_id')
+            ->join('members', 'members.id', '=', 'purchasepackages.member_id');
+
+        if (!if_can('show_all_data')) {
+            $query->where('members.id', auth()->user()->member_id);
         } else {
-            $purchasePackages = PurchasePackage::select( 'purchasepackages.*', 'packages.pack_name as pack_name', 'members.mem_name as member_name' )
-                ->join( 'packages', 'packages.id', '=', 'purchasepackages.package_id' )
-                ->join( 'members', 'members.id', '=', 'purchasepackages.member_id' )
-                ->where( 'members.id', auth()->user()->member_id )
-                ->orderBy( 'purchasepackages.id', 'desc' )
-                ->get();
+            if (if_can('male-access')) {
+                $query->where('members.branch_id', 1); // Male branch
+            } elseif (if_can('female-access')) {
+                $query->where('members.branch_id', 2); // Female branch
+            } elseif (!if_can('see_all_branch')) {
+                $query->where('members.branch_id', get_branch());
+            }
         }
 
-        return view( 'purchase_packages.index' )
-            ->with( 'purchasePackages', $purchasePackages );
+        $purchasePackages = $query->orderBy('purchasepackages.id', 'desc')->get();
+
+        return view('purchase_packages.index')
+            ->with('purchasePackages', $purchasePackages);
     }
 
     /**

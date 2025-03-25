@@ -94,15 +94,23 @@
                         <div class='btn-group'>
 
                             @if(if_can('show_all_data'))
-                            <a href="{{ route('purchasePackages.edit', [$purchasePackage->id]) }}"
-                                class='btn btn-outline-primary btn-xs'>
-                                <i class="im im-icon-Pen" data-toggle="tooltip" data-placement="top" title="Edit"></i>
-                            </a>
-                            {!! Form::button('<i class="im im-icon-Remove" data-toggle="tooltip" data-placement="top" title="Delete"></i>', [
-                                'type' => 'submit',
-                                'class' => 'btn btn-outline-danger btn-xs',
-                                'onclick' => "return confirm('Are you sure?')",
-                            ]) !!}
+
+
+                            @if (if_can('purchase-package-edit'))
+                                 <a href="{{ route('purchasePackages.edit', [$purchasePackage->id]) }}"
+                                    class='btn btn-outline-primary btn-xs'>
+                                    <i class="im im-icon-Pen" data-toggle="tooltip" data-placement="top" title="Edit"></i>
+                                </a>
+                            @endif
+
+                            @if (if_can('purchase-package-delete'))
+                                {!! Form::button('<i class="im im-icon-Remove" data-toggle="tooltip" data-placement="top" title="Delete"></i>', [
+                                    'type' => 'submit',
+                                    'class' => 'btn btn-outline-danger btn-xs',
+                                    'onclick' => "return confirm('Are you sure?')",
+                                ]) !!}
+                            @endif
+                           
                             <a target="_blank" href="{{ route('purchasePackages.make_payment', $purchasePackage->id) }}"
                                 class="btn btn-success" style="white-space: nowrap;">Make Payment</a>
                             @endif

@@ -17,7 +17,6 @@ class PackageDataTable extends DataTable
     public function dataTable($query)
     {
         $dataTable = new EloquentDataTable($query);
-
         return $dataTable
             ->editColumn('pack_status', function ($package) {
                 return $package->pack_status == 1 ? 'Active' : 'Inactive';
@@ -34,12 +33,23 @@ class PackageDataTable extends DataTable
      */
     public function query(Package $model)
     {
-        return $model->newQuery()
+        $query = $model->newQuery()
                     ->leftJoin('multi_branchs', 'packages.branch_id', '=', 'multi_branchs.id')
                     ->select([
                         'packages.*', // Select all columns from the packages table
                         'multi_branchs.branch_name as branch_name' // Alias branch_name
                     ]);
+
+        // Check permissions and filter by branch accordingly
+        if (if_can('male-access')) {
+            $query->where('packages.branch_id', 1); // Male branch
+        } elseif (if_can('female-access')) {
+            $query->where('packages.branch_id', 2); // Female branch
+        } elseif (!if_can('see_all_branch')) {
+            $query->where('packages.branch_id', get_branch());
+        }
+
+        return $query;
     }
     
     

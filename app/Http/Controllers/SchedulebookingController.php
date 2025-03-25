@@ -22,18 +22,24 @@ class SchedulebookingController extends AppBaseController
     public function index(Request $request)
     {
         /** @var Schedulebooking $schedulebookings */
-        if(if_can('show_all_data')){
-            $schedulebookings = Schedulebooking::select('schedulebookings.*','schedulebookings.id as schedulebooking_id', 'members.mem_name as mem_name', 'assets_managements.item_name as item_name')
+        $query = Schedulebooking::select('schedulebookings.*','schedulebookings.id as schedulebooking_id', 'members.mem_name as mem_name', 'assets_managements.item_name as item_name')
             ->join('members', 'members.id', '=', 'schedulebookings.member_id')
-            ->join('assets_managements', 'assets_managements.id', '=', 'schedulebookings.asset_id')
-            ->get();
-        }else{
-            $schedulebookings = Schedulebooking::select('schedulebookings.*','schedulebookings.id as schedulebooking_id', 'members.mem_name as mem_name', 'assets_managements.item_name as item_name')
-            ->join('members', 'members.id', '=', 'schedulebookings.member_id')
-            ->join('assets_managements', 'assets_managements.id', '=', 'schedulebookings.asset_id')
-            ->where('members.id', auth()->user()->member_id)
-            ->paginate(10);
+            ->join('assets_managements', 'assets_managements.id', '=', 'schedulebookings.asset_id');
+
+        if (if_can('male-access')) {
+            $query->where('members.branch_id', 1); // Male branch
+        } elseif (if_can('female-access')) {
+            $query->where('members.branch_id', 2); // Female branch
+        } elseif (!if_can('see_all_branch')) {
+            $query->where('members.branch_id', get_branch());
         }
+
+        if (!if_can('show_all_data')) {
+            $query->where('members.id', auth()->user()->member_id);
+        }
+
+        $schedulebookings = if_can('show_all_data') ? $query->get() : $query->paginate(10);
+
         return view('schedulebookings.index')
             ->with('schedulebookings', $schedulebookings);
     }

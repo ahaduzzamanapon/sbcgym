@@ -54,7 +54,7 @@
         </ul>
     </li>
 @endif
-<li class="{!! (Request::is('dietChartRequests*') ? 'active' : '' ) !!}">
+<li class="{!! Request::is('dietChartRequests*') ? 'active' : '' !!}">
     <a href="{{ route('dietChartRequests.index') }}">
         <span class="mm-text ">Diet Chart Requests</span>
         <span class="menu-icon"><i class="align-self-center fa-1x fas fa-calendar-alt"></i></span>
@@ -85,7 +85,7 @@
                 </a>
             </li>
         @endif
-        @if (if_can('manage_package'))
+        @if (if_can('manage_package') && if_can('package-report'))
             <li class="{!! Request::is('packages.packages_report') ? 'active' : '' !!}">
                 <a href="{{ route('packages.packages_report') }}">
                     <span class="mm-text ">Packages Report</span>
@@ -220,7 +220,7 @@
                 </li>
             @endif
 
-            @if (if_can('manage_product'))
+            @if (if_can('manage_product') && if_can('sales-product'))
                 <li {!! Request::is('sales*') ? 'class="active"' : '' !!}>
                     <a href="{{ route('sales.index') }}">
                         <span class="mm-text ">Sales Product</span>
@@ -403,12 +403,14 @@
 
 
 
-<li class="{!! Request::is('notices*') ? 'active' : '' !!}">
-    <a href="{{ route('notices.index') }}">
-        <span class="mm-text ">Notices</span>
-        <span class="menu-icon"><i class="align-self-center fa-1x fas fa-bullhorn"></i></span>
-    </a>
-</li>
+@if (if_can('notices-access'))
+    <li class="{!! Request::is('notices*') ? 'active' : '' !!}">
+        <a href="{{ route('notices.index') }}">
+            <span class="mm-text ">Notices</span>
+            <span class="menu-icon"><i class="align-self-center fa-1x fas fa-bullhorn"></i></span>
+        </a>
+    </li>
+@endif
 
 
 @if (if_can('site_settings'))
@@ -481,5 +483,3 @@
         </a>
     </li>
 @endif
-
-

@@ -29,11 +29,22 @@ class ProductDataTable extends DataTable
      */
     public function query(Product $model)
     {
-        return $model->newQuery()->leftJoin('multi_branchs', 'products.branch_id', '=', 'multi_branchs.id')
+        $query = $model->newQuery()->leftJoin('multi_branchs', 'products.branch_id', '=', 'multi_branchs.id')
         ->select([
             'products.*', // Select all member columns
             'multi_branchs.branch_name'
         ]);
+
+        // Check permissions and filter by branch accordingly
+        if (if_can('male-access')) {
+            $query->where('products.branch_id', 1); // Male branch
+        } elseif (if_can('female-access')) {
+            $query->where('products.branch_id', 2); // Female branch
+        } elseif (!if_can('see_all_branch')) {
+            $query->where('products.branch_id', get_branch());
+        }
+
+        return $query;
     }
 
     /**

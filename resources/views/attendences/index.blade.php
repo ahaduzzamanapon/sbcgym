@@ -66,7 +66,13 @@ Attendences @parent
                             <select name="branch_id" id="branch_id" class="form-control" onchange="get_member()">
                                 <option value="">Please Select Branch Type</option>
                                 @php
-                                $multi_branchs = DB::table('multi_branchs')->get();
+                                    if (if_can('male-access')) {
+                                        $multi_branchs = DB::table('multi_branchs')->where('id', 1)->get();
+                                    } elseif (if_can('female-access')) {
+                                        $multi_branchs = DB::table('multi_branchs')->where('id', 2)->get();
+                                    } else {
+                                        $multi_branchs = DB::table('multi_branchs')->get();
+                                    }
                                 @endphp
                                 @foreach ($multi_branchs as $multi_branch)
                                 <option value="{{ $multi_branch->id }}">{{ $multi_branch->branch_name }}</option>

@@ -5,6 +5,15 @@ $members = DB::table('members')
     ->when(!if_can('show_all_data'), function ($query) {
         $query->where('members.id', Auth::user()->member_id);
     })
+    ->when(true, function ($query) {
+        if (if_can('male-access')) {
+            $query->where('members.branch_id', 1); // Male branch
+        } elseif (if_can('female-access')) {
+            $query->where('members.branch_id', 2); // Female branch  
+        } elseif (!if_can('see_all_branch')) {
+            $query->where('members.branch_id', get_branch());
+        }
+    })
     ->get()
     ->map(function ($member) {
         return [

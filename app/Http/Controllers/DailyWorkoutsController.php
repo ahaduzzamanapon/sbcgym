@@ -35,10 +35,12 @@ class DailyWorkoutsController extends AppBaseController
         if (if_can('show_all_data')){
             $member = Member::leftJoin('multi_branchs', 'members.branch_id', '=', 'multi_branchs.id')
                             ->select('members.*', 'multi_branchs.branch_name')
+                            ->where('members.branch_id', 1)
                             ->get();
         }else{
             $member = Member::leftJoin('multi_branchs', 'members.branch_id', '=', 'multi_branchs.id')
                             ->select('members.*', 'multi_branchs.branch_name')
+                            ->where('members.branch_id', 1)
                             ->where('members.id',auth()->user()->member_id)
                             ->get();
         }
